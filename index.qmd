@@ -1,6 +1,10 @@
 ---
 title: 'A year of cartographic curiosity'
 title-block-banner: false
+format:
+  html:
+    body-classes: maps-home
+    title-block-style: none
 ---
 
 ::: {.hero}

@@ -11,6 +11,6 @@ The maps may explore research, Iceland, history, technology, board games, or an 
 
 The project uses Python for data preparation, a shared PostGIS database for spatial analysis, R for cartography, and Quarto for publication. Code and publishable assets live in [tungufoss/maps](https://github.com/tungufoss/maps).
 
-The website’s bold typography and hero composition take inspiration from [quarto-hi](https://github.com/tungufoss/quarto-hi), with a separate palette and identity. No University branding is used.
+The website reuses the shared website theme from [quarto-hi](https://github.com/tungufoss/quarto-hi): Jost typography, blue navigation and footer, turquoise accents, and its heading, table, code, and callout styles. The gallery layout adapts those patterns for this project. University logos are omitted.
 
 [Browse the atlas](gallery.qmd) · [Explore the pipeline](pipeline.qmd)

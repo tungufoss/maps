@@ -22,4 +22,4 @@ This local setup does not create the GitHub repository or enable Pages remotely.
 
 ## Design provenance
 
-Original styling inspired by the bold hero and typography patterns in [quarto-hi](https://github.com/tungufoss/quarto-hi). No logos or branding assets are copied.
+`styles/hi-site.scss` is reused from [quarto-hi](https://github.com/tungufoss/quarto-hi), with its MIT notice retained in `styles/quarto-hi-LICENSE.txt`. `styles.css` adds the map gallery and responsive hero layout. The site loads Jost and uses the shared theme’s blue navigation/footer, turquoise accents, headings, tables, code, and callouts. No University logos are copied.
