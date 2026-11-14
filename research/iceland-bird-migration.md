@@ -21,6 +21,8 @@ This is a reference for the eventual cartographic discussion. No specific visual
 
 ### Access and validation state
 
+Update, 14 November 2026: Dryad's documented public API successfully returned dataset metadata (dataset 22977, version 23041) and the file list. It explicitly reports CC0-1.0. File 79926 is `raw_positions.csv`, 1,664,257 bytes, expected MD5 `f535a4f97f6fefbf53c3c1c08041f798`. Its `/api/v2/files/79926/download` link returned HTTP 401. The metadata supports individual-bird data in principle, but identifiers, coordinate fields and completeness remain unverified. Metadata access is not a successful coordinate download.
+
 The landing-page file list and study description have been checked. A direct automated request to the listed [position-file download](https://datadryad.org/downloads/file_stream/79926) returned HTTP 403 from this environment. **The CSV has not been downloaded or imported.** No row count, column schema, coordinate reference system, date coverage, or geometry quality has been verified. The study's migration count should not be confused with the number of position records.
 
 Before mapping, inspect the actual file and documentation, identify individual tracks and time fields, confirm coordinate conventions, and assess uncertainty, seasonal latitude problems, missing observations, and implausible jumps. Do not draw estimated geolocations as precise GPS flight paths or silently smooth/interpolate missing movements.

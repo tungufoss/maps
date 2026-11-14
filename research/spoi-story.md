@@ -1,4 +1,26 @@
-# Spói: a faster journey south
+# 52 / HIDEF MAPS
+
+Maps defined by Dr Helga Ingimundardóttir
+
+# Spói: escaping the Icelandic winter
+
+*A summer in Iceland. Most of the year away.*
+
+Editorial framing: “escaping winter” is the human storytelling hook, not a claim that the study measured birds' feelings or established a single cause of migration.
+
+## TL;DR — meet spói
+
+Spói, the whimbrel, is a long-distance migrant with a downcurved bill, a pale crown stripe and a distinctive whistling call. It breeds in Iceland and spends the non-breeding season farther south, including West Africa. In the tracked-adult study, departures were typically in August and returns in May: roughly **nine months away from Iceland**, and only about three months at home. Individual schedules vary. Many spring journeys included a stopover, so the trip home was not simply the outward journey in reverse.
+
+Sources: [BTO BirdFacts — identification](https://www.bto.org/learn/about-birds/birdfacts/whimbrel); [RSPB / Fuglavernd — Icelandic bird and migration context](https://web-cdn.rspb.org.uk/whats-happening/news/whats-happening-on-the-frontline-to-help-migratory-birds); [Carneiro et al. — Table 1, seasonal dates](https://doi.org/10.1111/jav.01938). Nine months is an approximate interpretation of August-to-May timing, not a newly computed sample mean or a duration applicable to every bird or age class.
+
+## Explore each bird — proposed interaction
+
+Show each verified bird-year journey as a separate overlaid route, rather than showing only a schematic population pattern. Selecting an individual should highlight its journeys and dim the other birds. Offer a season/year filter, a clear reset to all birds, and a mobile-friendly time control that displays observations without implying continuous GPS tracking. Use original bird IDs, not invented names. Multiple years from one bird must remain distinguishable.
+
+R should prepare the cartography and export a Leaflet HTML widget plus a static poster from the same validated observations. Quarto should publish the prepared outputs without a running database or R server. Preserve teal styling, with line types, labels and selection states for readability. Individual duration calculations must require identifiable departure and return events, and show “not available” for incomplete journeys.
+
+This interaction is a proposed design, not an implemented map. No route records have been imported.
 
 Design and story draft. No weekly slot assigned. Not published.
 
