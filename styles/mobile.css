@@ -1,0 +1,5 @@
+/* Phone typography complements the shared quarto-hi theme without new colours. */
+@media (max-width:760px) {
+  .hero h1 { font-size:clamp(2rem,8.5vw,3.3rem); line-height:1.05; }
+  .navbar-toggler { min-width:44px; min-height:44px; }
+}

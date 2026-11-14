@@ -28,7 +28,9 @@ format:
     theme:
       - cosmo
       - styles/hi-site.scss
-    css: styles.css
+    css:
+      - styles.css
+      - styles/mobile.css
     include-in-header:
       - text: |
           <link rel="preconnect" href="https://fonts.googleapis.com">
