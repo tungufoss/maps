@@ -20,6 +20,10 @@ The intended repository is `tungufoss/maps`. Push this project to its `main` bra
 
 This local setup does not create the GitHub repository or enable Pages remotely.
 
+## Historical challenge database
+
+The [SQLite reference database](data/challenge/30daymapchallenge.sqlite) contains the 240 official prompts from 2019–2026, exact repeats, grouped themes, and editorial categories. See [the data notes and query examples](data/challenge/README.md) for provenance, definitions, and rebuilding instructions. The 2026 list is included as an ongoing edition.
+
 ## Design provenance
 
 `styles/hi-site.scss` is reused from [quarto-hi](https://github.com/tungufoss/quarto-hi), with its MIT notice retained in `styles/quarto-hi-LICENSE.txt`. `styles.css` adds the map gallery and responsive hero layout. The site loads Jost and uses the shared theme’s blue navigation/footer, turquoise accents, headings, tables, code, and callouts. No University logos are copied.

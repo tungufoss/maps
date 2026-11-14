@@ -1,0 +1,134 @@
+theme,category,occurrences,year_count,first_year,last_year,years
+Hexagons,Geometry and data models,8,8,2019,2026,"2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026"
+Lines,Geometry and data models,8,8,2019,2026,"2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026"
+Points,Geometry and data models,8,8,2019,2026,"2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026"
+Polygons,Geometry and data models,8,8,2019,2026,"2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026"
+Raster,Geometry and data models,8,8,2019,2026,"2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026"
+Analog mapping,Tools and working process,6,6,2021,2026,"2021, 2022, 2023, 2024, 2025, 2026"
+OpenStreetMap,Data sources,6,6,2021,2026,"2021, 2022, 2023, 2024, 2025, 2026"
+3D,Cartographic methods,5,5,2020,2024,"2020, 2021, 2022, 2023, 2024"
+New tool,Tools and working process,5,5,2020,2026,"2020, 2021, 2024, 2025, 2026"
+Blue,Colour and visual style,4,4,2019,2022,"2019, 2020, 2021, 2022"
+Boundaries,Society and culture,4,4,2019,2025,"2019, 2020, 2021, 2025"
+Green,Colour and visual style,4,4,2019,2022,"2019, 2020, 2021, 2022"
+Movement,Society and culture,4,4,2019,2022,"2019, 2020, 2021, 2022"
+NULL,Data sources,4,4,2020,2026,"2020, 2021, 2022, 2026"
+Population,Society and culture,4,4,2019,2023,"2019, 2020, 2021, 2023"
+Red,Colour and visual style,4,4,2019,2022,"2019, 2020, 2021, 2022"
+Water,Geography and environment,4,4,2020,2026,"2020, 2021, 2025, 2026"
+Choropleth,Cartographic methods,3,3,2021,2024,"2021, 2023, 2024"
+Elevation,Geography and environment,3,3,2019,2021,"2019, 2020, 2021"
+Globe,Cartographic methods,3,3,2019,2022,"2019, 2020, 2022"
+Island(s),Geography and environment,3,3,2020,2022,"2020, 2021, 2022"
+Minimal,Colour and visual style,3,3,2022,2025,"2022, 2023, 2025"
+Projections,Cartographic methods,3,3,2024,2026,"2024, 2025, 2026"
+Vintage style,Colour and visual style,3,3,2023,2026,"2023, 2024, 2026"
+A bad map,Concepts and storytelling,2,2,2022,2023,"2022, 2023"
+AI / prompting only,Tools and working process,2,2,2024,2026,"2024, 2026"
+Black and white,Colour and visual style,2,2,2019,2023,"2019, 2023"
+Collaborative map,Tools and working process,2,2,2024,2026,"2024, 2026"
+Five-minute map,Tools and working process,2,2,2022,2023,"2022, 2023"
+Historical map,Concepts and storytelling,2,2,2020,2021,"2020, 2021"
+Monochrome,Colour and visual style,2,2,2020,2021,"2020, 2021"
+My data,Data sources,2,2,2024,2025,"2024, 2025"
+My favourite,Concepts and storytelling,2,2,2022,2023,"2022, 2023"
+Natural Earth,Data sources,2,2,2021,2025,"2021, 2025"
+Network,Society and culture,2,2,2022,2026,"2022, 2026"
+Ten-minute map,Tools and working process,2,2,2025,2026,"2025, 2026"
+Two colours,Colour and visual style,2,2,2022,2024,"2022, 2024"
+Urban,Society and culture,2,2,2019,2025,"2019, 2025"
+Urban/rural,Society and culture,2,2,2021,2026,"2021, 2026"
+Yellow,Colour and visual style,2,2,2019,2020,"2019, 2020"
+"""Out of my comfort zone""",Concepts and storytelling,1,1,2022,2022,2022
+A journey,Concepts and storytelling,1,1,2024,2024,2024
+A map,Concepts and storytelling,1,1,2020,2020,2020
+A world map,Concepts and storytelling,1,1,2024,2024,2024
+Accessibility,Society and culture,1,1,2025,2025,2025
+Africa,Geography and environment,1,1,2023,2023,2023
+Air,Geography and environment,1,1,2025,2025,2025
+Antarctica,Geography and environment,1,1,2023,2023,2023
+Arctic,Geography and environment,1,1,2024,2024,2024
+Asia,Geography and environment,1,1,2023,2023,2023
+Atmosphere,Geography and environment,1,1,2023,2023,2023
+Big or small data,Data sources,1,1,2020,2020,2020
+Black,Colour and visual style,1,1,2025,2025,2025
+Borgesian map,Concepts and storytelling,1,1,2026,2026,2026
+Built Environment,Society and culture,1,1,2019,2019,2019
+COVID-19,Society and culture,1,1,2020,2020,2020
+Cell,Geometry and data models,1,1,2025,2025,2025
+Climate,Geography and environment,1,1,2019,2019,2019
+Climate change,Geography and environment,1,1,2020,2020,2020
+Clusters,Cartographic methods,1,1,2026,2026,2026
+Conflict,Society and culture,1,1,2024,2024,2024
+Connections,Society and culture,1,1,2020,2020,2020
+Data challenge 3: GHSL Global Human Settlement Layer,Data sources,1,1,2021,2021,2021
+Data: Kontur Population Dataset,Data sources,1,1,2022,2022,2022
+Dimensions,Cartographic methods,1,1,2025,2025,2025
+Dot,Geometry and data models,1,1,2023,2023,2023
+Earth,Geography and environment,1,1,2025,2025,2025
+Environment,Geography and environment,1,1,2019,2019,2019
+Europe,Geography and environment,1,1,2023,2023,2023
+Experimental,Concepts and storytelling,1,1,2019,2019,2019
+Fantasy,Concepts and storytelling,1,1,2022,2022,2022
+Fire,Geography and environment,1,1,2025,2025,2025
+Flow,Cartographic methods,1,1,2023,2023,2023
+Food/drink,Society and culture,1,1,2022,2022,2022
+Funny,Concepts and storytelling,1,1,2019,2019,2019
+Grid,Geometry and data models,1,1,2020,2020,2020
+Heat,Geography and environment,1,1,2024,2024,2024
+Heatmap,Cartographic methods,1,1,2021,2021,2021
+Home,Society and culture,1,1,2019,2019,2019
+Humanitarian Data Exchange (HDX),Data sources,1,1,2024,2024,2024
+Hydrology,Geography and environment,1,1,2019,2019,2019
+Icons,Colour and visual style,1,1,2025,2025,2025
+Inside out,Concepts and storytelling,1,1,2026,2026,2026
+Interactions,Concepts and storytelling,1,1,2026,2026,2026
+Interactive map,Cartographic methods,1,1,2021,2021,2021
+Is this a chart or a map?,Concepts and storytelling,1,1,2023,2023,2023
+Is this a map?,Concepts and storytelling,1,1,2026,2026,2026
+Land,Geography and environment,1,1,2021,2021,2021
+Landuse,Geography and environment,1,1,2020,2020,2020
+Light & dark,Colour and visual style,1,1,2026,2026,2026
+Makeover,Concepts and storytelling,1,1,2025,2025,2025
+Map from 2125,Concepts and storytelling,1,1,2025,2025,2025
+Map not made with GIS software,Tools and working process,1,1,2020,2020,2020
+Memory,Concepts and storytelling,1,1,2024,2024,2024
+Metamapping day,Concepts and storytelling,1,1,2021,2021,2021
+Micromapping,Cartographic methods,1,1,2024,2024,2024
+Music,Society and culture,1,1,2022,2022,2022
+Names,Society and culture,1,1,2019,2019,2019
+Navigation,Society and culture,1,1,2023,2023,2023
+Non-geographic map,Concepts and storytelling,1,1,2020,2020,2020
+North America,Geography and environment,1,1,2023,2023,2023
+North is not always up,Cartographic methods,1,1,2023,2023,2023
+Oceania,Geography and environment,1,1,2023,2023,2023
+Only circular shapes,Geometry and data models,1,1,2024,2024,2024
+Out of this world,Geography and environment,1,1,2025,2025,2025
+Outdoors,Geography and environment,1,1,2023,2023,2023
+Overture,Data sources,1,1,2024,2024,2024
+Places,Society and culture,1,1,2019,2019,2019
+Places and their names,Society and culture,1,1,2025,2025,2025
+Power,Society and culture,1,1,2026,2026,2026
+Process,Tools and working process,1,1,2025,2025,2025
+Remix,Concepts and storytelling,1,1,2022,2022,2022
+Resources,Geography and environment,1,1,2019,2019,2019
+Rural,Society and culture,1,1,2019,2019,2019
+Scale,Cartographic methods,1,1,2022,2022,2022
+Senses: Feeling,Concepts and storytelling,1,1,2026,2026,2026
+Senses: Sight,Concepts and storytelling,1,1,2026,2026,2026
+Senses: Smell,Concepts and storytelling,1,1,2026,2026,2026
+Senses: Sound,Concepts and storytelling,1,1,2026,2026,2026
+Senses: Taste,Concepts and storytelling,1,1,2026,2026,2026
+South America,Geography and environment,1,1,2023,2023,2023
+Space,Geography and environment,1,1,2022,2022,2022
+Statistics,Cartographic methods,1,1,2019,2019,2019
+The Earth is not flat,Cartographic methods,1,1,2021,2021,2021
+The blue planet,Geography and environment,1,1,2024,2024,2024
+The final map,Concepts and storytelling,1,1,2024,2024,2024
+Time and space,Concepts and storytelling,1,1,2024,2024,2024
+Tracks,Society and culture,1,1,2019,2019,2019
+Transport,Society and culture,1,1,2025,2025,2025
+Typography,Colour and visual style,1,1,2024,2024,2024
+Ukraine,Society and culture,1,1,2022,2022,2022
+Utopia,Concepts and storytelling,1,1,2026,2026,2026
+Zones,Society and culture,1,1,2019,2019,2019

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "method": "Editorial classification for this atlas, not official challenge categories. One primary category per theme; conservative aliases group wording variants, not all related subjects.",
+  "categories": {
+    "Geometry and data models": ["Points", "Lines", "Polygons", "Hexagons", "Raster", "Grid", "Dot", "Only circular shapes", "Cell"],
+    "Cartographic methods": ["3D", "Choropleth", "Choropleth map", "Clusters", "Dimensions", "Flow", "Globe", "Heatmap", "Interactive map", "Map projections", "Projections", "Scale", "Statistics", "The Earth is not flat", "North is not always up", "Micromapping"],
+    "Colour and visual style": ["Black", "Black & white", "Black & White", "Blue", "Red", "Green", "Yellow", "Monochrome", "Colour Friday: Green", "Colour Friday: Red", "Colour Friday: Blue", "Colour Friday: 2 colours", "2 colours", "Minimal", "Minimal map", "Retro", "Vintage", "Vintage style", "Typography", "Icons", "Light & dark"],
+    "Geography and environment": ["Africa", "Antarctica", "Arctic", "Asia", "Europe", "North America", "South America", "Oceania", "Air", "Atmosphere", "Climate", "Climate change", "Earth", "Elevation", "Environment", "Fire", "Heat", "Hydrology", "Island(s)", "Land", "Landuse", "Out of this world", "Outdoors", "Resources", "Space", "The blue planet", "Water"],
+    "Society and culture": ["Accessibility", "Boundaries", "Built Environment", "Conflict", "Connections", "COVID-19", "Food/drink", "Home", "Movement", "Music", "Names", "Navigation", "Network", "Places", "Places and their names", "Population", "Power", "Rural", "Tracks", "Transport", "Ukraine", "Urban", "Urban/rural", "Urban-rural", "Zones"],
+    "Data sources": ["Big or small data", "Data challenge 1: OpenStreetMap", "Data challenge 2: Natural Earth", "Data challenge 3: GHSL Global Human Settlement Layer", "Data challenge: My Data", "Data challenge: Natural Earth", "Data challenge: OpenStreetMap", "Data: Kontur Population Dataset", "Data: OpenStreetMap", "Humanitarian Data Exchange (HDX)", "My data", "NULL", "OpenStreetMap", "Overture"],
+    "Tools and working process": ["10 minute map", "5 minute map", "5-minute map", "A map without a computer", "A new tool", "AI only", "Analog", "Analog map", "Collaborative map", "Map made without using a computer", "Map not made with GIS software", "Map with a new tool", "New tool", "Pen & paper", "Process", "Prompting only"],
+    "Concepts and storytelling": ["\"My favorite..\"", "\"My favourite…\"", "\"Out of my comfort zone\"", "A bad map", "A journey", "A map", "A world map", "Borgesian map", "Experimental", "Fantasy", "Funny", "Historical map", "Inside out", "Interactions", "Is this a chart or a map?", "Is this a map?", "Makeover", "Map from 2125", "Memory", "Metamapping day", "Non-geographic map", "Remix", "Senses: Feeling", "Senses: Sight", "Senses: Smell", "Senses: Sound", "Senses: Taste", "The final map", "Time and space", "Utopia"]
+  },
+  "alias_groups": [
+    {"theme": "Black and white", "titles": ["Black & White", "Black & white"], "rationale": "Capitalisation variants only; monochrome remains separate because it can use any single colour."},
+    {"theme": "Blue", "titles": ["Blue", "Colour Friday: Blue"], "rationale": "Same colour prompt with a series prefix."},
+    {"theme": "Green", "titles": ["Green", "Colour Friday: Green"], "rationale": "Same colour prompt with a series prefix."},
+    {"theme": "Red", "titles": ["Red", "Colour Friday: Red"], "rationale": "Same colour prompt with a series prefix."},
+    {"theme": "Two colours", "titles": ["2 colours", "Colour Friday: 2 colours"], "rationale": "Same two-colour constraint with a series prefix."},
+    {"theme": "Five-minute map", "titles": ["5 minute map", "5-minute map"], "rationale": "Punctuation variants; ten-minute prompts remain separate."},
+    {"theme": "Ten-minute map", "titles": ["10 minute map"], "rationale": "Keep the ten-minute constraint distinct from five minutes."},
+    {"theme": "Choropleth", "titles": ["Choropleth", "Choropleth map"], "rationale": "Same named mapping method."},
+    {"theme": "Minimal", "titles": ["Minimal", "Minimal map"], "rationale": "Same minimalist style constraint."},
+    {"theme": "OpenStreetMap", "titles": ["OpenStreetMap", "Data challenge 1: OpenStreetMap", "Data: OpenStreetMap", "Data challenge: OpenStreetMap"], "rationale": "Same named data source; challenge numbering and series prefixes removed."},
+    {"theme": "Natural Earth", "titles": ["Data challenge 2: Natural Earth", "Data challenge: Natural Earth"], "rationale": "Same named data source, different series prefixes."},
+    {"theme": "My data", "titles": ["My data", "Data challenge: My Data"], "rationale": "Same personal-data prompt, different prefix and case."},
+    {"theme": "New tool", "titles": ["New tool", "A new tool", "Map with a new tool"], "rationale": "Same instruction to try a new mapmaking tool."},
+    {"theme": "Analog mapping", "titles": ["Analog", "Analog map", "A map without a computer", "Map made without using a computer", "Pen & paper"], "rationale": "All explicitly request non-digital or manual mapmaking; original medium wording is preserved per prompt."},
+    {"theme": "AI / prompting only", "titles": ["AI only", "Prompting only"], "rationale": "Both explicitly require generating the map through AI rather than ordinary assisted mapmaking."},
+    {"theme": "Urban/rural", "titles": ["Urban/rural", "Urban-rural"], "rationale": "Punctuation variants; urban-only and rural-only prompts stay separate."},
+    {"theme": "Projections", "titles": ["Map projections", "Projections"], "rationale": "Same explicit projection topic; globe and Earth-is-not-flat prompts remain separate."},
+    {"theme": "Vintage style", "titles": ["Vintage", "Vintage style", "Retro"], "rationale": "Related period-style prompts grouped editorially; historical-map prompts remain separate because they can concern historical data."},
+    {"theme": "My favourite", "titles": ["\"My favorite..\"", "\"My favourite…\""], "rationale": "Spelling and punctuation variants of the open favourite prompt."}
+  ]
+}

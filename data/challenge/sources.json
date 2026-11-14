@@ -1,0 +1,74 @@
+[
+  {
+    "year": 2019,
+    "file": "sources/themes-2019.md",
+    "source_url": "https://github.com/tjukanovt/30DayMapChallenge/blob/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes/themes-2019.md",
+    "public_url": "https://30daymapchallenge.com/2019/",
+    "commit_sha": "aaf2e251d929cc61cc8d5620a4b749f304f5b67a",
+    "retrieved_at": "2026-11-14T14:14:47Z",
+    "sha256": "6851824d45aa8ab06f071d14eaa34c2943b651e6da9a3424d674b2ae72319523"
+  },
+  {
+    "year": 2020,
+    "file": "sources/themes-2020.md",
+    "source_url": "https://github.com/tjukanovt/30DayMapChallenge/blob/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes/themes-2020.md",
+    "public_url": "https://30daymapchallenge.com/2020/",
+    "commit_sha": "aaf2e251d929cc61cc8d5620a4b749f304f5b67a",
+    "retrieved_at": "2026-11-14T14:14:48Z",
+    "sha256": "136a20098707708875e7729e7269eb44a42d77e4045067b53e77ea8417eb53e4"
+  },
+  {
+    "year": 2021,
+    "file": "sources/themes-2021.md",
+    "source_url": "https://github.com/tjukanovt/30DayMapChallenge/blob/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes/themes-2021.md",
+    "public_url": "https://30daymapchallenge.com/2021/",
+    "commit_sha": "aaf2e251d929cc61cc8d5620a4b749f304f5b67a",
+    "retrieved_at": "2026-11-14T14:14:49Z",
+    "sha256": "b49e03d194c9041b7038a8d226f79b84bb28033ee003c23b7a2db0ea85fa9e86"
+  },
+  {
+    "year": 2022,
+    "file": "sources/themes-2022.md",
+    "source_url": "https://github.com/tjukanovt/30DayMapChallenge/blob/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes/themes-2022.md",
+    "public_url": "https://30daymapchallenge.com/2022/",
+    "commit_sha": "aaf2e251d929cc61cc8d5620a4b749f304f5b67a",
+    "retrieved_at": "2026-11-14T14:14:49Z",
+    "sha256": "c724685ffd78833e3c3da704bf647eab3c0cd74f914ae278bff22bf236fab593"
+  },
+  {
+    "year": 2023,
+    "file": "sources/themes-2023.md",
+    "source_url": "https://github.com/tjukanovt/30DayMapChallenge/blob/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes/themes-2023.md",
+    "public_url": "https://30daymapchallenge.com/2023/",
+    "commit_sha": "aaf2e251d929cc61cc8d5620a4b749f304f5b67a",
+    "retrieved_at": "2026-11-14T14:14:50Z",
+    "sha256": "4c3733744b73a9f83d72e97030a5415c51277458a2351fe3bf7e3176231c1d94"
+  },
+  {
+    "year": 2024,
+    "file": "sources/themes-2024.md",
+    "source_url": "https://github.com/tjukanovt/30DayMapChallenge/blob/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes/themes-2024.md",
+    "public_url": "https://30daymapchallenge.com/2024/",
+    "commit_sha": "aaf2e251d929cc61cc8d5620a4b749f304f5b67a",
+    "retrieved_at": "2026-11-14T14:14:51Z",
+    "sha256": "12da4b72797f5f784f15cfc723dad517a8a55648a7ff42d933734ca2cc0e59cf"
+  },
+  {
+    "year": 2025,
+    "file": "sources/themes-2025.md",
+    "source_url": "https://github.com/tjukanovt/30DayMapChallenge/blob/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes/themes-2025.md",
+    "public_url": "https://30daymapchallenge.com/2025/",
+    "commit_sha": "aaf2e251d929cc61cc8d5620a4b749f304f5b67a",
+    "retrieved_at": "2026-11-14T14:14:51Z",
+    "sha256": "e81d8c268bd4e6eea77fba8b08afcf8975c5841969075bf882d365b6ee2d21af"
+  },
+  {
+    "year": 2026,
+    "file": "sources/themes-2026.md",
+    "source_url": "https://github.com/tjukanovt/30DayMapChallenge/blob/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes/themes-2026.md",
+    "public_url": "https://30daymapchallenge.com/2026/",
+    "commit_sha": "aaf2e251d929cc61cc8d5620a4b749f304f5b67a",
+    "retrieved_at": "2026-11-14T14:14:52Z",
+    "sha256": "3d3cba87d3dc7d253d2592f9b66cbbd845eabee0f12faf82ae19206a7bc4d96f"
+  }
+]
