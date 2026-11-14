@@ -19,7 +19,59 @@ Each published map can have three kinds of metadata:
 | Technique | Points, flow map, raster | How the story is drawn |
 | Historical prompt | Exact year, day, and prompt | A verified link to an earlier challenge |
 
-Exact historical matches are recorded separately from loose thematic connections. Historical prompts will be added only after checking their original sources. No historical coverage totals have been calculated yet.
+Exact historical matches are recorded separately from loose thematic connections. The historical prompt archive below gives us a reference for those tags; coverage by my own maps will grow as the atlas develops.
+
+## What keeps coming back?
+
+Across the **240 daily prompts announced for 2019–2026**, a few foundations return again and again. **Points, Lines, and Polygons** open every edition. **Hexagons and Raster** also appear in all eight years, although their positions change. These five themes form a remarkably consistent backbone to the challenge.
+
+The recurring prompts also make room for changing how a map is made. **Analog mapping** and **OpenStreetMap** each feature in six editions; **3D** and **trying a new tool** appear in five. Alongside subjects such as population, water, and boundaries, these prompts make experimentation part of the challenge itself.
+
+### The most recurrent themes
+
+Ranked by the number of editions containing each theme. This table includes every theme appearing in **at least four of the eight editions**. Ties share a rank; tied themes are listed alphabetically.
+
+::: {.table-responsive}
+| Rank | Theme | Primary category | Editions |
+|---:|---|---|---:|
+| 1 | Hexagons | Geometry and data models | 8 / 8 |
+| 1 | Lines | Geometry and data models | 8 / 8 |
+| 1 | Points | Geometry and data models | 8 / 8 |
+| 1 | Polygons | Geometry and data models | 8 / 8 |
+| 1 | Raster | Geometry and data models | 8 / 8 |
+| 6 | Analog mapping | Tools and working process | 6 / 8 |
+| 6 | OpenStreetMap | Data sources | 6 / 8 |
+| 8 | 3D | Cartographic methods | 5 / 8 |
+| 8 | New tool | Tools and working process | 5 / 8 |
+| 10 | Blue | Colour and visual style | 4 / 8 |
+| 10 | Boundaries | Society and culture | 4 / 8 |
+| 10 | Green | Colour and visual style | 4 / 8 |
+| 10 | Movement | Society and culture | 4 / 8 |
+| 10 | NULL | Data sources | 4 / 8 |
+| 10 | Population | Society and culture | 4 / 8 |
+| 10 | Red | Colour and visual style | 4 / 8 |
+| 10 | Water | Geography and environment | 4 / 8 |
+:::
+
+`NULL` is the actual prompt title, used for missing data or absence; it is not an empty database value. These counts measure **announced prompts**, not the number or popularity of maps submitted.
+
+### How the themes are grouped
+
+The [official annual lists](https://30daymapchallenge.com/2019/) contain **158 distinct titles**. For this atlas, I have grouped wording variants into **133 themes** and assigned each a primary category. For example, “Map with a new tool” and “New tool” count together, as do OpenStreetMap prompts with different “Data challenge” prefixes. Analog and pen-and-paper prompts are grouped as analog mapping.
+
+These groupings and the eight broad categories are **editorial choices, not official challenge labels**. Related prompts are not automatically treated as identical: five-minute and ten-minute maps remain separate, as do monochrome and black-and-white maps. There are **40 grouped themes recurring across years**, compared with **32 recurring exact titles**. The original wording and the reason for each grouping remain available in the database.
+
+::: {.callout-note}
+### A dated snapshot
+
+This analysis was prepared on **14 November 2026**. The 2026 edition is still underway, and its full announced schedule is included—even prompts whose dates have not yet arrived. The database also provides a view restricted to the completed 2019–2025 editions.
+:::
+
+### Explore the data
+
+Download the [SQLite database](data/challenge/30daymapchallenge.sqlite), the [complete theme ranking (CSV)](data/challenge/theme_frequency.csv), or the [original prompts with categories and source links (CSV)](data/challenge/prompt_details.csv). The [data notes and example queries](https://github.com/tungufoss/maps/tree/main/data/challenge) explain the classification and how to reproduce the counts from the pinned [official source tables](https://github.com/tjukanovt/30DayMapChallenge/tree/aaf2e251d929cc61cc8d5620a4b749f304f5b67a/includes).
+
+For my weekly project, this is a way to notice patterns and seek variety. A recurring theme can be a useful starting point; it does not have to become the next assignment.
 
 ## A sustainable weekly rhythm
 
