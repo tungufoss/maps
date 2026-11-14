@@ -10,3 +10,8 @@ __pycache__/
 !data/raw/.gitkeep
 
 **/*.quarto_ipynb
+
+# Personal review exports must never be committed or deployed.
+/review-data/
+map-reviews-*.json
+map-inspiration-brief-*.md

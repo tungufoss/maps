@@ -1,2 +1,3 @@
 # Preserve checksummed official source snapshots across Windows/Linux checkouts.
 data/challenge/sources/themes-*.md text eol=lf
+data/community/sources/galleries.yml text eol=lf

@@ -36,6 +36,7 @@ a:focus-visible,button:focus-visible { outline:3px solid var(--hi-yellow); outli
 @media(max-width:760px) {
   .feature-grid { grid-template-columns:1fr; }
   .hero { padding:1.5rem; border-left-width:5px; }
+  .hero h1 { font-size:clamp(2rem,8.5vw,3.3rem); line-height:1.05; }
   .hero > p { font-size:1.15rem; }
   .hero .btn { display:block; margin-right:0; }
   .pipeline { padding:1rem; }

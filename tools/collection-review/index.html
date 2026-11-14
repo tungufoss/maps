@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Map inspiration · Private review</title>
+  <link rel="stylesheet" href="review.css">
+  <script src="catalog.js" defer></script><script src="model.js" defer></script><script src="review.js" defer></script>
+</head>
+<body>
+<header><div><p class="eyebrow">52 / MAPS · PERSONAL WORKSPACE</p><h1>Find your kind of map.</h1>
+<p>Browse the official collections. Record what draws you in—and what you would borrow.</p></div>
+<span class="private-badge">Reviews stay in this browser</span></header>
+<main>
+  <section class="intro" aria-label="About this collection">
+    <p id="coverage"></p>
+    <p>This is a directory of collections, not a ranking of individual maps. Open a creator’s original gallery to see their work; no third-party images or posts are loaded here.</p>
+    <details><summary>Saving, privacy, and backups</summary><p>Your reactions and notes are saved only in this browser, on this device. Clearing browser data or using another browser can hide or remove them. Export a backup regularly. Nothing is sent to the public website or to the creators.</p><p>Import merges your backup, keeping the newer version of each review. “Export design brief” turns your positively reviewed collections and chosen features into a Markdown brief you can share in this chat.</p><p>Keep using the same file location or local preview address so the browser can find its saved reviews.</p></details>
+  </section>
+  <section class="toolbar" aria-label="Review backups">
+    <button id="export">Export review backup</button><label class="file-button" for="import">Import backup<input id="import" type="file" accept="application/json,.json"></label><button id="brief">Export design brief</button>
+    <span id="save-status" role="status" aria-live="polite"></span>
+  </section>
+  <p id="notice" class="notice" role="alert" hidden></p>
+  <section class="progress-section" aria-label="Your progress"><p id="progress"></p><div id="feature-summary"></div></section>
+  <div class="workspace">
+    <section class="browse" aria-label="Collection browser">
+      <div class="filters">
+        <label>Search creators, descriptions, or notes<input id="search" type="search" placeholder="Try typography, Iceland, R…"></label>
+        <div class="filter-row"><label>Edition<select id="year"><option value="">All years</option></select></label>
+        <label>Review<select id="reaction"><option value="">All collections</option><option value="unreviewed">Not reviewed</option><option value="positive">Positive</option><option value="neutral">Neutral</option><option value="negative">Negative</option></select></label></div>
+      </div>
+      <p id="result-count" aria-live="polite"></p><div id="collection-list" class="collection-list"></div>
+      <noscript>Enable JavaScript to browse the catalogue and save reviews. The complete catalogue is also available in data/community/collection_tracker.csv.</noscript>
+    </section>
+    <section class="inspector" aria-labelledby="selected-title">
+      <p class="eyebrow" id="selected-years"></p><h2 id="selected-title">Choose a collection</h2><p id="selected-description"></p>
+      <p><a id="source-link" class="source-link" target="_blank" rel="noopener noreferrer">Open original collection ↗</a></p><p id="selected-host" class="muted"></p>
+      <div id="per-year-listings"></div>
+      <form id="review-form">
+        <fieldset><legend>Your reaction</legend><div class="reactions">
+          <label><input type="radio" name="rating" value="unreviewed" checked> Not reviewed</label>
+          <label><input type="radio" name="rating" value="positive"> Positive</label>
+          <label><input type="radio" name="rating" value="neutral"> Neutral</label>
+          <label><input type="radio" name="rating" value="negative"> Negative</label>
+        </div></fieldset>
+        <label for="why">Why? What works—or doesn’t work—for you?</label><textarea id="why" rows="4" placeholder="Be specific: the restrained palette makes the pattern clear, but the labels are hard to read…"></textarea>
+        <label for="features">Features you would borrow</label><input id="features" type="text" placeholder="Comma-separated: typography, relief, annotations…">
+        <div id="feature-suggestions" class="feature-suggestions" aria-label="Suggested feature tags"></div>
+        <label for="map-url">Specific map or page worth returning to (optional)</label><input id="map-url" type="url" placeholder="https://…">
+        <label for="inspiration">An idea for one of your own maps</label><textarea id="inspiration" rows="3" placeholder="Could I use this technique to explore…?"></textarea>
+        <p class="muted">Changes save automatically. Tags count toward the design brief when you mark a collection “Positive.” Neutral and negative reactions remain useful context in the backup.</p>
+      </form>
+      <div class="next-row"><button id="previous">← Previous</button><button id="next">Next →</button><button id="next-unreviewed">Next not reviewed</button></div>
+    </section>
+  </div>
+  <footer><a id="directory-link" target="_blank" rel="noopener noreferrer">Official directory</a> · <a id="snapshot-link" target="_blank" rel="noopener noreferrer">Pinned source snapshot</a><p>The catalogue is public source material. Your personal reviews are separate and private to this browser.</p></footer>
+</main>
+</body></html>
