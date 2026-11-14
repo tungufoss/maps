@@ -2,6 +2,8 @@
 
 Maps defined by Dr Helga Ingimundardóttir
 
+[HIDEF website design preview](hidef-spoi-site-preview.png) — an AI-generated visual mockup, not a screenshot of a functioning Leaflet implementation. The disabled explorer depicts pending data access; no individual tracks are shown. Generated 14 November 2026 with `image_gen.imagegen`; exact model identifier not exposed. [Full prompt](illustrations/hidef-site-preview-prompt.txt). The input reference was `spoi-teal-poster-v2.png`.
+
 # Spói: escaping the Icelandic winter
 
 *A summer in Iceland. Most of the year away.*
