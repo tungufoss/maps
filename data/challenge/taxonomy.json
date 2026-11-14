@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "method": "Editorial classification for this atlas, not official challenge categories. One primary category per theme; conservative aliases group wording variants, not all related subjects.",
+  "version": 2,
+  "method": "Editorial classification for this atlas, not official challenge categories. One primary category per theme; aliases group wording variants and selected shared constraints, with original prompt wording retained.",
   "categories": {
     "Geometry and data models": ["Points", "Lines", "Polygons", "Hexagons", "Raster", "Grid", "Dot", "Only circular shapes", "Cell"],
     "Cartographic methods": ["3D", "Choropleth", "Choropleth map", "Clusters", "Dimensions", "Flow", "Globe", "Heatmap", "Interactive map", "Map projections", "Projections", "Scale", "Statistics", "The Earth is not flat", "North is not always up", "Micromapping"],
@@ -17,8 +17,7 @@
     {"theme": "Green", "titles": ["Green", "Colour Friday: Green"], "rationale": "Same colour prompt with a series prefix."},
     {"theme": "Red", "titles": ["Red", "Colour Friday: Red"], "rationale": "Same colour prompt with a series prefix."},
     {"theme": "Two colours", "titles": ["2 colours", "Colour Friday: 2 colours"], "rationale": "Same two-colour constraint with a series prefix."},
-    {"theme": "Five-minute map", "titles": ["5 minute map", "5-minute map"], "rationale": "Punctuation variants; ten-minute prompts remain separate."},
-    {"theme": "Ten-minute map", "titles": ["10 minute map"], "rationale": "Keep the ten-minute constraint distinct from five minutes."},
+    {"theme": "Timed mapping", "titles": ["5 minute map", "5-minute map", "10 minute map"], "rationale": "Grouped by the shared time-limit constraint at the project owner's request; the original prompt wording and description retain whether the limit is five or ten minutes."},
     {"theme": "Choropleth", "titles": ["Choropleth", "Choropleth map"], "rationale": "Same named mapping method."},
     {"theme": "Minimal", "titles": ["Minimal", "Minimal map"], "rationale": "Same minimalist style constraint."},
     {"theme": "OpenStreetMap", "titles": ["OpenStreetMap", "Data challenge 1: OpenStreetMap", "Data: OpenStreetMap", "Data challenge: OpenStreetMap"], "rationale": "Same named data source; challenge numbering and series prefixes removed."},

@@ -5,7 +5,7 @@ subtitle: 'One map a week in 2027. The topic stays open.'
 
 ## Follow the question
 
-This project takes inspiration from the [30DayMapChallenge galleries](https://30daymapchallenge.com/galleries/) and [Esri’s 2025 collection](https://storyscape-esriwhere.hub.arcgis.com/pages/2025-30-day-map-challenge). Instead of following a fixed sequence of prompts, I choose a subject that interests me each week.
+This project takes inspiration from the [30DayMapChallenge galleries](https://30daymapchallenge.com/galleries/). Instead of following a fixed sequence of prompts, I choose a subject that interests me each week.
 
 Variety matters: different scales, sources, techniques, visual styles, and levels of effort. Some weeks may be substantial analyses; others may be a quick experiment.
 
@@ -50,6 +50,7 @@ Ranked by the number of editions containing each theme. This table includes ever
 | 10 | NULL | 4 / 8 |
 | 10 | Population | 4 / 8 |
 | 10 | Red | 4 / 8 |
+| 10 | Timed mapping | 4 / 8 |
 | 10 | Water | 4 / 8 |
 :::
 
@@ -57,9 +58,9 @@ Ranked by the number of editions containing each theme. This table includes ever
 
 ### How the themes are grouped
 
-The [official annual lists](https://30daymapchallenge.com/2019/) contain **158 distinct titles**. For this atlas, I have grouped wording variants into **133 themes** and assigned each a primary category. For example, “Map with a new tool” and “New tool” count together, as do OpenStreetMap prompts with different “Data challenge” prefixes. Analog and pen-and-paper prompts are grouped as analog mapping.
+The [official annual lists](https://30daymapchallenge.com/2019/) contain **158 distinct titles**. For this atlas, I have grouped related prompts into **132 themes** and assigned each a primary category. For example, “Map with a new tool” and “New tool” count together, as do OpenStreetMap prompts with different “Data challenge” prefixes. Analog and pen-and-paper prompts are grouped as analog mapping. Five- and ten-minute challenges are grouped as **Timed mapping**, which appears in 2022, 2023, 2025, and 2026.
 
-These groupings and the eight broad categories are **editorial choices, not official challenge labels**. Related prompts are not automatically treated as identical: five-minute and ten-minute maps remain separate, as do monochrome and black-and-white maps. There are **40 grouped themes recurring across years**, compared with **32 recurring exact titles**. The original wording and the reason for each grouping remain available in the database.
+These groupings and the eight broad categories are **editorial choices, not official challenge labels**. Related prompts are not automatically treated as identical: monochrome and black-and-white maps, for example, remain separate. There are **39 grouped themes recurring across years**, compared with **32 recurring exact titles**. The original wording—including each timed challenge’s duration—and the reason for each grouping remain available in the database.
 
 ::: {.callout-note}
 ### A dated snapshot

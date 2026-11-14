@@ -45,7 +45,9 @@ class HistoricalDatabaseTests(unittest.TestCase):
         aliases = dict(self.db.execute('SELECT original_title,theme_id FROM aliases'))
         self.assertEqual(aliases['OpenStreetMap'], aliases['Data challenge 1: OpenStreetMap'])
         self.assertEqual(aliases['New tool'], aliases['Map with a new tool'])
-        for first, second in [('5 minute map', '10 minute map'), ('Monochrome', 'Black & white'),
+        self.assertEqual(aliases['5 minute map'], aliases['10 minute map'])
+        self.assertEqual(self.db.execute("SELECT occurrences,year_count FROM theme_frequency WHERE theme='Timed mapping'").fetchone(), (4,4))
+        for first, second in [('Monochrome', 'Black & white'),
                               ('Historical map', 'Vintage'), ('Points', 'Dot'), ('Interactions', 'Interactive map')]:
             self.assertNotEqual(aliases[first], aliases[second])
 

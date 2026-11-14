@@ -14,12 +14,13 @@ This describes **prompts, not participant entries, popularity, or actual mapping
 
 There are **158 distinct exact titles**, of which **32 recur in more than one year**. Exact matching preserves spelling, case, punctuation, and prefixes.
 
-`taxonomy.json` maps those titles into **133 grouped themes**, of which **40 recur across years**. Groupings and categories are editorial additions for this atlas, not official challenge classifications. Each alias has an explicit rationale. For example:
+`taxonomy.json` maps those titles into **132 grouped themes**, of which **39 recur across years**. Groupings and categories are editorial additions for this atlas, not official challenge classifications. Each alias has an explicit rationale. For example:
 
 - `Data challenge 1: OpenStreetMap`, `Data: OpenStreetMap`, and `OpenStreetMap` share a theme.
 - `A new tool`, `Map with a new tool`, and `New tool` share a theme.
 - Analog/manual variants share a theme, while their exact wording remains available.
-- Five-minute and ten-minute maps remain separate, as do Monochrome and Black & white, Points and Dot, and Historical map and Vintage style.
+- Five-minute and ten-minute challenges share the **Timed mapping** theme (2022, 2023, 2025, 2026). Their original titles and descriptions preserve the precise time limit.
+- Monochrome and Black & white, Points and Dot, and Historical map and Vintage style remain separate.
 
 Each grouped theme receives **one primary category**. Prompts often span multiple ideas, so these totals are a simple lens rather than an exhaustive tagging system. Edit the taxonomy and rebuild to revise them.
 
