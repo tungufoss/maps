@@ -1,0 +1,2 @@
+-- Put this week's reproducible spatial queries here.
+-- Use its dedicated schema, for example w2027_01, and document CRS units.

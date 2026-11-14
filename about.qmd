@@ -1,0 +1,16 @@
+---
+title: 'About the project'
+subtitle: 'An atlas of curiosity, made one week at a time.'
+---
+
+52 Weeks of Maps is a personal mapping project by [tungufoss](https://github.com/tungufoss). The aim is to create and share a data-driven map every week during 2027, post it on LinkedIn, and keep a lasting record here.
+
+The maps may explore research, Iceland, history, technology, board games, or an unexpected dataset. Each entry should make its sources and limitations clear and explain how the map was made.
+
+## Open methods
+
+The project uses Python for data preparation, a shared PostGIS database for spatial analysis, R for cartography, and Quarto for publication. Code and publishable assets live in [tungufoss/maps](https://github.com/tungufoss/maps).
+
+The website’s bold typography and hero composition take inspiration from [quarto-hi](https://github.com/tungufoss/quarto-hi), with a separate palette and identity. No University branding is used.
+
+[Browse the atlas](gallery.qmd) · [Explore the pipeline](pipeline.qmd)

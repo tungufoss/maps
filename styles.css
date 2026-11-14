@@ -1,0 +1,28 @@
+/* Original styling; typography and hero composition inspired by tungufoss/quarto-hi. */
+:root { --paper:#f3f0e7; --ink:#153b3c; --accent:#c14c2d; --line:#c7cebf; }
+body { background:var(--paper); color:var(--ink); font-family:system-ui,sans-serif; }
+.navbar { background:var(--paper); border-bottom:1px solid var(--line); padding-block:1rem; }
+.navbar-brand { font-weight:900; letter-spacing:.12em; }
+a { color:#8d361f; text-underline-offset:.2em; }
+main { max-width:1180px; margin-inline:auto; }
+h1,h2,h3 { color:var(--ink); font-weight:800; letter-spacing:-.035em; }
+#title-block-header { margin-block:3rem; }
+.hero { position:relative; padding:3rem 0 4rem; border-bottom:1px solid var(--line); }
+.hero h1 { font-size:clamp(3.4rem,7vw,6.6rem); line-height:1.02; margin:1.3rem 0 2rem; border:0; }
+.hero > p { max-width:700px; font-size:1.25rem; line-height:1.6; }
+.eyebrow { font-size:.8rem; letter-spacing:.2em; font-weight:800; color:var(--accent); }
+.hero-note { margin-top:2rem; font-size:.9rem; color:#506869; }
+.btn { border-radius:0; padding:.8rem 1.15rem; margin:.4rem .4rem .4rem 0; font-weight:700; }
+.btn-primary { background:var(--ink); border-color:var(--ink); color:white; }
+.btn-primary:hover { background:#286264; border-color:#286264; }
+.btn-outline-primary { color:var(--ink); border-color:var(--ink); }
+.feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin:2.5rem 0; }
+.feature { padding-top:1.1rem; border-top:3px solid var(--accent); }
+.feature h3 { font-size:1.3rem; }
+.pipeline { padding:2rem; background:var(--ink); color:var(--paper); font-size:clamp(1rem,2.5vw,1.6rem); margin-block:2rem; }
+.empty-atlas { border:1px solid var(--line); padding:2rem; margin-block:2rem; max-width:760px; }
+main:has(.quarto-grid-item) .empty-atlas { display:none; }
+.quarto-grid-item { background:#fffdf7; border-color:var(--line); }
+.nav-footer { border-top:1px solid var(--line); margin-top:3rem; }
+a:focus-visible,button:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+@media(max-width:760px) { .feature-grid { grid-template-columns:1fr; gap:1rem; } .hero { padding-top:1.5rem; } .pipeline { padding:1rem; } }

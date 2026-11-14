@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - '*.qmd'
+    - 'maps/**/*.qmd'
+    - '!maps/_template/'
+website:
+  title: '52 Weeks of Maps'
+  site-url: https://tungufoss.github.io/maps/
+  repo-url: https://github.com/tungufoss/maps
+  navbar:
+    title: '52 / MAPS'
+    left:
+      - href: gallery.qmd
+        text: Atlas
+      - href: pipeline.qmd
+        text: Behind the maps
+      - href: challenge.qmd
+        text: The challenge
+      - href: about.qmd
+        text: About
+  page-footer:
+    left: 'A year of cartographic curiosity · 2027'
+    right: '[Source & methods](https://github.com/tungufoss/maps)'
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    page-layout: full
+    code-fold: true
+    code-copy: true
+execute:
+  freeze: auto
+  eval: false

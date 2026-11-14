@@ -1,0 +1,45 @@
+---
+title: 'A year of cartographic curiosity'
+title-block-banner: false
+---
+
+::: {.hero}
+::: {.eyebrow}
+FIELD NOTES / 2027
+:::
+
+# 52 weeks.<br>52 maps.<br>52 rabbit holes.
+
+One question, one dataset, one map. A weekly exploration of whatever catches my attention — from Iceland and research to board games, infrastructure, and the unexpected.
+
+[Explore the atlas](gallery.qmd){.btn .btn-primary} [How the maps are made](pipeline.qmd){.btn .btn-outline-primary}
+
+::: {.hero-note}
+The project starts in January 2027. The atlas is ready for its first map.
+:::
+:::
+
+## Curiosity sets the direction
+
+The subject can change every week. The commitment stays the same: ask an interesting question, work with real data, and make something worth looking at.
+
+::: {.feature-grid}
+::: {.feature}
+### 01 / Explore
+An open atlas of weekly investigations, with a permanent home for every map and its story.
+
+[Visit the atlas →](gallery.qmd)
+:::
+::: {.feature}
+### 02 / Follow the data
+Python prepares the sources, PostGIS connects them, R draws the map, and Quarto tells the story.
+
+[Behind the maps →](pipeline.qmd)
+:::
+::: {.feature}
+### 03 / Try something different
+Historical map challenge prompts offer inspiration and a way to reflect on variety throughout the year.
+
+[Read the challenge →](challenge.qmd)
+:::
+:::

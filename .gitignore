@@ -1,0 +1,12 @@
+/_site/
+/.quarto/
+.env
+.Rhistory
+.RData
+__pycache__/
+.venv/
+/data/raw/
+/data/processed/
+!data/raw/.gitkeep
+
+**/*.quarto_ipynb

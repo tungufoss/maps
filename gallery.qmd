@@ -1,0 +1,27 @@
+---
+title: 'The atlas'
+subtitle: 'Independent investigations. A growing collection.'
+listing:
+  id: atlas
+  contents:
+    - 'maps/*/index.qmd'
+    - '!maps/_template/index.qmd'
+  type: grid
+  sort: 'date desc'
+  categories: true
+  filter-ui: true
+  fields: [image, title, description, date, categories]
+  grid-columns: 3
+  page-size: 12
+---
+
+Each map starts with a question. Open an entry to explore the findings, data sources, methods, and code. Search and category filters appear as the collection grows.
+
+::: {.empty-atlas}
+**The first map is still ahead.**
+
+The 2027 challenge begins in January. Published weekly entries will appear here automatically; ideas and unfinished drafts stay out of the atlas.
+:::
+
+::: {#atlas}
+:::

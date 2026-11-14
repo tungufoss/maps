@@ -1,0 +1,32 @@
+---
+title: 'A challenge, not a checklist'
+subtitle: 'One map a week in 2027. The topic stays open.'
+---
+
+## Follow the question
+
+This project takes inspiration from the [30DayMapChallenge galleries](https://30daymapchallenge.com/galleries/) and [Esri’s 2025 collection](https://storyscape-esriwhere.hub.arcgis.com/pages/2025-30-day-map-challenge). Instead of following a fixed sequence of prompts, I choose a subject that interests me each week.
+
+Variety matters: different scales, sources, techniques, visual styles, and levels of effort. Some weeks may be substantial analyses; others may be a quick experiment.
+
+## Tag after making
+
+Each published map can have three kinds of metadata:
+
+| Dimension | Examples | Purpose |
+|---|---|---|
+| Subject | Iceland, games, environment | What is being explored |
+| Technique | Points, flow map, raster | How the story is drawn |
+| Historical prompt | Exact year, day, and prompt | A verified link to an earlier challenge |
+
+Exact historical matches are recorded separately from loose thematic connections. Historical prompts will be added only after checking their original sources. No historical coverage totals have been calculated yet.
+
+## A sustainable weekly rhythm
+
+1. Choose a question and assess the data.
+2. Prepare, analyse, and map it.
+3. Write the finding, limitations, and method.
+4. Export the LinkedIn image and prepare the post.
+5. Publish the page and record its tags.
+
+The idea bank remains editable. It is a source of possibilities, not a predetermined timetable.

@@ -1,0 +1,38 @@
+---
+title: 'Your map title'
+description: 'The question this map investigates.'
+date: 2027-01-01
+draft: true
+categories: []
+week: 1
+year: 2027
+techniques: []
+historical_prompts: []
+---
+
+<!-- Add image: map.png to the front matter when a real export exists. -->
+
+## The map
+
+<!-- Embed the actual map with meaningful alternative text. -->
+
+## What I found
+
+<!-- Write 100–200 words: question, finding, interpretation, limitations. -->
+
+## Data and provenance
+
+| Source | URL | Retrieved | Licence | Coverage / limitations |
+|---|---|---|---|---|
+
+## How it was made
+
+<!-- Explain the actual Python → SQL → R steps, CRS, dependencies and commands. -->
+
+## Reproduce it
+
+<!-- Link to the real weekly folder on GitHub, with expandable code where useful. -->
+
+## LinkedIn
+
+<!-- Add the published post URL after posting. -->

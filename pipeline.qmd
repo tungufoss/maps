@@ -1,0 +1,38 @@
+---
+title: 'Behind the maps'
+subtitle: 'The journey from a question to a published map.'
+---
+
+## A repeatable process, room to experiment
+
+Every investigation has its own question and visual approach. A shared workflow keeps the data traceable and makes it easier to revisit a result.
+
+::: {.pipeline}
+**Sources** → **Python** → **PostGIS** → **R** → **Quarto**
+:::
+
+### 01 / Find and assess the data
+
+Start with the question. Record the publisher, source URL, retrieval date, licence, coverage, and limitations. Retain original downloads outside Git when they are large or cannot be redistributed.
+
+### 02 / Prepare with Python
+
+Download, clean, validate, and transform inputs. Check coordinate reference systems, missing values, duplicates, and geographic coverage before drawing conclusions.
+
+### 03 / Connect in PostGIS
+
+Use one shared PostgreSQL/PostGIS database, with `raw`, `staging`, and `shared` schemas for reusable datasets and a separate schema such as `w2027_01` for a weekly analysis. Keep transformations in versioned SQL. Simple investigations can use files directly.
+
+### 04 / Make the map in R
+
+Use `sf` and `ggplot2` as a starting point, choosing other tools when the story benefits from them. Check projections, legends, colour accessibility, labels, and uncertainty. Export a web image and a LinkedIn version at 1200 × 1200 or 1200 × 1500 pixels.
+
+### 05 / Publish with Quarto
+
+Each weekly page combines the map, a short interpretation, provenance, expandable code, and links to source files and the LinkedIn post. GitHub Pages serves the rendered site; visitors do not need access to the database.
+
+## Reproduce an investigation
+
+Weekly folders contain `prepare.py`, `analysis.sql`, `map.R`, `metadata.yml`, and `index.qmd`. The page explains which steps were actually used, their order, and dependencies. Prepared figures are committed when their licences permit it, so the public site can build without database credentials.
+
+[Explore the repository](https://github.com/tungufoss/maps)
