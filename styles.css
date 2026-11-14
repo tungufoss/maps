@@ -5,6 +5,7 @@
 .navbar-toggler { border-color:rgba(255,255,255,.6); }
 #quarto-content main { max-width:1180px; width:100%; }
 #title-block-header { margin-block:3rem 2rem; }
+.maps-home #title-block-header { display:none; }
 .quarto-title .subtitle { font-size:1.35rem; color:var(--hi-ink); }
 .hero { position:relative; background:var(--hi-paper); padding:clamp(2rem,5vw,4.5rem); margin:1.5rem 0 3rem; border-left:8px solid var(--hi-teal); }
 .hero h1 { font-size:clamp(3.3rem,6.4vw,6rem); line-height:.98; font-weight:900; letter-spacing:-.025em; border:0; padding:0; margin:1.25rem 0 1.75rem; }
