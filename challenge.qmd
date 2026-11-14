@@ -32,25 +32,25 @@ The recurring prompts also make room for changing how a map is made. **Analog ma
 Ranked by the number of editions containing each theme. This table includes every theme appearing in **at least four of the eight editions**. Ties share a rank; tied themes are listed alphabetically.
 
 ::: {.table-responsive}
-| Rank | Theme | Primary category | Editions |
-|---:|---|---|---:|
-| 1 | Hexagons | Geometry and data models | 8 / 8 |
-| 1 | Lines | Geometry and data models | 8 / 8 |
-| 1 | Points | Geometry and data models | 8 / 8 |
-| 1 | Polygons | Geometry and data models | 8 / 8 |
-| 1 | Raster | Geometry and data models | 8 / 8 |
-| 6 | Analog mapping | Tools and working process | 6 / 8 |
-| 6 | OpenStreetMap | Data sources | 6 / 8 |
-| 8 | 3D | Cartographic methods | 5 / 8 |
-| 8 | New tool | Tools and working process | 5 / 8 |
-| 10 | Blue | Colour and visual style | 4 / 8 |
-| 10 | Boundaries | Society and culture | 4 / 8 |
-| 10 | Green | Colour and visual style | 4 / 8 |
-| 10 | Movement | Society and culture | 4 / 8 |
-| 10 | NULL | Data sources | 4 / 8 |
-| 10 | Population | Society and culture | 4 / 8 |
-| 10 | Red | Colour and visual style | 4 / 8 |
-| 10 | Water | Geography and environment | 4 / 8 |
+| Rank | Theme | Editions |
+|---:|---|---:|
+| 1 | Hexagons | 8 / 8 |
+| 1 | Lines | 8 / 8 |
+| 1 | Points | 8 / 8 |
+| 1 | Polygons | 8 / 8 |
+| 1 | Raster | 8 / 8 |
+| 6 | Analog mapping | 6 / 8 |
+| 6 | OpenStreetMap | 6 / 8 |
+| 8 | 3D | 5 / 8 |
+| 8 | New tool | 5 / 8 |
+| 10 | Blue | 4 / 8 |
+| 10 | Boundaries | 4 / 8 |
+| 10 | Green | 4 / 8 |
+| 10 | Movement | 4 / 8 |
+| 10 | NULL | 4 / 8 |
+| 10 | Population | 4 / 8 |
+| 10 | Red | 4 / 8 |
+| 10 | Water | 4 / 8 |
 :::
 
 `NULL` is the actual prompt title, used for missing data or absence; it is not an empty database value. These counts measure **announced prompts**, not the number or popularity of maps submitted.
