@@ -42,6 +42,18 @@ This is a closer sensor match to the osprey reference, with a much smaller sampl
 
 The [Arctic Animal Movement Archive](https://www.movebank.org/cms/movebank-content/arctic-animal-movement-archive) lists Icelandic puffin and whooper-swan studies. Its table is explicitly a November 2022 summary, so those counts and visibility labels are historical, not a fresh access guarantee. Study-specific access, licence, sampling, and Icelandic coverage still need checking.
 
+## Mobile design preview
+
+![Spói design mockup with illustrative autumn and spring arrows between Iceland and West Africa, summary and citations.](spoi-mobile-mockup.png)
+
+This AI-generated portrait mockup takes visual inspiration from Warren Davison's *Drawn by Flight*. It is a design preview, not a data-derived map: arrows, coastlines and graticule are illustrative and require replacement with verified cartography before publication. The position CSV has not been imported. The mockup is not included in the published atlas.
+
+**Paper summary:** Carneiro and colleagues studied 56 migrations from 19 Icelandic whimbrels using light-level geolocators. Autumn migration was faster, with direct journeys to West Africa, while most spring journeys included a stopover. These findings describe the study sample, not a new analysis of the archived data.
+
+**Paper:** Carneiro, C., Gunnarsson, T. G. & Alves, J. A. (2019). *Faster migration in autumn than in spring: seasonal migration patterns and non-breeding distribution of Icelandic whimbrels Numenius phaeopus islandicus*. Journal of Avian Biology, 50(1). [doi:10.1111/jav.01938](https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/jav.01938). First published online 15 November 2018; cited by its 2019 issue year.
+
+**Dataset:** Carneiro, C., Gunnarsson, T. G. & Alves, J. A. (2019). *Data from: Faster migration in autumn than in spring: seasonal migration patterns and non-breeding distribution of Icelandic Whimbrels Numenius phaeopus islandicus*. Dryad. [doi:10.5061/dryad.3kf35s5](https://datadryad.org/dataset/doi:10.5061/dryad.3kf35s5).
+
 ## Next decision
 
 Start by obtaining and inspecting the public whimbrel position file, or request the Sandgerði tern GPS tracks if kría is the preferred subject. After data feasibility is established, choose a question and cartographic approach with the user. Possible research questions include a seasonal route comparison or a single bird's journey; no analysis result or map is claimed yet.
