@@ -1,7 +1,23 @@
 {
-  "order": ["Map", "Observed trajectories", "Season-coloured observed trajectories", "Archived candidate smooths", "Constrained regional anchors and schematic lanes", "Concentration regions", "Final oblique composition", "Text and illustration"],
-  "direction_colours": "Paper motivates seasonal distinction. Colour complete candidate journey intervals from journey_journeys; outside intervals stays grey. Preserve gaps and cycle breaks; split on colour changes.",
-  "exploratory_view": "EPSG:3857; 0–72N, A4 frame centred on 17W. Full-coverage north-up relief is cached independently in breakdown_relief.",
+  "order": ["Start with the map", "Plot all trajectories", "Identify concentration regions", "Add the geographic anchors", "Identify seasonal migration events", "Extract and colour migration journeys", "Smooth the migration routes", "Tilt the composition", "Tell the story"],
+  "files": ["build-01-map.png", "build-02-trajectories.png", "build-03-regions.png", "build-04-anchors.png", "build-05-events.png", "build-06-journeys.png", "build-07-smoothing.png", "poster-lanes.png", "poster.png"],
+  "groups": {
+    "Geographic foundation": 1,
+    "Explore the tracking data": [2, 3, 4],
+    "Isolate seasonal migration": [5, 6],
+    "Simplify the trajectories": 7,
+    "Compose and communicate": [8, 9]
+  },
+  "seasonal_colour": "Introduced at panel 6 only. Orange: southbound autumn (Outbound); magenta: northbound spring (Inbound).",
+  "events": "Complete candidate journeys from journey_journeys (departure-arrival); candidate stops from journey_stops. Departure/arrival markers are the first/last displayable estimate inside each interval.",
+  "extraction": "Displayable estimates inside complete journey intervals, excluding estimates inside candidate stop intervals. Quality-mask, 36-hour, cycle and stop breaks are preserved.",
+  "smoothing": {
+    "selected": "A: cubic Bezier links between land-constrained regional anchors (make_lane_geometry)",
+    "A": "Endpoints fixed at regional anchors; bends are design choices; widths scale with journey counts.",
+    "B": "Per journey: smooth.spline (spar 0.8) of longitude and latitude against time, 60 steps, journeys with at least 8 travelling estimates. Per season: median longitude per journey in 2-degree latitude bins, mean within bird, equal bird weight, at least 3 birds, weighted smooth.spline (spar 0.65); written to breakdown-smoothing.csv.",
+    "reason": "B follows the data but its seasonal means stop where bin support ends and average divergent spring routes into one line; A keeps meaningful endpoints and separates the spring lanes."
+  },
+  "exploratory_view": "EPSG:3857; 0–72N, A4 frame centred on 17W. Panel 7 panes are half-width crops of the same frame. Full-coverage north-up relief is cached independently in breakdown_relief.",
   "final_view": "+proj=omerc +lat_0=35 +lonc=-20 +alpha=15 +gamma=0 +k=1 +datum=WGS84 +units=m +no_defs",
-  "meaning": "Design-decision sequence, not literal render-call order. The archived smooth is superseded by anchor-based links. All observed trajectories retain quality-mask, 36-hour and cycle breaks."
+  "meaning": "Design-decision sequence, not literal render-call order."
 }

@@ -57,7 +57,7 @@ if(!html_only){
   stopifnot(file.copy("research/spoi/static-index.html",landing))
   spoi_publish(landing,"previews/spoi/index.html")
   DBI::dbDisconnect(con)
-  cat("Built A4 English/Icelandic posters and eight-stage article assets. Interactive work is parked.\n")
+  cat("Built A4 English/Icelandic posters and nine-panel article assets. Interactive work is parked.\n")
   quit(save="no",status=0)
 }
 writeLines(enc2utf8(basemap$geojson[[1]]), cached_land, useBytes = TRUE)
