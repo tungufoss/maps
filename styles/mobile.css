@@ -2,4 +2,9 @@
 @media (max-width:760px) {
   .hero h1 { font-size:clamp(2rem,8.5vw,3.3rem); line-height:1.05; }
   .navbar-toggler { min-width:44px; min-height:44px; }
+  /* Listing category filters: a full-width row of chips under the atlas, not a squeezed margin column. */
+  #quarto-content:has(.quarto-listing-category) #quarto-margin-sidebar { grid-column:body-content-start / body-content-end; grid-row:2; position:static; max-height:none; padding:0 0 1.5rem; border:0; }
+  #quarto-content:has(.quarto-listing-category) > main { grid-row:1; }
+  .quarto-listing-category { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .quarto-listing-category .category { min-height:44px; display:inline-flex; align-items:center; gap:.3em; padding:0 .75rem; border:1px solid var(--hi-teal); }
 }

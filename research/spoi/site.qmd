@@ -5,6 +5,8 @@ author: 'Dr Helga Ingimundardóttir'
 date: '2026-11-15'
 draft: true
 categories: [Flow map, Research dataset, Poster]
+image: ../../previews/spoi/poster.png
+image-alt: 'Whimbrel migration poster with teal ocean, white relief and orange and magenta routes'
 lightbox: true
 format:
   html:

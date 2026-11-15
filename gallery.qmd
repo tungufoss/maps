@@ -5,6 +5,7 @@ listing:
   id: atlas
   contents:
     - 'maps/*/index.qmd'
+    - 'research/*/site.qmd'
     - '!maps/_template/index.qmd'
   type: grid
   sort: 'date desc'
@@ -16,18 +17,6 @@ listing:
 ---
 
 Each map starts with a question. Open an entry to explore the findings, data sources, methods, and code. Search and category filters appear as the collection grows.
-
-::: {.content-visible when-profile="spoi-preview"}
-```{=html}
-<style>body:has(.atlas-preview-grid) #quarto-margin-sidebar,body:has(.atlas-preview-grid) #listing-atlas{display:none}</style>
-<div class="atlas-preview-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:1.25rem;margin:2rem 0"><article class="quarto-grid-item card h-100">
-<a href="research/spoi/site.html" style="text-decoration:none;color:inherit">
-<img src="research/spoi/poster.png" alt="Whimbrel migration poster with teal ocean, white relief and orange and magenta routes" style="display:block;width:100%;aspect-ratio:1;object-fit:cover;object-position:center 32%;background:#2DD2C0">
-<div class="card-body" style="padding:.85rem"><h2 class="card-title no-anchor" style="font-size:1.05rem">Whimbrel migration</h2><p style="font-size:.85rem;line-height:1.45">Between Iceland and West Africa: direct autumn journeys and spring stopovers.</p>
-<div class="listing-categories"><span class="listing-category">Flow map</span> <span class="listing-category">Research dataset</span> <span class="listing-category">Poster</span></div></div>
-</a></article></div>
-```
-:::
 
 ::: {.empty-atlas}
 **The first map is still ahead.**
