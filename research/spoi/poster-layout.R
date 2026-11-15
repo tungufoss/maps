@@ -57,8 +57,8 @@ spoi_palette <- function() {
   ocean<-"#2DD2C0";hue<-rgb2hsv(col2rgb(ocean))[1]
   # The two neighbours of teal's RGB complement, +/-30 degrees from it.
   list(ocean=ocean,south=hsv((hue+210/360)%%1,.70,.82),north=hsv((hue+150/360)%%1,.55,.65),
-    legend="Muted orange south; muted magenta north.",
-    legend_is="Appels\u00ednugult su\u00f0ur; fj\u00f3lubleikt nor\u00f0ur.",
+    legend="Orange southbound; magenta northbound.",
+    legend_is="Appels\u00ednugult su\u00f0urflug; fj\u00f3lubleikt nor\u00f0urflug.",
     relationship="RGB split-complementary: route hues at teal +210 and +150 degrees; adjusted saturation/value. Not restricted to the HI route palette.")
 }
 
@@ -118,23 +118,23 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   npc<-function(point)c((point[1]-bounds["xmin"])/diff(bounds[c("xmin","xmax")]),(point[2]-bounds["ymin"])/diff(bounds[c("ymin","ymax")]))
   ap<-sf::st_coordinates(anchors); ice<-npc(ap[a$region=="Iceland",]);africa<-npc(ap[a$region=="West Africa",])
   txt("52 / HIDEF MAPS",.035,.977,12,"bold");txt(w$author,.035,.957,6.5)
-  grid::grid.raster(png::readPNG("research/illustrations/spoi-flight-ai.png"),x=.25,y=if(language=="en").66 else .70,width=.46,interpolate=TRUE)
+  grid::grid.raster(png::readPNG("research/illustrations/spoi-flight-ai.png"),x=.25,y=if(language=="en").60 else .64,width=.46,interpolate=TRUE)
   text_width<-function(label,size)grid::convertWidth(grid::grobWidth(grid::textGrob(label,gp=grid::gpar(fontfamily="Jost Poster",fontface="bold",fontsize=size))),"inches",valueOnly=TRUE)
   subtitle_width<-text_width(w$subtitle,19)
   title_size<-w$title_size*subtitle_width/text_width(w$title,w$title_size)
   title_width<-text_width(w$title,title_size)
-  txt(w$title,.045,if(language=="en").535 else .575,title_size,"bold");txt(w$subtitle,.045,.495,19,"bold")
-  txt(w$vacation,.045,.464,10.5,"bold");txt("Numenius phaeopus islandicus",.045,.441,9,"italic");txt(w$biology,.045,.406,9.5)
+  txt(w$title,.045,if(language=="en").475 else .515,title_size,"bold");txt(w$subtitle,.045,.435,19,"bold")
+  txt(w$vacation,.045,.404,10.5,"bold");txt("Numenius phaeopus islandicus",.045,.381,9,"italic");txt(w$biology,.045,.346,9.5)
   txt("1",.42,.943,38,"bold");txt(w$iceland,.49,.950,12,"bold")
   txt(if(language=="is")sprintf("Um %d m\u00e1nu\u00f0ir heima.\nH\u00e9r verpa fuglarnir\nog ala upp unga.",facts$summer_months) else sprintf("About %d months at home.\nTime to nest and\nraise their chicks.",facts$summer_months),.49,.915,9)
   leader(c(.41,.39,ice[1]+.012),c(.94,.94,ice[2]+.002))
   txt("4",.70,.895,38,"bold");txt(if(language=="is")"HEIMFER\u00d0IN" else "THE WAY HOME",.77,.904,12,"bold")
   txt(if(language=="is")"\u00c1 vorin" else "In spring",.77,.882,8.5)
   # Study card and autumn note follow the existing poster's composition.
-  grid::grid.polygon(x=c(.035,.345,.345,.315,.035),y=c(.359,.359,.272,.258,.258),gp=grid::gpar(fill=grDevices::adjustcolor("white",alpha.f=.80),col=NA))
-  txt(w$study,.05,.338,12,"bold");txt(w$adults,.05,.307,9)
-  txt("2",.05,.223,38,"bold");txt(w$autumn,.12,.239,11,"bold")
-  txt(if(language=="is")sprintf("Beint til Vestur-Afr\u00edku\n\u00e1 um %d\u2013%d d\u00f6gum.",floor(facts$south_days),ceiling(facts$south_days)) else sprintf("Straight to West Africa\nin about %d\u2013%d days.",floor(facts$south_days),ceiling(facts$south_days)),.12,.210,9)
+  grid::grid.polygon(x=c(.035,.345,.345,.315,.035),y=c(.285,.285,.198,.184,.184),gp=grid::gpar(fill=grDevices::adjustcolor("white",alpha.f=.80),col=NA))
+  txt(w$study,.05,.264,12,"bold");txt(w$adults,.05,.233,9)
+  txt("2",.05,.800,38,"bold");txt(w$autumn,.12,.816,11,"bold")
+  txt(if(language=="is")sprintf("Beint til Vestur-Afr\u00edku\n\u00e1 um %d\u2013%d d\u00f6gum.",floor(facts$south_days),ceiling(facts$south_days)) else sprintf("Straight to West Africa\nin about %d\u2013%d days.",floor(facts$south_days),ceiling(facts$south_days)),.12,.787,9)
   txt("3",.40,.166,38,"bold");txt(w$africa,.47,.177,12,"bold")
   txt(if(language=="is")sprintf("Um %d m\u00e1na\u00f0a vetrardv\u00f6l\nvi\u00f0 str\u00f6ndina.",facts$winter_months) else sprintf("About %d months by the coast\nfor the non-breeding season.",facts$winter_months),.47,.145,9)
   leader(c(.64,.67,africa[1]-.012),c(.135,.135,africa[2]+.004))

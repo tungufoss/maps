@@ -33,8 +33,8 @@
       "ocean": "#2DD2C0",
       "south": "#D1783F",
       "north": "#A64B82",
-      "legend": "Muted orange south; muted magenta north.",
-      "legend_is": "Appelsínugult suður; fjólubleikt norður.",
+      "legend": "Orange southbound; magenta northbound.",
+      "legend_is": "Appelsínugult suðurflug; fjólubleikt norðurflug.",
       "relationship": "RGB split-complementary: route hues at teal +210 and +150 degrees; adjusted saturation/value. Not restricted to the HI route palette."
     },
     "pattern": "Both solid; arrows show direction"
