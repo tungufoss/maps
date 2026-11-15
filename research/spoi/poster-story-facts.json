@@ -1,0 +1,25 @@
+{
+  "residence": [
+    {
+      "region": "Iceland",
+      "mean_days": 94.7223,
+      "mean_months": 3.112,
+      "birds": 4,
+      "paired_stays": 8
+    },
+    {
+      "region": "West Africa",
+      "mean_days": 251.5531,
+      "mean_months": 8.2646,
+      "birds": 17,
+      "paired_stays": 24
+    }
+  ],
+  "summer_months": 3,
+  "winter_months": 8,
+  "south_days": 4.5357,
+  "ireland_stop_days": 12,
+  "ireland_journey_days": 16,
+  "direct_home_days": 5,
+  "ireland_share": 50
+}

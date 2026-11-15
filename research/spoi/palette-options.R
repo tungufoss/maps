@@ -6,7 +6,7 @@ source("research/spoi/cartography.R");source("research/spoi/poster-layout.R")
 con<-DBI::dbConnect(RSQLite::SQLite(),"data/spoi/spoi.sqlite")
 projection<-"+proj=omerc +lat_0=35 +lonc=-20 +alpha=15 +gamma=0 +k=1 +datum=WGS84 +units=m +no_defs"
 metadata<-jsonlite::fromJSON(DBI::dbReadTable(con,"poster_relief")$metadata_json[1]);bounds<-unlist(metadata$bounds)
-analysis<-list(anchors=DBI::dbReadTable(con,"journey_anchors"),summary=DBI::dbReadTable(con,"journey_summary"))
+analysis<-list(anchors=DBI::dbReadTable(con,"journey_anchors"),summary=DBI::dbReadTable(con,"journey_summary"),journeys=DBI::dbReadTable(con,"journey_journeys"))
 f<-tempfile(fileext=".geojson");writeLines(DBI::dbReadTable(con,"journey_density")$geojson[1],f);analysis$density<-st_transform(st_read(f,quiet=TRUE),projection)
 cartography<-prepare_poster_cartography(con,projection,bounds);DBI::dbDisconnect(con)
 systemfonts::register_font("Jost Poster",plain="styles/fonts/Jost-Regular.ttf",bold="styles/fonts/Jost-Black.ttf",italic="styles/fonts/Jost-Italic.ttf",bolditalic="styles/fonts/Jost-BlackItalic.ttf")

@@ -23,6 +23,7 @@
   "limitations": "Raw geolocations are noisy and these analyst thresholds are not validated against the authors' events. Countries, journey classes and elapsed days are exploratory approximations. Data do not resolve exact flight paths; source timezone/datum unspecified.",
   "paper": "https://doi.org/10.1111/jav.01938",
   "data": "https://doi.org/10.5061/dryad.3kf35s5",
+  "residence": "Pair accepted sensor-refined arrival and next departure for the same bird. Iceland: spring/autumn within a calendar year, 20-180 days. West Africa: autumn/next spring, 90-330 days. Average stays within birds, then equally across birds. Convert days using 30.4375 days/month; round to whole months for public captions. Partial stays excluded; small summer sample does not represent every bird. Full values and sample sizes in poster_residence.",
   "route_display": {
     "geometry": "Schematic cubic links between shared regional means; not estimated flight paths",
     "width": "One count scale for both directions: 0.13 mm per journey; white edge halos are not part of the count encoding",

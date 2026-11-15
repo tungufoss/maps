@@ -54,3 +54,14 @@ pal<-spoi_palette();hue<-function(col)rgb2hsv(col2rgb(col))[1]*360
 stopifnot(abs((hue(pal$south)-hue(pal$ocean))%%360-210)<1,
           abs((hue(pal$north)-hue(pal$ocean))%%360-150)<1)
 cat("Lane-scale checks passed: 30 southbound journeys are wider than 13 via Ireland, on one proportional count scale; route hues are split-complementary to teal.\n")
+residence<-data.frame(bird_id=c("A","A","A","A","B","B"),year=c(2015,2015,2016,2016,2015,2015),
+  season=rep(c("Inbound","Outbound"),3),complete=1,timing_method="Local sensor change points",
+  departure=c("2015-04-20T00:00:00","2015-07-31T00:00:00","2016-04-20T00:00:00","2016-07-31T00:00:00","2015-04-20T00:00:00","2015-08-31T00:00:00"),
+  arrival=c("2015-05-01T00:00:00","2015-08-04T00:00:00","2016-05-01T00:00:00","2016-08-04T00:00:00","2015-05-01T00:00:00","2015-09-04T00:00:00"))
+facts<-poster_story_facts(list(journeys=residence,summary=data.frame(season=c("Outbound","Inbound","Inbound"),lane=c("Direct","Ireland","Direct"),
+  timed_journeys=c(3,2,1),mean_elapsed_days=c(4.5,15.7,4.7),mean_stopover_days=c(0,12.3,0),percent=c(100,50,25))))
+stopifnot(facts$residence$mean_days[facts$residence$region=="Iceland"]==106.5,
+  facts$residence$birds[facts$residence$region=="Iceland"]==2,
+  facts$residence$paired_stays[facts$residence$region=="Iceland"]==3,
+  facts$ireland_stop_days==12,facts$ireland_journey_days==16,facts$direct_home_days==5)
+cat("Public-caption checks passed: same-bird arrival/departure pairs, equal bird weights and rounded journey times.\n")

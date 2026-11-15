@@ -3,27 +3,54 @@ poster_words <- function(language) {
   if(language=="is")list(title="SP\u00d3I",title_size=82,subtitle="SUMAR \u00c1 \u00cdSLANDI",vacation="\u2248 3 m\u00e1na\u00f0a sumarfr\u00ed",
     author="Kort skilgreind af Dr. Helgu Ingimundard\u00f3ttur",biology="Ungarnir klekjast \u00fat \u00e1 \u00cdslandi.\nFullor\u00f0nu fuglarnir dvelja sunnar \u00e1 veturna.",
     iceland="\u00cdSLAND",breeding="Varpsv\u00e6\u00f0i",spring="VOR",autumn="HAUST",africa="VESTUR-AFR\u00cdKA",winter="Vetrardv\u00f6l",
-    study="19 fuglar \u00b7 56 fer\u00f0ir",adults="Fullor\u00f0nir fuglar \u00ed ranns\u00f3kninni.\n13 karlfuglar og 6 kvenfuglar.",
+    study="19 fuglar \u00b7 56 fer\u00f0ir",adults="Litlir m\u00e6lar \u00e1 f\u00f3tum fuglanna\nhj\u00e1lpu\u00f0u a\u00f0 rekja fer\u00f0ir \u00feeirra.",
     south="Um 4\u20135 dagar su\u00f0ur",south_detail="Skynjaramat \u00b7 28 t\u00edmasettar fer\u00f0ir",lanes="VORFER\u00d0IR \u00b7 n = 26",lane_note="Breidd l\u00ednu s\u00fdnir hlutfall fer\u00f0a.",
     direct="Beint",Ireland="\u00cdrland",`United Kingdom`="Bretland",France="Frakkland",Portugal="Port\u00fagal",Unresolved="\u00d3v\u00eds sta\u00f0setning",
     day="d.",via="fer\u00f0",stop="vi\u00f0dv\u00f6l",untimed="T\u00edmalengd \u00f3viss",timed="t\u00edmasettar",unresolved="1/26 fer\u00f0: \u00f3v\u00eds vi\u00f0komusta\u00f0ur (4%).",
     breeding_key="Varp",stop_key="Vi\u00f0koma",winter_key="Vetrardv\u00f6l",density="Dekkri kjarnar: meiri \u00fe\u00e9ttleiki \u00e1\u00e6tla\u00f0ra sta\u00f0setninga.",
-    caveat="K\u00f6nnunarmat \u00far hr\u00e1um lj\u00f3sm\u00e6lig\u00f6gnum; ekki sta\u00f0festir atbur\u00f0ir h\u00f6funda.\nLei\u00f0ir eru sk\u00fdringarmyndir milli sv\u00e6\u00f0a. T\u00edmi er me\u00f0 vi\u00f0dv\u00f6lum, \u00e1n fitus\u00f6fnunar fyrir brottf\u00f6r.",
+    caveat="T\u00edmar eru n\u00e1munda\u00f0ar \u00e1\u00e6tlanir \u00far g\u00f6gnunum; fer\u00f0at\u00edmi er me\u00f0 vi\u00f0komum.\nL\u00ednurnar tengja sv\u00e6\u00f0i og s\u00fdna ekki n\u00e1kv\u00e6ma flugsl\u00f3\u00f0a. N\u00e1nari fyrirvarar \u00ed grein.",
     source="GREIN",data="G\u00d6GN",geography="Land og h\u00e6\u00f0askuggar: Natural Earth, almannaeign. Sk\u00e1sni\u00f0 Mercators.",
     credit="Fuglamynd: gervigreind eftir Nozeman & Sepp. Upprunaleg mynd \u00ed almannaeign; heimildir og fyrirm\u00e6li \u00ed grein.",
-    method="Teikna\u00f0 \u00ed R. Sameiginlegir landbundnir me\u00f0alpunktar; 50/75/95% \u00fe\u00e9ttleikasv\u00e6\u00f0i \u00e1 landi, ekki \u00f6ryggism\u00f6rk.")
+    method="Gert \u00ed R \u00far opnum g\u00f6gnum. A\u00f0fer\u00f0, \u00f3vissa og lei\u00f0beiningar um endurger\u00f0 \u00ed grein.")
   else list(title="WHIMBREL",title_size=34,subtitle="SUMMERS IN ICELAND",vacation="\u2248 3 months of summer vacation",
     author="Maps defined by Dr Helga Ingimundard\u00f3ttir",biology="Chicks hatch in Iceland.\nAdults winter farther south.",
     iceland="ICELAND",breeding="Breeding grounds",spring="SPRING",autumn="AUTUMN",africa="WEST AFRICA",winter="Non-breeding season",
-    study="19 birds \u00b7 56 migrations",adults="Tracked adults in the study.\n13 males and 6 females.",south="About 4\u20135 days south",south_detail="Sensor estimates \u00b7 28 timed journeys",
+    study="19 birds \u00b7 56 migrations",adults="Tiny leg-mounted loggers helped\nresearchers follow their journeys.",south="About 4\u20135 days south",south_detail="Sensor estimates \u00b7 28 timed journeys",
     lanes="SPRING JOURNEYS \u00b7 n = 26",lane_note="Spring band width shows journey share.",
     direct="Direct",Ireland="Ireland",`United Kingdom`="United Kingdom",France="France",Portugal="Portugal",Unresolved="Unresolved location",
     day="d",via="journey",stop="stopped",untimed="Timing unresolved",timed="timed",unresolved="1/26 journeys: unresolved stop country (4%).",
     breeding_key="Breeding",stop_key="Stopover",winter_key="Non-breeding",density="Darker cores: greater concentration of location estimates.",
-    caveat="Exploratory estimates from raw geolocations; not the authors' confirmed events.\nLanes are schematic links between regions. Elapsed time includes stops, excludes pre-departure fuelling.",
+    caveat="Rounded estimates from tracking data; journey time includes stops.\nLines link regions, not exact flight paths. Further limitations in the write-up.",
     source="PAPER",data="DATA",geography="Geography & shaded relief: Natural Earth, public domain. Projection: oblique Mercator.",
     credit="Bird illustration: AI after Nozeman & Sepp, public-domain reference. Original, prompt and provenance in the write-up.",
-    method="Drawn in R. Shared land-constrained mean markers; 50/75/95% on-land density regions, not confidence bounds.")
+    method="Made in R from open data. Methods, uncertainty and reproduction in the write-up.")
+}
+
+poster_story_facts <- function(analysis) {
+  j<-analysis$journeys
+  j<-j[j$complete==1 & j$timing_method=="Local sensor change points",]
+  day<-function(x)as.numeric(as.POSIXct(x,format="%Y-%m-%dT%H:%M:%S",tz="UTC"))/86400
+  stays<-function(winter=FALSE){
+    start<-j[j$season==if(winter)"Outbound" else "Inbound",]
+    end<-j[j$season==if(winter)"Inbound" else "Outbound",]
+    start$pair_year<-start$year+as.integer(winter);end$pair_year<-end$year
+    pairs<-merge(start,end,by=c("bird_id","pair_year"),suffixes=c("_start","_end"))
+    pairs$days<-day(pairs$departure_end)-day(pairs$arrival_start)
+    pairs<-pairs[pairs$days>(if(winter)90 else 20) & pairs$days<(if(winter)330 else 180),]
+    per_bird<-aggregate(days~bird_id,pairs,mean)
+    data.frame(region=if(winter)"West Africa" else "Iceland",mean_days=mean(per_bird$days),
+      mean_months=mean(per_bird$days)/30.4375,birds=nrow(per_bird),paired_stays=nrow(pairs))
+  }
+  residence<-rbind(stays(),stays(TRUE))
+  q<-analysis$summary
+  ireland<-q[q$season=="Inbound" & q$lane=="Ireland",]
+  direct<-q[q$season=="Inbound" & q$lane=="Direct",]
+  south<-q[q$season=="Outbound",]
+  list(residence=residence,summer_months=round(residence$mean_months[residence$region=="Iceland"]),
+    winter_months=round(residence$mean_months[residence$region=="West Africa"]),
+    south_days=weighted.mean(south$mean_elapsed_days,south$timed_journeys,na.rm=TRUE),
+    ireland_stop_days=round(ireland$mean_stopover_days),ireland_journey_days=round(ireland$mean_elapsed_days),
+    direct_home_days=round(direct$mean_elapsed_days),ireland_share=ireland$percent)
 }
 
 spoi_palette <- function() {
@@ -60,7 +87,7 @@ make_lane_geometry <- function(analysis,projection,colours=spoi_palette()) {
 }
 
 render_spoi_poster <- function(analysis,cartography,projection,bounds,language="en",colours=spoi_palette(),tag="",linkedin=TRUE) {
-  w<-poster_words(language);land<-cartography$land;a<-analysis$anchors
+  w<-poster_words(language);land<-cartography$land;a<-analysis$anchors;facts<-poster_story_facts(analysis)
   xy<-function(lon,lat)sf::st_coordinates(sf::st_transform(sf::st_as_sf(data.frame(lon,lat),coords=c("lon","lat"),crs=4326),projection))
   anchors<-sf::st_transform(sf::st_as_sf(a,coords=c("longitude","latitude"),crs=4326),projection)
   lanes<-make_lane_geometry(analysis,projection,colours)
@@ -92,32 +119,35 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   ap<-sf::st_coordinates(anchors); ice<-npc(ap[a$region=="Iceland",]);africa<-npc(ap[a$region=="West Africa",])
   txt("52 / HIDEF MAPS",.035,.977,12,"bold");txt(w$author,.035,.957,6.5)
   grid::grid.raster(png::readPNG("research/illustrations/spoi-flight-ai.png"),x=.25,y=if(language=="en").66 else .70,width=.46,interpolate=TRUE)
-  txt(w$title,.04,if(language=="en").535 else .575,w$title_size,"bold");txt(w$subtitle,.045,.495,19,"bold")
+  text_width<-function(label,size)grid::convertWidth(grid::grobWidth(grid::textGrob(label,gp=grid::gpar(fontfamily="Jost Poster",fontface="bold",fontsize=size))),"inches",valueOnly=TRUE)
+  subtitle_width<-text_width(w$subtitle,19)
+  title_size<-w$title_size*subtitle_width/text_width(w$title,w$title_size)
+  title_width<-text_width(w$title,title_size)
+  txt(w$title,.045,if(language=="en").535 else .575,title_size,"bold");txt(w$subtitle,.045,.495,19,"bold")
   txt(w$vacation,.045,.464,10.5,"bold");txt("Numenius phaeopus islandicus",.045,.441,9,"italic");txt(w$biology,.045,.406,9.5)
-  txt("1",.42,.943,38,"bold");txt(w$iceland,.49,.950,12,"bold");txt(w$breeding,.49,.929,9)
+  txt("1",.42,.943,38,"bold");txt(w$iceland,.49,.950,12,"bold")
+  txt(if(language=="is")sprintf("Um %d m\u00e1nu\u00f0ir heima.\nH\u00e9r verpa fuglarnir\nog ala upp unga.",facts$summer_months) else sprintf("About %d months at home.\nTime to nest and\nraise their chicks.",facts$summer_months),.49,.915,9)
   leader(c(.41,.39,ice[1]+.012),c(.94,.94,ice[2]+.002))
-  txt("4",.70,.895,38,"bold");txt(w$spring,.77,.904,12,"bold")
-  txt(if(language=="is")"Fj\u00f6lbreytt lei\u00f0 heim" else "More than one way home",.70,.858,8.5)
+  txt("4",.70,.895,38,"bold");txt(if(language=="is")"HEIMFER\u00d0IN" else "THE WAY HOME",.77,.904,12,"bold")
+  txt(if(language=="is")"\u00c1 vorin" else "In spring",.77,.882,8.5)
   # Study card and autumn note follow the existing poster's composition.
   grid::grid.polygon(x=c(.035,.345,.345,.315,.035),y=c(.359,.359,.272,.258,.258),gp=grid::gpar(fill=grDevices::adjustcolor("white",alpha.f=.80),col=NA))
   txt(w$study,.05,.338,12,"bold");txt(w$adults,.05,.307,9)
-  txt("2",.37,.346,38,"bold");txt(w$autumn,.44,.355,11,"bold");txt(w$south,.44,.326,8.5)
-  # Duration includes the two unresolved route classifications; denominator explicit.
-  timed<-sum(analysis$summary$timed_journeys[analysis$summary$season=="Outbound"])
-  txt(sub("28",paste0("\n",timed),w$south_detail),.44,.302,6.5)
-  txt("3",.40,.166,38,"bold");txt(w$africa,.47,.177,12,"bold");txt(w$winter,.47,.150,9)
+  txt("2",.05,.223,38,"bold");txt(w$autumn,.12,.239,11,"bold")
+  txt(if(language=="is")sprintf("Beint til Vestur-Afr\u00edku\n\u00e1 um %d\u2013%d d\u00f6gum.",floor(facts$south_days),ceiling(facts$south_days)) else sprintf("Straight to West Africa\nin about %d\u2013%d days.",floor(facts$south_days),ceiling(facts$south_days)),.12,.210,9)
+  txt("3",.40,.166,38,"bold");txt(w$africa,.47,.177,12,"bold")
+  txt(if(language=="is")sprintf("Um %d m\u00e1na\u00f0a vetrardv\u00f6l\nvi\u00f0 str\u00f6ndina.",facts$winter_months) else sprintf("About %d months by the coast\nfor the non-breeding season.",facts$winter_months),.47,.145,9)
   leader(c(.64,.67,africa[1]-.012),c(.135,.135,africa[2]+.004))
-  # One short information box replaces the individual-country annotations.
-  grid::grid.rect(x=.835,y=.73,width=.28,height=.19,gp=grid::gpar(fill=grDevices::adjustcolor("white",alpha.f=.75),col=NA))
-  txt(if(language=="is")"HEIMFER\u00d0IN \u00b7 n=26" else "THE JOURNEY HOME \u00b7 n=26",.715,.805,9,"bold")
-  summary<-if(language=="is")paste("Flestir stoppa \u00e1 lei\u00f0inni heim.","Um helmingur tekur 12 daga", "sm\u00e1fr\u00ed \u00e1 \u00cdrlandi a\u00f0 me\u00f0altali.","~16 dagar um \u00cdrland; ~5 beint.","Fer\u00f0at\u00edmi inniheldur vi\u00f0dv\u00f6l.",sep="\n") else paste("Most stop on the way home.","About half take a 12-day", "mini-break in Ireland, on average.","~16 days via Ireland; ~5 direct.","Elapsed time includes stops.",sep="\n")
-  txt(summary,.715,.734,8.4)
-  txt(if(language=="is")paste(colours$legend_is,"Breidd l\u00ednu s\u00fdnir fj\u00f6lda fer\u00f0a.","Dekkri sv\u00e6\u00f0i: fleiri fuglar.",sep="\n") else paste(colours$legend,"One width scale: number of journeys.","Darker regions: more contributing birds.",sep="\n"),.715,.657,6.1)
+  # Public-facing story, directly on the map: no return-journey panel.
+  summary<-if(language=="is")sprintf("Um helmingur fer um \u00cdrland.\nA\u00f0 jafna\u00f0i %d daga vi\u00f0koma.\n\u00dear g\u00e6tu fuglarnir safna\u00f0 kr\u00f6ftum\nog be\u00f0i\u00f0 betri skilyr\u00f0a \u00e1 \u00cdslandi.\nHeim um \u00cdrland: um %d dagar.\nBeint heim: um %d dagar.",facts$ireland_stop_days,facts$ireland_journey_days,facts$direct_home_days) else sprintf("About half stop in Ireland:\n%d days there, on average.\nThey may build reserves and wait\nfor better conditions in Iceland.\nVia Ireland: about %d days home.\nDirect: about %d days home.",facts$ireland_stop_days,facts$ireland_journey_days,facts$direct_home_days)
+  txt(summary,.70,.818,9)
+  # Width explanation belongs in the clear ocean text area.
+  txt(if(language=="is")paste("Bre\u00ed\u00f0ari l\u00ednur s\u00fdna fleiri fer\u00f0ir.",colours$legend_is,"Dekkri sv\u00e6\u00f0i s\u00fdna fleiri fugla.",sep="\n") else paste("Wider lines show more journeys.",colours$legend,"Darker regions show more birds.",sep="\n"),.04,.153,7.5)
   # Geographic names remain deliberately brief, with no per-stop statistics.
   for(i in which(a$role=="Stopover")) {
     pos<-npc(ap[i,]);txt(toupper(w[[a$region[i]]]),pos[1]+.016,pos[2]+.006,6,"bold")
   }
-  places<-data.frame(lon=c(-5,-7,-13,-13,-12.1,-9,-10.5),lat=c(31,21,15,13.7,12.4,9,7.8),
+  places<-data.frame(lon=c(-5,-12,-13,-13,-12.1,-9,-10.5),lat=c(31,20.5,15,13.7,12.4,9,7.8),
     en=c("MOROCCO","MAURITANIA","SENEGAL","THE GAMBIA","GUINEA-BISSAU","GUINEA","SIERRA LEONE"),
     is=c("MAROKK\u00d3","M\u00c1RITAN\u00cdA","SENEGAL","GAMB\u00cdA","G\u00cdNEA-BISSAU","G\u00cdNEA","S\u00cdERRA LE\u00d3NE"))
   for(i in seq_len(nrow(places))){pos<-npc(xy(places$lon[i],places$lat[i]));txt(if(language=="is")places$is[i] else places$en[i],pos[1],pos[2],6,"bold")}
@@ -131,5 +161,5 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   ragg::agg_png(paste0("previews/spoi/poster",suffix,tag,"-linkedin.png"),width=1200,height=1500,res=150,background=colours$ocean)
   grid::grid.newpage();grid::grid.raster(png::readPNG(file),x=.5,y=.5,width=5/6,height=1,interpolate=TRUE);grDevices::dev.off()
   }
-  invisible(file)
+  invisible(structure(file,title_width_inches=title_width,subtitle_width_inches=subtitle_width))
 }

@@ -22,6 +22,11 @@ bounds <- c(xmin=ends[1,1]-.29*width,xmax=ends[1,1]+.71*width,ymin=ends[2,2]-.13
 cartography <- prepare_poster_cartography(con,projection,bounds)
 countries <- prepare_countries(con,projection)
 analysis <- analyse_journeys(observations,DBI::dbReadTable(con,"environment"),countries,projection)
+story_facts <- poster_story_facts(analysis)
+DBI::dbWriteTable(con,"poster_residence",story_facts$residence,overwrite=TRUE)
+write.csv(story_facts$residence,"research/spoi/poster-residence.csv",row.names=FALSE)
+writeLines(jsonlite::toJSON(story_facts,auto_unbox=TRUE,pretty=TRUE),"research/spoi/poster-story-facts.json")
+analysis$method$residence <- "Pair accepted sensor-refined arrival and next departure for the same bird. Iceland: spring/autumn within a calendar year, 20-180 days. West Africa: autumn/next spring, 90-330 days. Average stays within birds, then equally across birds. Convert days using 30.4375 days/month; round to whole months for public captions. Partial stays excluded; small summer sample does not represent every bird. Full values and sample sizes in poster_residence."
 analysis$method$route_display <- list(geometry="Schematic cubic links between shared regional means; not estimated flight paths",
   width="One count scale for both directions: 0.13 mm per journey; white edge halos are not part of the count encoding",
   outbound="30 direct autumn migrations reported in the paper; automated classifications remain separately retained",
