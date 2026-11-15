@@ -4,12 +4,12 @@ This is a real R/Leaflet map of the journal-linked observations, not a generated
 
 ## Reproduce from Git
 
-The committed data artifact is [`../../data/spoi/spoi.sqlite`](../../data/spoi/spoi.sqlite). Raw ZIP/CSV downloads and installed R libraries are excluded from Git. The database includes the unmodified source fields, parsed observations, all quality flags, environmental observations, source checksums and the public-domain Natural Earth land geometry. The standalone HTML embeds its JavaScript, illustration, basemap and observations; viewing it needs neither internet nor a database server.
+The committed data artifact is [`../../data/spoi/spoi.sqlite`](../../data/spoi/spoi.sqlite). Raw ZIP/CSV downloads and installed R libraries are excluded from Git. The database includes the unmodified source fields, parsed observations, all quality flags, environmental observations, source checksums and the public-domain Natural Earth land geometry used by the static export. The interactive poster uses ready-made OpenTopoMap raster tiles below the bird tracks. Its HTML embeds the code, illustration and observations; the basemap tiles need internet, but no database or R server is needed.
 
 From the repository root, with Python 3.12+ and R 4.5+:
 
 ```r
-install.packages(c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc"), repos = "https://cloud.r-project.org")
+install.packages(c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc", "ggplot2", "ragg", "boot"), repos = "https://cloud.r-project.org")
 ```
 
 Install Quarto (which provides Pandoc) or make Pandoc available to R, then run:
@@ -19,7 +19,19 @@ Rscript research/spoi/build.R
 python -m http.server 8875 --bind 127.0.0.1 --directory previews/spoi
 ```
 
-Open <http://127.0.0.1:8875/>. The outputs are `previews/spoi/index.html` (standalone interactive poster) and `previews/spoi/poster.png` (1200 × 1500, drawn in R from the same display mask). Open `Open spoi poster.cmd` on Windows to launch the prepared preview. The static PNG shows all birds; it does not capture the current browser selection. Recorded package versions and R/GDAL/GEOS/PROJ details are alongside this README.
+Open <http://127.0.0.1:8875/>. The outputs are `previews/spoi/index.html` (interactive poster) and `previews/spoi/poster.png` (1200 × 1500, designed in R/ggplot2 with solid/dashed seasonal summaries and bootstrap shading). Open `Open spoi poster.cmd` on Windows to launch the prepared preview. The static PNG summarizes the seasonal location corridors of all birds; it does not capture the current browser selection. Recorded package versions and R/GDAL/GEOS/PROJ details are alongside this README. Poster typography uses Arial and Impact, which must be installed for the same appearance.
+
+For a fast interaction/style rebuild without regenerating the static PNG: `Rscript research/spoi/build.R --html-only`. OpenTopoMap is a modern topographic basemap, not a historical map scan. OpenTopoMap/OpenStreetMap attribution remains visible. The static PNG retains its reproducible Natural Earth background.
+
+For the designed static poster alone: `Rscript research/spoi/poster.R`. This also writes the derived estimates and full method to SQLite (`corridor_estimates`, `corridor_curves`, `corridor_bird_bins`, `corridor_cycle_bins`, `analysis_methods`) and exports human-readable CSV/JSON alongside the R source.
+
+## Candidate seasonal corridors and their bands
+
+Solid lines summarize the July–September location window; dashed lines summarize April–May. These calendar windows are **not** independently identified migration events. For every 2.5-degree latitude bin, take the median longitude within each bird/cycle, average cycles within a bird, then give birds equal weight. Require at least five contributing birds; the actual data support 7–19 birds per bin. Smooth the bin means with a cubic smoothing spline (`spar = 0.65`) within contiguous supported latitude runs.
+
+Resample bird IDs as clusters 1,000 times (seed 2027), recomputing the means and applying the same smoother to each bootstrap curve. Shading is the pointwise 2.5th–97.5th percentile range of those curves. It describes the **estimated smoothed mean corridor**, not individual route spread, instrument accuracy, a simultaneous confidence region, or the probability that a bird flew through the band. Binning loses temporal order, and stationary/migrating locations can mix; missingness and geolocator errors remain limitations. This is an exploratory visual summary, not a reconstruction of the paper's flight paths or stopover analysis. The un-smoothed bin estimates remain available for audit.
+
+Numbered notes and the 30 autumn / 26 spring migration totals come from the paper. No new layover counts or durations are claimed from this corridor calculation. The bird engraving is decorative; the land shadow is a graphic treatment rather than invented elevation data. Static poster projection is equidistant conic, separate from Leaflet's Web Mercator.
 
 ## Rebuild the data import
 
@@ -39,8 +51,9 @@ This rebuilds the source and observation tables. To regenerate the basemap cache
 - A masked row breaks its line. Gaps longer than 36 hours, different birds and different July–June cycles never connect. No missing values are imputed, and no flight positions are interpolated. Bird selection highlights one individual over the others; cycle and month filters retain genuine observations. Playback reveals calendar months rather than simulating continuous flight.
 - Some first/last annual cycles are partial. A cycle label does not guarantee a complete migration. The application does not calculate departure dates, flight speeds or time away from these noisy raw estimates. “About nine months away” interprets typical August/May dates in the paper, not a per-bird result.
 - The paper used visual twilight checks, filtering and double smoothing; this exploratory viewer does **not** reproduce that entire analysis. Raw latitude noise remains visible, especially at high latitudes. Do not equate the displayed dashed joins with GPS flight paths.
-- Source timezone and coordinate datum are not specified in the table. The source time strings remain intact; an interval midpoint is used for ordering and display. WGS84 is assumed for geographic display, then Leaflet and the static poster use Web Mercator (EPSG:3857). Do not measure migration distance on that projection.
+- Source timezone and coordinate datum are not specified in the table. The source time strings remain intact; an interval midpoint is used for ordering and display. WGS84 is assumed for geographic display; Leaflet uses Web Mercator (EPSG:3857), while the designed static poster uses the equidistant conic projection specified in `poster.R`. Do not measure migration distance from either graphic.
 - The coastline is repaired with planar GEOS and clipped before projection; spherical ring repair changed a continental ring in this environment and is deliberately avoided. No elevation raster is used; unlike the initial generated concept, this real basemap does not depict shaded relief.
+- Leaflet's raster tile pane stays beneath observed routes and points at z-index 450, with labels at the normal marker level. There is no custom SVG land layer in the interactive poster.
 
 ## Sources and credits
 
@@ -57,6 +70,7 @@ Design inspiration: Warren Davison, [Drawn by Flight](https://storymaps.esri.com
 ```sh
 python -m unittest discover -s tests -p test_spoi_db.py
 node --test tests/spoi-poster.test.cjs
+Rscript tests/test_spoi_corridors.R
 Rscript research/spoi/build.R
 quarto render
 ```

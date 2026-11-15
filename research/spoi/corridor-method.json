@@ -1,0 +1,22 @@
+{
+  "name": "Exploratory seasonal location corridor",
+  "latitude_bin_degrees": 2.5,
+  "months": {
+    "outbound": [7, 8, 9],
+    "inbound": [4, 5]
+  },
+  "within_bird_cycle": "median longitude",
+  "within_bird_across_cycles": "mean of cycle-bin summaries",
+  "between_birds": "equal-weight mean",
+  "smoothing": {
+    "method": "cubic smoothing spline",
+    "spar": 0.65,
+    "applies_to": "equal-bird means and every bootstrap curve",
+    "scope": "separate supported latitude runs; no bridging unsupported bins"
+  },
+  "uncertainty": "95% percentile cluster bootstrap of bird IDs; not individual location error or a flight-path confidence band",
+  "seed": 2027,
+  "repetitions": 1000,
+  "min_birds": 5,
+  "limitations": "Calendar windows do not identify migration events. Binning loses sequence and may mix stationary/migrating observations. Missingness may be informative. Do not infer stopovers, exact flight paths or distance from the mean corridor."
+}

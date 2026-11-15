@@ -1,8 +1,9 @@
 # Run from the repository root: Rscript research/spoi/build.R
-# Uses committed SQLite; no database server, token or internet needed after setup.
+# Uses committed SQLite; live OpenTopoMap tiles need internet when viewed.
+html_only <- "--html-only" %in% commandArgs(trailingOnly = TRUE)
 if (.Platform$OS.type == "windows") Sys.setlocale("LC_CTYPE", "English_United States.UTF-8")
 .libPaths(c(file.path(getwd(), ".R-library"), .libPaths()))
-required <- c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc")
+required <- c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc", "ggplot2", "ragg", "boot")
 missing <- required[!vapply(required, requireNamespace, logical(1), quietly = TRUE)]
 if (length(missing)) stop("Install required packages first: ", paste(missing, collapse = ", "))
 root <- normalizePath(getwd(), winslash = "/")
@@ -46,12 +47,11 @@ dir.create(out, recursive = TRUE, showWarnings = FALSE)
 manifest <- jsonlite::fromJSON(file.path(root, "data/spoi/source.json"))
 payload <- list(positions = positions, birds = birds, quality = quality, flags = flags,
   environmentMissing = environment_missing, manifest = manifest,
-  land = jsonlite::fromJSON(land_geo, simplifyVector = FALSE),
   birdImage = base64enc::dataURI(file = file.path(root, "research/illustrations/spoi-flight-ai.png"), mime = "image/png"))
 
-map <- leaflet::leaflet(width = "100%", height = "100%", options = leaflet::leafletOptions(
+map <- leaflet::leaflet(width = "100%", height = 700, options = leaflet::leafletOptions(
   zoomControl = FALSE, preferCanvas = TRUE, minZoom = 2, maxZoom = 9, attributionControl = TRUE))
-map <- leaflet::addControl(map, html = 'Made with Natural Earth | Geolocator estimates, not GPS', position = "bottomright", className = "map-credit")
+map <- leaflet::addProviderTiles(map, leaflet::providers$OpenTopoMap)
 map <- leaflet::fitBounds(map, -38, 0, 10, 70)
 render_code <- paste("function(el,x,data){", paste(readLines("research/spoi/poster-data.js", warn = FALSE, encoding = "UTF-8"), collapse = "\n"), paste(readLines("research/spoi/poster.js", warn = FALSE, encoding = "UTF-8"), collapse = "\n"), "}", sep = "\n")
 map <- htmlwidgets::onRender(map, render_code, data = payload)
@@ -68,36 +68,9 @@ if (nzchar(quarto)) {
 }
 htmlwidgets::saveWidget(map, file.path(out, "index.html"), selfcontained = TRUE, title = "Sp\u00f3i \u00b7 52 / HIDEF MAPS", background = "#2DD2C0")
 
-# A real R-drawn static companion; uses the exact same display mask and gap rule.
-mercator <- function(lon, lat) cbind(lon * pi / 180 * 6378137, log(tan(pi / 4 + lat * pi / 360)) * 6378137)
-land_m <- sf::st_transform(land, 3857)
-corners <- mercator(c(-38, 10), c(0, 70))
-grDevices::png(file.path(out, "poster.png"), width = 1200, height = 1500, res = 150, bg = "#2DD2C0")
-par(mar = c(6, 1, 6, 1), family = "sans", bg = "#2DD2C0", xpd = FALSE)
-plot(sf::st_geometry(land_m), xlim = corners[, 1], ylim = corners[, 2], col = "#F5F5F5", border = "#ffffff", axes = FALSE, asp = 1)
-for (group in split(positions, interaction(positions$bird_id, positions$cycle, drop = TRUE))) {
-  group <- group[order(group$timestamp), ]
-  if (nrow(group) > 1) {
-    times <- as.numeric(as.POSIXct(group$timestamp, format = "%Y-%m-%dT%H:%M:%S", tz = "UTC"))
-    gap <- diff(times) / 3600
-    eligible <- head(group$display_ok, -1) == 1 & tail(group$display_ok, -1) == 1 & gap > 0 & gap <= 36
-    a <- which(eligible); b <- a + 1
-    if (length(a)) {
-      start <- mercator(group$longitude[a], group$latitude[a]); end <- mercator(group$longitude[b], group$latitude[b])
-      segments(start[, 1], start[, 2], end[, 1], end[, 2], col = grDevices::adjustcolor("#262626", alpha.f = 0.16), lwd = 0.6)
-    }
-  }
-}
-for (place in list(c(-19,65,"ICELAND"), c(-8,54,"IRELAND"), c(-7,40,"IBERIA"), c(-10,11,"WEST AFRICA"))) {
-  xy <- mercator(as.numeric(place[1]), as.numeric(place[2])); text(xy[1], xy[2], place[3], cex = 0.75, font = 2)
-}
-title(main = "SP\u00d3I: ESCAPING THE ICELANDIC WINTER", cex.main = 1.3, col.main = "#262626", line = 3)
-mtext("52 / HIDEF MAPS \u00b7 Maps defined by Dr Helga Ingimundard\u00f3ttir", side = 3, line = 1, cex = 0.65)
-mtext("19 birds \u00b7 observed estimates overlaid \u00b7 breaks retained \u00b7 2012\u20132016", side = 1, line = 1, cex = 0.7)
-mtext("Paper: doi:10.1111/jav.01938 | Data: doi:10.5061/dryad.3kf35s5 (CC0)", side = 1, line = 2.5, cex = 0.6)
-mtext("Raw geolocation estimates with conservative display flags; not a reproduction of the paper's filtered tracks.", side = 1, line = 4, cex = 0.55)
-dev.off()
+# Designed static poster and derived corridors use the same SQLite observations.
+if (!html_only) source("research/spoi/poster.R", encoding = "UTF-8")
 versions <- data.frame(package = required, version = vapply(required, function(p) as.character(utils::packageVersion(p)), character(1)))
 write.csv(versions, "research/spoi/package-versions.csv", row.names = FALSE)
 writeLines(capture.output(sessionInfo()), "research/spoi/session-info.txt")
-cat("Built", file.path(out, "index.html"), "and poster.png from", nrow(positions), "source observations.\n")
+cat("Built", file.path(out, "index.html"), if (!html_only) "and poster.png" else "(HTML only)", "from", nrow(positions), "source observations.\n")

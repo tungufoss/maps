@@ -6,9 +6,25 @@ Maps defined by Dr Helga Ingimundardóttir
 
 [HIDEF website design preview](hidef-spoi-site-preview.png) — an AI-generated visual mockup, not a screenshot of a functioning Leaflet implementation. The disabled explorer depicts pending data access; no individual tracks are shown. Generated 14 November 2026 with `image_gen.imagegen`; exact model identifier not exposed. [Full prompt](illustrations/hidef-site-preview-prompt.txt). The input reference was `spoi-teal-poster-v2.png`.
 
-# Spói: escaping the Icelandic winter
+# Spói summers in Iceland
 
-*A summer in Iceland. Most of the year away.*
+*≈ 3 months of summer vacation.*
+
+Spói returns to Iceland to breed, filling the short summer with its distinctive whistling call. Tracked adults typically returned in May and left in August: roughly three months in Iceland and nine months away. The non-breeding season takes them south, including to West Africa. Individual schedules vary.
+
+The subtitle is playful editorial framing; the description identifies the Icelandic stay as the breeding season. The durations are approximate interpretations of typical dates in the paper, not per-bird estimates calculated from the raw position file.
+
+## What the dataset contains
+
+The position table contains bird ID, sex, two twilight timestamps, derived longitude/latitude and the solar-elevation calibration angle. The second table contains bird ID, time, minimum/maximum temperature, wet-contact count and conductivity. SQLite also stores traceable source row IDs, parsed display timestamps, annual cycles and explicit quality flags. The 19 birds comprise 13 males and 6 females. Exact ages are absent; the paper identifies the study birds as adults caught on nests. Stopover labels, exact departure/arrival events and per-position uncertainty bounds are not provided as columns.
+
+## Next analysis and animation design
+
+Keep individual bird-year journeys visible in the vintage teal poster. Add separate inbound and outbound summaries after identifying migration intervals from the positions and environmental channels using a documented method. Avoid averaging longitude/latitude by calendar date: some birds are travelling while others are stationary, and repeated years from the same bird would otherwise dominate. A representative route or density corridor plus bird-level summary statistics is preferable to an unqualified “mean path”. Report the number of birds and complete journeys contributing to each summary, and distinguish stopover counts, stopover duration and total travel duration. Paper-derived numbers must be labelled separately from newly reproduced estimates.
+
+An R/gganimate export can reveal observed positions on a fixed map without tweening across gaps. Highlight the current bird-year season and fade older seasons as context. Within a season, recent observations can fade into a short trail. Use actual dates for chronological playback; label any optional calendar-aligned multi-year comparison. `transition_manual()` can reveal prepared date frames without inventing intermediate locations. This extension is proposed, not implemented in the current Leaflet poster.
+
+References: [gganimate](https://gganimate.com/), [background marks](https://gganimate.com/reference/shadow_mark.html), and the paper and dataset citations below.
 
 Editorial framing: “escaping winter” is the human storytelling hook, not a claim that the study measured birds' feelings or established a single cause of migration.
 
