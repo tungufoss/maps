@@ -63,6 +63,15 @@
     $('selected-title').textContent=item.creator;
     $('selected-description').textContent=item.description || 'The official directory does not include a description for this collection.';
     $('source-link').href=item.url; $('selected-host').textContent=item.url;
+    $('original-title').textContent=item.creator;
+    $('original-external').href=item.url;
+    const frame=$('original-frame');
+    // Do not reload the creator's page when notes, backups or ratings update.
+    if(frame.dataset.collection!==item.id) {
+      frame.dataset.collection=item.id;
+      frame.title='Original collection by '+item.creator;
+      frame.src=item.url;
+    }
     const extra=$('per-year-listings'); extra.replaceChildren();
     if(item.listings.length>1) {
       const details=el('details'); details.append(el('summary','Listed in more than one edition'));
