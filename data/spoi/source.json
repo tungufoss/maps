@@ -1,0 +1,42 @@
+{
+  "dataset_doi": "10.5061/dryad.3kf35s5",
+  "paper_doi": "10.1111/jav.01938",
+  "dataset_url": "https://datadryad.org/dataset/doi:10.5061/dryad.3kf35s5",
+  "licence": "CC0-1.0",
+  "retrieved": "2026-11-14",
+  "version": "2019-11-19",
+  "retrieval": "User-provided original Dryad ZIP; publisher MD5s verified",
+  "authors": [
+    "Camilo Carneiro",
+    "Tómas G. Gunnarsson",
+    "José A. Alves"
+  ],
+  "sensor": "light-level geolocator; not GPS",
+  "crs": "Geographic longitude/latitude interpreted as WGS84 (EPSG:4326); datum not specified by the CSV",
+  "time_basis": "Source timezone unspecified. Twilight strings retained; interval midpoint used for display/order, not an exact flight fix.",
+  "display_policy": "Exclude missing/invalid coordinates, reversed intervals, points outside 0–75N/50W–20E, and ±20 days around calendar March 20 and September 22. Keep every source row. Do not connect gaps exceeding 36 hours or masked rows.",
+  "files": [
+    {
+      "name": "raw_positions.csv",
+      "bytes": 1664257,
+      "md5": "f535a4f97f6fefbf53c3c1c08041f798",
+      "sha256": "bd0d9acc88d3f1feb7778f278cd96105bd55f3ebeb652b8ab0bf322a3a3d4d33"
+    },
+    {
+      "name": "temp_cond_wets.csv",
+      "bytes": 3678690,
+      "md5": "ab587f907c2f3bf0112f86c3fb89a513",
+      "sha256": "0426c3656311d14fe9d57d96a4de09841db4e6aa1910d49918c3af6ac844cc7e"
+    }
+  ],
+  "counts": {
+    "birds": 19,
+    "positions": 19981,
+    "environment": 67393,
+    "displayed_positions": 14074
+  },
+  "coverage": {
+    "first_midpoint": "2012-04-09T15:16:39",
+    "last_midpoint": "2016-07-20T12:23:15"
+  }
+}

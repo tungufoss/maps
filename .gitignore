@@ -1,5 +1,7 @@
 /_site/
 /.quarto/
+/.R-library/
+/previews/spoi/index_files/
 .env
 .Rhistory
 .RData

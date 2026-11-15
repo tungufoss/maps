@@ -1,5 +1,7 @@
 # Icelandic bird migration: dataset investigation
 
+**Current status, 15 November 2026:** the user supplied the original Dryad ZIP. Both publisher MD5s match. Both source tables are preserved in `data/spoi/spoi.sqlite`: 19 birds, 19,981 position rows and 67,393 environmental rows. The real R/Leaflet implementation and its quality policy are documented in [spoi/README.md](spoi/README.md). Earlier access and mockup notes below record the initial investigation, not the current import status.
+
 Research checked on 14 November 2026. Branch: `feature/iceland-bird-migration`.
 
 ## Visual reference
