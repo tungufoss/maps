@@ -15,13 +15,9 @@ format:
     code-fold: false
 ---
 
-With [*Drawn by Flight*](https://storymaps.esri.com/stories/storyscape-resources/30-day-map-challenge/map2.png) by Warren Davison in mind, I set out to make a similarly story-led poster in R, using open research data about Icelandic birds. Its full-page geography, pale relief, bird illustration and numbered story notes gave me a composition to work towards.
+With [*Drawn by Flight*](https://storymaps.esri.com/stories/storyscape-resources/30-day-map-challenge/map2.png) by Warren Davison in mind, I set out to make a similarly story-led poster in R, using open research data about Icelandic birds. Its full-page geography, pale relief, bird illustration and numbered story notes gave me a composition to work towards. That aim led me to the Icelandic whimbrel, a bird that breeds in Iceland and spends the non-breeding season on West Africa's Atlantic coast. Carneiro, Gunnarsson and Alves followed 19 Icelandic whimbrels across 56 migrations and openly archived the tracking data on [Dryad](https://doi.org/10.5061/dryad.3kf35s5). Their [paper in the *Journal of Avian Biology*](https://doi.org/10.1111/jav.01938) is the essential companion to those files: it explains the tracking method, how the estimates were processed, and the limitations that matter when interpreting the dataset.
 
-That aim led me to the Icelandic whimbrel: a bird that breeds in Iceland and spends the non-breeding season on West Africa's Atlantic coast.
-
-The dataset comes from [Carneiro, Gunnarsson and Alves's study](https://doi.org/10.1111/jav.01938) and is openly archived on [Dryad](https://doi.org/10.5061/dryad.3kf35s5). The study followed 19 Icelandic whimbrels across 56 migrations. The openly accessible paper is an essential companion to the files: it explains the tracking method, how the estimates were processed, and the limitations that matter when interpreting the dataset.
-
-This page shows the resulting poster and how those observations shaped its design.
+This page shows the resulting poster and how the data shaped its design.
 
 ## The poster
 
