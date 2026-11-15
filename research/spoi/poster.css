@@ -8,3 +8,11 @@
 button:disabled,input:disabled,select:disabled{opacity:.5;cursor:default}#spoi-journey-summary{margin:18px 0}#spoi-journey-summary h3{font-size:23px;margin-bottom:8px}
 
 .poster-heading .scientific-name{margin:4px 0 12px;font-size:12px;line-height:1.2}
+
+/* The paper image is projected once in R; vectors use the identical CRS. */
+.poster-paper{position:absolute;pointer-events:none;max-width:none!important;max-height:none!important}
+.poster-stage[data-view=summary] .poster-heading,.poster-stage[data-view=summary] .poster-bird{display:none}
+.flight-marker{color:#262626;background:none;border:0;filter:drop-shadow(0 1px 1px #fff)}
+.flight-marker svg{display:block;width:28px;height:28px;transform-origin:50% 50%}
+.bird-heading-unknown{display:block;width:28px;line-height:28px;text-align:center;font-size:18px;color:#262626;text-shadow:0 0 2px #fff}
+[hidden]{display:none!important}#spoi-bird-story h3{font-size:25px;margin:.7rem 0}

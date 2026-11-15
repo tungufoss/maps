@@ -86,7 +86,7 @@ make_lane_geometry <- function(analysis,projection,colours=spoi_palette()) {
   do.call(rbind,out)
 }
 
-render_spoi_poster <- function(analysis,cartography,projection,bounds,language="en",colours=spoi_palette(),tag="",linkedin=TRUE) {
+render_spoi_poster <- function(analysis,cartography,projection,bounds,language="en",colours=spoi_palette(),tag="",linkedin=TRUE,mode="poster") {
   w<-poster_words(language);land<-cartography$land;a<-analysis$anchors;facts<-poster_story_facts(analysis)
   xy<-function(lon,lat)sf::st_coordinates(sf::st_transform(sf::st_as_sf(data.frame(lon,lat),coords=c("lon","lat"),crs=4326),projection))
   anchors<-sf::st_transform(sf::st_as_sf(a,coords=c("longitude","latitude"),crs=4326),projection)
@@ -110,15 +110,24 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
     ggplot2::geom_sf(data=anchors,shape=21,size=2.6,fill="white",colour="#262626",stroke=.7)+
     ggplot2::coord_sf(crs=projection,xlim=bounds[c("xmin","xmax")],ylim=bounds[c("ymin","ymax")],expand=FALSE,datum=NA)+
     ggplot2::theme_void()+ggplot2::theme(plot.background=ggplot2::element_rect(fill=colours$ocean,colour=NA),panel.background=ggplot2::element_rect(fill=colours$ocean,colour=NA),plot.margin=ggplot2::margin(0,0,0,0))
+  if(mode %in% c("background","overview","observed"))fig$layers<-fig$layers[seq_len(4)]
+  if(mode=="regions")fig$layers<-fig$layers[seq_len(5)]
+  if(mode=="observed"){
+    observed<-analysis$observations[analysis$observations$display_ok==1,]
+    observed<-sf::st_transform(sf::st_as_sf(observed,coords=c("longitude","latitude"),crs=4326),projection)
+    fig<-fig+ggplot2::geom_sf(data=observed,size=.22,alpha=.14,colour="#262626")+
+      ggplot2::coord_sf(crs=projection,xlim=bounds[c("xmin","xmax")],ylim=bounds[c("ymin","ymax")],expand=FALSE,datum=NA)
+  }
   suffix<-if(language=="is")"-is" else ""
   file<-paste0("previews/spoi/poster",suffix,tag,".png")
   ragg::agg_png(file,width=1200,height=1800,res=150,background=colours$ocean);print(fig)
+  if(mode %in% c("background","observed","regions","lanes")) {grDevices::dev.off();return(invisible(file))}
   txt<-function(label,x,y,size=12,face="plain",just="left")grid::grid.text(label,x=x,y=y,just=just,gp=grid::gpar(fontfamily="Jost Poster",fontsize=size,fontface=face,col="#262626"))
   leader<-function(x,y)grid::grid.lines(x=x,y=y,gp=grid::gpar(col="#262626",lwd=.8))
   npc<-function(point)c((point[1]-bounds["xmin"])/diff(bounds[c("xmin","xmax")]),(point[2]-bounds["ymin"])/diff(bounds[c("ymin","ymax")]))
   ap<-sf::st_coordinates(anchors); ice<-npc(ap[a$region=="Iceland",]);africa<-npc(ap[a$region=="West Africa",])
   txt("52 / HIDEF MAPS",.035,.977,12,"bold");txt(w$author,.035,.957,6.5)
-  grid::grid.raster(png::readPNG("research/illustrations/spoi-flight-ai.png"),x=.25,y=if(language=="en").60 else .64,width=.46,interpolate=TRUE)
+  grid::grid.raster(png::readPNG("research/illustrations/images/spoi-flight-ai.png"),x=.25,y=if(language=="en").60 else .64,width=.46,interpolate=TRUE)
   text_width<-function(label,size)grid::convertWidth(grid::grobWidth(grid::textGrob(label,gp=grid::gpar(fontfamily="Jost Poster",fontface="bold",fontsize=size))),"inches",valueOnly=TRUE)
   subtitle_width<-text_width(w$subtitle,19)
   title_size<-w$title_size*subtitle_width/text_width(w$title,w$title_size)

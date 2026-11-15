@@ -19,3 +19,28 @@ test('month slider reveals actual observations; it does not invent positions',()
 test('calendar filters do not turn excluded months into continuous segments',()=> {
   assert.equal(data.segments(data.prepare([row(1)]),{...state,season:'north'}).length,0);
 });
+
+test('playback has no current marker in a month without observations',()=>{
+  const rows=data.prepare([row(1)]);
+  assert.equal(data.playbackFrame(rows,state,Date.UTC(2014,8,1)).heads.length,0);
+});
+
+test('playback caps history at twelve calendar months and preserves masked breaks',()=>{
+  const rows=data.prepare([row(1,{timestamp:'2013-08-01T12:00:00'}),row(1),row(2,{display_ok:0}),row(3)]);
+  const frame=data.playbackFrame(rows,state,Date.UTC(2014,7,1));
+  assert.deepEqual(frame.segments.map(s=>s.length),[1,1]);
+  assert.equal(frame.heads.length,1);
+  assert.equal(frame.heads[0].previous,null);
+});
+
+test('timeline includes missing months rather than jumping across them',()=>{
+  const rows=data.prepare([row(1),row(1,{timestamp:'2014-10-01T12:00:00',month:10})]);
+  assert.equal(data.timeline(rows).length,3);
+});
+
+test('head direction uses consecutive estimates within the same continuous segment',()=>{
+  const rows=data.prepare([row(1),row(2,{latitude:61})]);
+  const frame=data.playbackFrame(rows,state,Date.UTC(2014,7,1));
+  assert.equal(frame.heads[0].previous.latitude,60);
+  assert.equal(frame.heads[0].row.latitude,61);
+});

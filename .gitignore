@@ -18,3 +18,10 @@ __pycache__/
 /previews/collection-review/
 map-reviews-*.json
 map-inspiration-brief-*.md
+
+# Reference images are cited by URL; only used generated assets are tracked.
+/research/illustrations/inspiration/
+/.worktrees/
+
+# Temporary htmlwidgets/Pandoc export dependencies (the dashboard is self-contained).
+/previews/spoi/*_files/

@@ -21,6 +21,21 @@ var SpoiData = (() => {
     }
     flush(); return result;
   }
-  return {prepare,included,segments};
+  function timeline(rows) {
+    const times=rows.filter(r=>r.display_ok===1 && Number.isFinite(r.time)).map(r=>r.time);
+    const first=new Date(Math.min(...times)),last=new Date(Math.max(...times)),months=[];
+    for(let t=Date.UTC(first.getUTCFullYear(),first.getUTCMonth(),1);t<=last.getTime();){
+      months.push(t);const d=new Date(t);t=Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1);
+    }
+    return months;
+  }
+  function playbackFrame(rows,state,month) {
+    const d=new Date(month),end=Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1),start=Date.UTC(d.getUTCFullYear(),d.getUTCMonth()-11,1);
+    const pieces=segments(rows,{...state,monthLimit:12}).map(s=>s.filter(r=>r.time>=start && r.time<end)).filter(s=>s.length);
+    const heads=new Map();
+    for(const s of pieces){const current=s.at(-1);if(current.time<month)continue;const prior=heads.get(current.bird_id);if(!prior || current.time>prior.row.time)heads.set(current.bird_id,{row:current,previous:s.length>1?s.at(-2):null});}
+    return {segments:pieces,heads:[...heads.values()],start,end};
+  }
+  return {prepare,included,segments,timeline,playbackFrame};
 })();
 if (typeof module !== 'undefined' && module.exports) module.exports = SpoiData;
