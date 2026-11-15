@@ -7,9 +7,15 @@ subtitle: 'The journey from a question to a published map.'
 
 Every investigation has its own question and visual approach. A shared workflow keeps the data traceable and makes it easier to revisit a result.
 
-::: {.pipeline}
-**Sources** → **Python** → **PostGIS** → **R** → **Quarto**
-:::
+```{=html}
+<ol class="pipeline" aria-label="Map-making workflow" role="list">
+  <li><strong>Sources</strong><span>Find &amp; assess</span></li>
+  <li><strong>Python</strong><span>Prepare the data</span></li>
+  <li><strong>PostGIS</strong><span>Connect &amp; analyse</span></li>
+  <li><strong>R</strong><span>Draw the map</span></li>
+  <li><strong>Quarto</strong><span>Publish the story</span></li>
+</ol>
+```
 
 ### 01 / Find and assess the data
 

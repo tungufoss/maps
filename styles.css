@@ -22,8 +22,15 @@
 .feature:nth-child(3) { border-color:var(--hi-pink); }
 .feature h3 { font-size:1.4rem; font-weight:800; margin:0 0 1rem; }
 .feature a { font-weight:700; }
-.pipeline { background:var(--hi-blue); color:var(--hi-white); border-bottom:5px solid var(--hi-teal); padding:2rem; font-size:clamp(1.1rem,2.3vw,1.7rem); margin-block:2rem; }
-.pipeline p { margin:0; }
+.pipeline { --pipeline-arrow:1.3rem; display:flex; gap:.3rem; padding:0; margin:2rem 0; list-style:none; }
+.pipeline li { flex:1 1 0; min-width:0; display:flex; flex-direction:column; justify-content:center; gap:.35rem; padding:1.5rem 1.8rem 1.5rem 2rem; background:var(--hi-blue); color:var(--hi-white); clip-path:polygon(0 0,calc(100% - var(--pipeline-arrow)) 0,100% 50%,calc(100% - var(--pipeline-arrow)) 100%,0 100%,var(--pipeline-arrow) 50%); }
+.pipeline li:first-child { padding-left:1.2rem; clip-path:polygon(0 0,calc(100% - var(--pipeline-arrow)) 0,100% 50%,calc(100% - var(--pipeline-arrow)) 100%,0 100%); }
+.pipeline li:last-child { padding-right:1.2rem; clip-path:polygon(0 0,100% 0,100% 100%,0 100%,var(--pipeline-arrow) 50%); }
+.pipeline li:nth-child(2) { background:var(--hi-teal); color:var(--hi-blue); }
+.pipeline li:nth-child(3) { background:var(--hi-yellow); color:var(--hi-ink); }
+.pipeline li:nth-child(4) { background:var(--hi-pink); }
+.pipeline strong { font-size:clamp(1.1rem,2.3vw,1.7rem); line-height:1.2; }
+.pipeline span { font-size:.9rem; line-height:1.35; }
 .empty-atlas { background:var(--hi-paper); border-left:5px solid var(--hi-teal); padding:2rem; margin-block:2rem; }
 .empty-atlas strong { color:var(--hi-blue); font-size:1.35rem; }
 main:has(.quarto-grid-item) .empty-atlas { display:none; }
@@ -38,6 +45,9 @@ a:focus-visible,button:focus-visible { outline:3px solid var(--hi-yellow); outli
   .hero { padding:1.5rem; border-left-width:5px; }
   .hero > p { font-size:1.15rem; }
   .hero .btn { display:block; margin-right:0; }
-  .pipeline { padding:1rem; }
+  .pipeline { flex-direction:column; gap:.4rem; }
+  .pipeline li,.pipeline li:first-child { flex:auto; align-items:center; padding:1.8rem 1rem 2rem; clip-path:polygon(0 0,50% var(--pipeline-arrow),100% 0,100% calc(100% - var(--pipeline-arrow)),50% 100%,0 calc(100% - var(--pipeline-arrow))); }
+  .pipeline li:first-child { padding-top:1rem; clip-path:polygon(0 0,100% 0,100% calc(100% - var(--pipeline-arrow)),50% 100%,0 calc(100% - var(--pipeline-arrow))); }
+  .pipeline li:last-child { padding-bottom:1rem; clip-path:polygon(0 0,50% var(--pipeline-arrow),100% 0,100% 100%,0 100%); }
   .navbar .navbar-brand:not(.navbar-brand-logo) { margin-right:1rem; }
 }

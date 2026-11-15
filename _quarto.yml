@@ -11,7 +11,11 @@ website:
   site-url: https://tungufoss.github.io/maps/
   repo-url: https://github.com/tungufoss/maps
   navbar:
-    title: '52 / MAPS'
+    title: '52 / HIDEF MAPS'
+    tools:
+      - icon: github
+        href: https://github.com/tungufoss/maps
+        aria-label: 'View the source repository on GitHub'
     left:
       - href: gallery.qmd
         text: Atlas
@@ -22,7 +26,7 @@ website:
       - href: about.qmd
         text: About
   page-footer:
-    left: 'A year of cartographic curiosity · 2027'
+    left: 'A year of cartographic curiosity · © 2027 Helga Ingimundardóttir'
     right: '[Source & methods](https://github.com/tungufoss/maps)'
 format:
   html:

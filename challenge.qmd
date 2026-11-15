@@ -13,6 +13,14 @@ This project takes inspiration from the [30DayMapChallenge galleries](https://30
 
 Variety matters: different scales, sources, techniques, visual styles, and levels of effort. Some weeks may be substantial analyses; others may be a quick experiment.
 
+## Suggest a topic or dataset
+
+Have a question, place, or dataset you would love to see mapped? Share it through the suggestion form. A public source link and a few words about what makes it interesting are especially helpful.
+
+You can leave your name and contact details so I can follow up and credit your idea if I use it. Choose a public name credit, ask me to contact you first, or remain anonymous. Contact details are optional and will not be published. Suggestions join the idea bank; they are not a commitment to a particular map.
+
+[Suggest a topic or dataset](https://docs.google.com/forms/d/e/1FAIpQLSf6fiYJtwKxgS2mclcwqK3CaeRTsp0y_ADPmH6CuiACLIJq8A/viewform){.btn .btn-primary}
+
 ## Tag after making
 
 Each published map can have three kinds of metadata:

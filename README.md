@@ -32,4 +32,4 @@ Or open the [online reviewer](https://tungufoss.github.io/maps/inspiration/). Se
 
 ## Design provenance
 
-`styles/hi-site.scss` is reused from [quarto-hi](https://github.com/tungufoss/quarto-hi), with its MIT notice retained in `styles/quarto-hi-LICENSE.txt`. `styles.css` adds the map gallery and responsive hero layout. The site loads Jost and uses the shared theme’s blue navigation/footer, turquoise accents, headings, tables, code, and callouts. No University logos are copied.
+`styles/hi-site.scss` is reused from [quarto-hi](https://github.com/HI-IDN/quarto-hi), with its MIT notice retained in `styles/quarto-hi-LICENSE.txt`. `styles.css` adds the map gallery and responsive hero layout. The site loads Jost and uses the shared theme’s blue navigation/footer, turquoise accents, headings, tables, code, and callouts. No University logos are copied.
