@@ -63,8 +63,6 @@ Seasonal colours are not introduced until panel 6, after the temporal and spatia
 
 :::
 
-Click a thumbnail to open the gallery. Use Next/Previous or the left/right arrow keys to compare stages; Escape closes it.
-
 ### 1. Start with the map
 
 Establish the geographic canvas: the North Atlantic, Iceland, Western Europe and West Africa, in a north-up Mercator view with coastlines and basic geographic styling.
