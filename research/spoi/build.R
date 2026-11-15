@@ -72,5 +72,5 @@ htmlwidgets::saveWidget(map, file.path(out, "index.html"), selfcontained = TRUE,
 if (!html_only) source("research/spoi/poster.R", encoding = "UTF-8")
 versions <- data.frame(package = required, version = vapply(required, function(p) as.character(utils::packageVersion(p)), character(1)))
 write.csv(versions, "research/spoi/package-versions.csv", row.names = FALSE)
-writeLines(capture.output(sessionInfo()), "research/spoi/session-info.txt")
+writeLines(sub("[[:blank:]]+$", "", capture.output(sessionInfo())), "research/spoi/session-info.txt")
 cat("Built", file.path(out, "index.html"), if (!html_only) "and poster.png" else "(HTML only)", "from", nrow(positions), "source observations.\n")
