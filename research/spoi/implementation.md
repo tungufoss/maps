@@ -48,3 +48,11 @@ Final heading/route-label refinement: omit the summer-vacation tagline, put the 
 
 
 Caption pairing revision: Autumn journey / Spring journey and Haustferðin / Vorferðin use parallel heading/destination structure. Autumn text is right-aligned closer to the trajectory, with 2 on its right and clear of the line. English uses “favourable conditions to continue to Iceland”; Icelandic says “hagstæðra skilyrða fyrir flugið til Íslands”, preserving conditional wording. Rendered both languages and LinkedIn variants; heading-width and country-position checks pass.
+
+## A4 and article gallery revision
+
+Use only the English and Icelandic A4 portrait posters (210 × 297 mm, 200 dpi), removing the separate LinkedIn crops. Expand the projected frame horizontally to the A4 ratio and re-cache relief without stretching the geography. Put projection and local scale in the bottom-right footer. Route colours encode direction; no arrowheads. Group the four layer thumbnails into a native Quarto lightbox gallery with Previous/Next and keyboard navigation.
+
+## Static focus and seven-stage walkthrough
+
+Interactive work is parked on `feature/whimbrel-interactive-poster`; the current page and local landing are static. Remove the rejected SVG and icon prompt. The gallery now separates north-up geography, all gap-aware trajectories, the archived smoothing attempt, fixed source/sink/waypoints, concentration regions, final tilt, and text/illustration. North-up relief has a dedicated full-coverage SQLite cache. Use native Quarto grouped lightboxes for mouse and keyboard navigation. The local atlas profile shows a compact square Whimbrel migration card with subject-specific copy, while ordinary publication excludes that unassigned draft.

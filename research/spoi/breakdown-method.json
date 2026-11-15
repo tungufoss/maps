@@ -1,0 +1,7 @@
+{
+  "order": ["Map", "Observed trajectories", "Season-coloured observed trajectories", "Archived candidate smooths", "Constrained regional anchors and schematic lanes", "Concentration regions", "Final oblique composition", "Text and illustration"],
+  "direction_colours": "Paper motivates seasonal distinction. Colour complete candidate journey intervals from journey_journeys; outside intervals stays grey. Preserve gaps and cycle breaks; split on colour changes.",
+  "exploratory_view": "EPSG:3857; 0–72N, A4 frame centred on 17W. Full-coverage north-up relief is cached independently in breakdown_relief.",
+  "final_view": "+proj=omerc +lat_0=35 +lonc=-20 +alpha=15 +gamma=0 +k=1 +datum=WGS84 +units=m +no_defs",
+  "meaning": "Design-decision sequence, not literal render-call order. The archived smooth is superseded by anchor-based links. All observed trajectories retain quality-mask, 36-hour and cycle breaks."
+}

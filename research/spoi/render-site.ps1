@@ -5,12 +5,14 @@ Push-Location $repoForSpoi
 try {
     $siteDestination = Join-Path $repoForSpoi '_site\research\spoi'
     New-Item -ItemType Directory -Path $siteDestination -Force | Out-Null
-    Copy-Item -LiteralPath 'previews/spoi/index.html' -Destination (Join-Path $siteDestination 'dashboard.html')
-    foreach ($image in @('poster.png','poster-is.png','poster-linkedin.png','poster-is-linkedin.png','poster-background.png','poster-observed.png','poster-regions.png','poster-lanes.png')) {
+    $galleryDestination = Join-Path $repoForSpoi '_site\previews\spoi'
+    New-Item -ItemType Directory -Path $galleryDestination -Force | Out-Null
+    foreach ($image in @('poster.png','poster-is.png','poster-background.png','build-01-map.png','build-02-trajectories.png','build-03-direction.png','build-03-smoothing.png','build-04-anchors.png','build-05-density.png','poster-lanes.png')) {
         Copy-Item -LiteralPath (Join-Path 'previews/spoi' $image) -Destination $siteDestination
+        Copy-Item -LiteralPath (Join-Path 'previews/spoi' $image) -Destination $galleryDestination
     }
-    # This one-page draft override is for local inspection, never a main-branch render.
-    & quarto render research/spoi/site.qmd --metadata draft:false --no-clean
+    # The explicit local profile includes the draft story and its atlas card.
+    & quarto render --profile spoi-preview --no-clean
     if ($LASTEXITCODE -ne 0) { throw 'The local story preview did not render.' }
     if ($Serve) {
         $previewForSpoi = 'http://127.0.0.1:8876/research/spoi/site.html'

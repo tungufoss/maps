@@ -1,3 +1,10 @@
+# Keep the geographic frame at the A4 portrait aspect ratio without distorting it.
+spoi_page_bounds <- function(bounds) {
+  centre<-mean(bounds[c("xmin","xmax")]);width<-diff(bounds[c("ymin","ymax")])*210/297
+  bounds[c("xmin","xmax")]<-centre+c(-.5,.5)*width
+  bounds
+}
+
 # Cache the real, public-domain 1:50m geography and relief in SQLite.
 prepare_poster_cartography <- function(con, projection, bounds) {
   feature_key <- "natural-earth-50m-land"
@@ -15,26 +22,32 @@ prepare_poster_cartography <- function(con, projection, bounds) {
   features <- DBI::dbReadTable(con,"poster_geography")
   f <- tempfile(fileext=".geojson"); writeLines(features$geojson[[1]],f,useBytes=TRUE)
   land <- sf::st_read(f,quiet=TRUE)
-  relief_key <- "gray-earth-50m-omerc15-reference-v1"
-  if (!DBI::dbExistsTable(con,"poster_relief")) {
+  relief_key <- "gray-earth-50m-omerc15-a4-grey-v2"
+  matching_relief<-FALSE
+  if(DBI::dbExistsTable(con,"poster_relief")){
+    old<-DBI::dbReadTable(con,"poster_relief");old_metadata<-jsonlite::fromJSON(old$metadata_json[1])
+    matching_relief<-old$name[1]==relief_key && identical(old_metadata$projection,projection) && max(abs(unlist(old_metadata$bounds)-bounds))<.001
+  }
+  if (!matching_relief) {
     path <- normalizePath("data/raw/spoi/GRAY_50M_SR_W.zip",winslash="/",mustWork=TRUE)
     raster <- terra::rast(paste0("/vsizip/",path,"/GRAY_50M_SR_W.tif"))
     raster <- terra::crop(raster,terra::ext(-70,40,-10,80))
-    target <- terra::rast(ncols=1000,nrows=1500,xmin=bounds["xmin"],xmax=bounds["xmax"],
+    relief_columns<-round(1500*210/297)
+    target <- terra::rast(ncols=relief_columns,nrows=1500,xmin=bounds["xmin"],xmax=bounds["xmax"],
       ymin=bounds["ymin"],ymax=bounds["ymax"],crs=projection)
     relief <- terra::project(raster,target,method="bilinear")
     relief <- terra::mask(relief,terra::vect(sf::st_transform(land,projection)))
     # Preserve terrain structure while keeping the land close to white paper.
-    relief <- round(190 + 65 * terra::clamp(relief,lower=0,upper=255) / 255)
+    relief <- round(190 + 55 * terra::clamp(relief,lower=0,upper=255) / 255)
     cache <- tempfile(fileext=".tif")
     terra::writeRaster(relief,cache,datatype="INT1U",NAflag=0,gdal=c("COMPRESS=DEFLATE"),overwrite=TRUE)
     metadata <- jsonlite::toJSON(list(source="https://naciscdn.org/naturalearth/50m/raster/GRAY_50M_SR_W.zip",
       dataset="Natural Earth Gray Earth with Shaded Relief, Hypsography and Flat Water",version="3.2.0",
       licence="Public domain",retrieved="2026-11-15",source_md5=unname(tools::md5sum(path)),
-      projection=projection,bounds=as.list(bounds),width=1000,height=1500,
-      method="Bilinear projection, mask to real 1:50m land, gray tones remapped to 190–255"),auto_unbox=TRUE)
+      projection=projection,bounds=as.list(bounds),width=relief_columns,height=1500,page_mm=c(210,297),
+      method="Bilinear projection, mask to real 1:50m land, gray tones remapped to 190–245"),auto_unbox=TRUE)
     DBI::dbWriteTable(con,"poster_relief",data.frame(name=relief_key,
-      tif=I(list(readBin(cache,"raw",n=file.info(cache)$size))),metadata_json=metadata))
+      tif=I(list(readBin(cache,"raw",n=file.info(cache)$size))),metadata_json=metadata),overwrite=TRUE)
   }
   cached <- DBI::dbReadTable(con,"poster_relief")
   stopifnot(cached$name[[1]]==relief_key)

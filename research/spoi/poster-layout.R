@@ -1,3 +1,11 @@
+# Complete an asset before replacing the copy served by the local preview.
+spoi_publish <- function(source,destination) {
+  launcher<-Sys.which(if(.Platform$OS.type=="windows")"py" else "python3")
+  if(!nzchar(launcher))stop("Python 3 is required to publish the prepared asset.")
+  args<-c(if(.Platform$OS.type=="windows")"-3",shQuote("research/spoi/publish-html.py"),shQuote(source),shQuote(destination))
+  stopifnot(system2(launcher,args)==0)
+}
+
 # Shared layout: only the strings differ between English and Icelandic exports.
 poster_words <- function(language) {
   if(language=="is")list(title="SP\u00d3I",title_size=82,subtitle="SUMAR \u00c1 \u00cdSLANDI",
@@ -9,7 +17,7 @@ poster_words <- function(language) {
     day="d.",via="fer\u00f0",stop="vi\u00f0dv\u00f6l",untimed="T\u00edmalengd \u00f3viss",timed="t\u00edmasettar",unresolved="1/26 fer\u00f0: \u00f3v\u00eds vi\u00f0komusta\u00f0ur (4%).",
     breeding_key="Varp",stop_key="Vi\u00f0koma",winter_key="Vetrardv\u00f6l",density="Dekkri kjarnar: meiri \u00fe\u00e9ttleiki \u00e1\u00e6tla\u00f0ra sta\u00f0setninga.",
     caveat="T\u00edmar eru n\u00e1munda\u00f0ar \u00e1\u00e6tlanir \u00far g\u00f6gnunum; fer\u00f0at\u00edmi er me\u00f0 vi\u00f0komum.\nL\u00ednurnar tengja sv\u00e6\u00f0i og s\u00fdna ekki n\u00e1kv\u00e6ma flugsl\u00f3\u00f0a. N\u00e1nari fyrirvarar \u00ed grein.",
-    source="GREIN",data="G\u00d6GN",geography="Land og h\u00e6\u00f0askuggar: Natural Earth, almannaeign. Sk\u00e1sni\u00f0 Mercators.",
+    source="GREIN",data="G\u00d6GN",geography="Land og h\u00e6\u00f0askuggar: Natural Earth, almannaeign.",
     credit="Fuglamynd: gervigreind eftir Nozeman & Sepp. Upprunaleg mynd \u00ed almannaeign; heimildir og fyrirm\u00e6li \u00ed grein.",
     method="Gert \u00ed R \u00far opnum g\u00f6gnum. A\u00f0fer\u00f0, \u00f3vissa og lei\u00f0beiningar um endurger\u00f0 \u00ed grein.")
   else list(title="WHIMBREL",title_size=34,subtitle="SUMMERS IN ICELAND",
@@ -21,7 +29,7 @@ poster_words <- function(language) {
     day="d",via="journey",stop="stopped",untimed="Timing unresolved",timed="timed",unresolved="1/26 journeys: unresolved stop country (4%).",
     breeding_key="Breeding",stop_key="Stopover",winter_key="Non-breeding",density="Darker cores: greater concentration of location estimates.",
     caveat="Rounded estimates from tracking data; journey time includes stops.\nLines link regions, not exact flight paths. Further limitations in the write-up.",
-    source="PAPER",data="DATA",geography="Geography & shaded relief: Natural Earth, public domain. Projection: oblique Mercator.",
+    source="PAPER",data="DATA",geography="Geography & shaded relief: Natural Earth, public domain.",
     credit="Bird illustration: AI after Nozeman & Sepp, public-domain reference. Original, prompt and provenance in the write-up.",
     method="Made in R from open data. Methods, uncertainty and reproduction in the write-up.")
 }
@@ -86,7 +94,7 @@ make_lane_geometry <- function(analysis,projection,colours=spoi_palette()) {
   do.call(rbind,out)
 }
 
-render_spoi_poster <- function(analysis,cartography,projection,bounds,language="en",colours=spoi_palette(),tag="",linkedin=TRUE,mode="poster") {
+render_spoi_poster <- function(analysis,cartography,projection,bounds,language="en",colours=spoi_palette(),tag="",mode="poster") {
   w<-poster_words(language);land<-cartography$land;a<-analysis$anchors;facts<-poster_story_facts(analysis)
   xy<-function(lon,lat)sf::st_coordinates(sf::st_transform(sf::st_as_sf(data.frame(lon,lat),coords=c("lon","lat"),crs=4326),projection))
   anchors<-sf::st_transform(sf::st_as_sf(a,coords=c("longitude","latitude"),crs=4326),projection)
@@ -105,7 +113,7 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
     ggplot2::geom_sf(data=den,ggplot2::aes(fill=fill,alpha=shade),colour=NA,show.legend=FALSE)+
     ggplot2::scale_fill_identity()+ggplot2::scale_alpha_identity()+
     ggplot2::geom_sf(data=lanes,ggplot2::aes(linewidth=width+.3,colour=halo),show.legend=FALSE)+
-    ggplot2::geom_sf(data=lanes,ggplot2::aes(linewidth=width,colour=color),alpha=1,arrow=grid::arrow(length=grid::unit(1.8,"mm"),type="closed"),show.legend=FALSE)+
+    ggplot2::geom_sf(data=lanes,ggplot2::aes(linewidth=width,colour=color),alpha=1,show.legend=FALSE)+
     ggplot2::scale_linewidth_identity()+ggplot2::scale_colour_identity()+
     ggplot2::geom_sf(data=anchors,shape=21,size=2.6,fill="white",colour="#262626",stroke=.7)+
     ggplot2::coord_sf(crs=projection,xlim=bounds[c("xmin","xmax")],ylim=bounds[c("ymin","ymax")],expand=FALSE,datum=NA)+
@@ -120,8 +128,10 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   }
   suffix<-if(language=="is")"-is" else ""
   file<-paste0("previews/spoi/poster",suffix,tag,".png")
-  ragg::agg_png(file,width=1200,height=1800,res=150,background=colours$ocean);print(fig)
-  if(mode %in% c("background","observed","regions","lanes")) {grDevices::dev.off();return(invisible(file))}
+  pending_file<-tempfile(tmpdir=dirname(file),fileext=".png")
+  ragg::agg_png(pending_file,width=210,height=297,units="mm",res=200,background=colours$ocean);print(fig)
+  finish<-function(){grDevices::dev.off();spoi_publish(pending_file,file)}
+  if(mode %in% c("background","observed","regions","lanes")) {finish();return(invisible(file))}
   txt<-function(label,x,y,size=12,face="plain",just="left")grid::grid.text(label,x=x,y=y,just=just,gp=grid::gpar(fontfamily="Jost Poster",fontsize=size,fontface=face,col="#262626"))
   leader<-function(x,y)grid::grid.lines(x=x,y=y,gp=grid::gpar(col="#262626",lwd=.8))
   npc<-function(point)c((point[1]-bounds["xmin"])/diff(bounds[c("xmin","xmax")]),(point[2]-bounds["ymin"])/diff(bounds[c("ymin","ymax")]))
@@ -160,17 +170,18 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   txt(autumn_duration,autumn_left,.770,9)
   # Local geographic scale, independent of the schematic journey geometry.
   # Solve for a horizontal projected bar spanning 1,000 km on a mean-radius sphere.
-  scale_start<-c(bounds["xmin"]+.05*diff(bounds[c("xmin","xmax")]),bounds["ymin"]+.715*diff(bounds[c("ymin","ymax")]))
+  scale_right<-.95;scale_y<-.05
+  scale_finish<-c(bounds["xmin"]+scale_right*diff(bounds[c("xmin","xmax")]),bounds["ymin"]+scale_y*diff(bounds[c("ymin","ymax")]))
   scale_distance<-function(dx){
-    ll<-sf::st_coordinates(sf::st_transform(sf::st_sfc(sf::st_point(unname(scale_start)),sf::st_point(unname(scale_start+c(dx,0))),crs=projection),4326))*pi/180
+    ll<-sf::st_coordinates(sf::st_transform(sf::st_sfc(sf::st_point(unname(scale_finish-c(dx,0))),sf::st_point(unname(scale_finish)),crs=projection),4326))*pi/180
     h<-sin((ll[2,2]-ll[1,2])/2)^2+cos(ll[1,2])*cos(ll[2,2])*sin((ll[2,1]-ll[1,1])/2)^2
     2*6371008.8*asin(sqrt(min(1,h)))
   }
   scale_metres<-uniroot(function(dx)scale_distance(dx)-1e6,c(5e5,2e6))$root
-  scale_end<-.05+scale_metres/diff(bounds[c("xmin","xmax")])
-  leader(c(.05,scale_end),c(.715,.715));leader(c(.05,.05),c(.711,.719));leader(c(scale_end,scale_end),c(.711,.719))
-  txt(if(language=="is")"Sk\u00e1sni\u00f0 Mercators" else "Oblique Mercator",.05,.739,7)
-  txt(if(language=="is")"Um 1.000 km \u00b7 kvar\u00f0i h\u00e9r" else "Approx. 1,000 km \u00b7 scale here",.05,.697,6.5)
+  scale_left<-scale_right-scale_metres/diff(bounds[c("xmin","xmax")])
+  leader(c(scale_left,scale_right),c(scale_y,scale_y));leader(c(scale_left,scale_left),scale_y+c(-.004,.004));leader(c(scale_right,scale_right),scale_y+c(-.004,.004))
+  txt(if(language=="is")"Sk\u00e1sni\u00f0 Mercators" else "Oblique Mercator",scale_right,.074,7,just="right")
+  txt(if(language=="is")"Um 1.000 km \u00b7 kvar\u00f0i h\u00e9r" else "Approx. 1,000 km \u00b7 scale here",scale_right,.031,6.5,just="right")
   stopifnot(abs(scale_distance(scale_metres)-1e6)<1)
   txt("3",.40,.166,38,"bold");txt(w$africa,.47,.177,12,"bold")
   txt(if(language=="is")sprintf("Um %d m\u00e1na\u00f0a vetrardv\u00f6l\nvi\u00f0 strendur Vestur-Afr\u00edku.",facts$winter_months) else sprintf("About %d months on\nWest Africa's Atlantic coast.",facts$winter_months),.47,.145,9)
@@ -193,10 +204,6 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   txt(paste(w$source," Carneiro, Gunnarsson & Alves (2019)  |  doi:10.1111/jav.01938"),.035,.072,6.5)
   txt(paste(w$data," Dryad, CC0  |  doi:10.5061/dryad.3kf35s5"),.035,.057,6.5)
   txt(w$geography,.035,.043,6);txt(w$credit,.035,.029,5.3);txt(w$method,.035,.016,5.3)
-  grDevices::dev.off()
-  if(linkedin){
-  ragg::agg_png(paste0("previews/spoi/poster",suffix,tag,"-linkedin.png"),width=1200,height=1500,res=150,background=colours$ocean)
-  grid::grid.newpage();grid::grid.raster(png::readPNG(file),x=.5,y=.5,width=5/6,height=1,interpolate=TRUE);grDevices::dev.off()
-  }
+  finish()
   invisible(structure(file,title_width_inches=title_width,subtitle_width_inches=subtitle_width))
 }

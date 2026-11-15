@@ -1,3 +1,5 @@
+# Static poster/article build by default. Interactive prototype is parked on
+# feature/whimbrel-interactive-poster; --html-only is an explicit prototype rebuild.
 # Run from the repository root: Rscript research/spoi/build.R
 # Uses committed SQLite and embeds the same Natural Earth paper map as the poster.
 html_only <- "--html-only" %in% commandArgs(trailingOnly = TRUE)
@@ -47,7 +49,17 @@ prepared$observations<-positions
 density_file<-tempfile(fileext=".geojson");writeLines(journey_payload$density,density_file)
 prepared$density<-sf::st_transform(sf::st_read(density_file,quiet=TRUE),poster_projection)
 systemfonts::register_font("Jost Poster",plain="styles/fonts/Jost-Regular.ttf",bold="styles/fonts/Jost-Black.ttf",italic="styles/fonts/Jost-Italic.ttf",bolditalic="styles/fonts/Jost-BlackItalic.ttf")
-for(mode in c("background","overview","observed","regions","lanes"))render_spoi_poster(prepared,paper,poster_projection,poster_bounds,tag=paste0("-",mode),linkedin=FALSE,mode=mode)
+for(mode in if(html_only)c("background","overview","lanes") else "lanes")render_spoi_poster(prepared,paper,poster_projection,poster_bounds,tag=paste0("-",mode),mode=mode)
+source("research/spoi/build-breakdown.R")
+render_spoi_breakdown(con,paper,prepared,poster_projection)
+if(!html_only){
+  landing<-tempfile(tmpdir="previews/spoi",fileext=".html")
+  stopifnot(file.copy("research/spoi/static-index.html",landing))
+  spoi_publish(landing,"previews/spoi/index.html")
+  DBI::dbDisconnect(con)
+  cat("Built A4 English/Icelandic posters and eight-stage article assets. Interactive work is parked.\n")
+  quit(save="no",status=0)
+}
 writeLines(enc2utf8(basemap$geojson[[1]]), cached_land, useBytes = TRUE)
 land <- sf::st_read(cached_land, quiet = TRUE)
 DBI::dbDisconnect(con)
@@ -71,7 +83,6 @@ payload$paper<-list(projection=poster_projection,bounds=as.list(poster_bounds),
 check_locations<-data.frame(longitude=c(-19.24562,-14.918776,-8.677507),latitude=c(63.450715,11.694855,51.871933))
 check_xy<-sf::st_coordinates(sf::st_transform(sf::st_as_sf(check_locations,coords=c("longitude","latitude"),crs=4326),poster_projection))
 payload$paper$checks<-cbind(check_locations,x=check_xy[,1],y=check_xy[,2])
-payload$markerSvg<-paste(readLines("research/illustrations/icons/whimbrel-flight-marker.svg",warn=FALSE),collapse="")
 
 map <- leaflet::leaflet(width = "100%", height = 700, options = leaflet::leafletOptions(
   zoomControl = FALSE, preferCanvas = TRUE, minZoom = 0, maxZoom = 9, zoomSnap=0,zoomAnimation=FALSE,

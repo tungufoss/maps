@@ -38,7 +38,7 @@ aside.innerHTML=`<div class="eyebrow">An interactive poster · R + Leaflet</div>
  <p id="spoi-count" class="count" role="status" aria-live="polite"></p>
  <div id="spoi-bird-story" hidden></div><div class="tldr overview-story"><strong>A short breeding season.</strong>Whimbrels return to Iceland to breed, filling the short summer with their distinctive whistling call. Tracked adults typically returned in May and left in August: roughly three months in Iceland and nine months away. The non-breeding season takes them south, including to West Africa. Individual schedules vary. <a href="https://www.bto.org/learn/about-birds/birdfacts/whimbrel">BTO</a> · <a href="https://web-cdn.rspb.org.uk/whats-happening/news/whats-happening-on-the-frontline-to-help-migratory-birds">RSPB/Fuglavernd</a> · <a href="https://doi.org/10.1111/jav.01938">Study dates</a></div>
  <div id="spoi-journey-summary" class="overview-story"></div>
- <p class="note"><a href="poster.png">English poster</a> · <a href="poster-is.png" lang="is">Íslenskt veggspjald</a><br><a href="poster-linkedin.png">English LinkedIn size</a> · <a href="poster-is-linkedin.png">Íslensk LinkedIn-stærð</a></p>
+ <p class="note"><a href="poster.png">English poster</a> · <a href="poster-is.png" lang="is">Íslenskt veggspjald</a></p>
  <section class="overview-story"><div class="eyebrow">The published story</div>
  <div class="step"><b>1</b><p><strong>A summer in Iceland.</strong> Breeding grounds at the northern end of the journey.</p></div>
  <div class="step"><b>2</b><p><strong>A direct journey south.</strong> All 30 autumn migrations in the study went directly to West Africa.</p></div>
@@ -114,11 +114,8 @@ function draw() {
    if(i>0&&byId('spoi-points').checked)L.polyline([[segment[i-1].latitude,segment[i-1].longitude],[r.latitude,r.longitude]],{renderer:canvas,color:'#262626',weight:1.2,opacity}).addTo(routes);
   }
  }
- for(const {row:r,previous} of selectedHeads){
-  let angle=null;
-  if(previous){const a=map.latLngToLayerPoint([previous.latitude,previous.longitude]),b=map.latLngToLayerPoint([r.latitude,r.longitude]);if(a.distanceTo(b)>.5)angle=Math.atan2(b.x-a.x,a.y-b.y)*180/Math.PI;}
-  const graphic=angle===null?'<span class="bird-heading-unknown">●</span>':data.markerSvg.replace('<svg ',`<svg style="transform:rotate(${angle}deg)" `);
-  L.marker([r.latitude,r.longitude],{icon:L.divIcon({className:'flight-marker',html:graphic,iconSize:[28,28],iconAnchor:[14,14]})}).bindPopup(`<strong>${escape(r.bird_id)}</strong><br>${escape(r.timestamp.slice(0,10))}<br>${angle===null?'Heading unavailable across a gap or at this scale.':'Direction between consecutive estimates, not measured flight heading.'}`).addTo(points);
+ for(const {row:r} of selectedHeads){
+  L.circleMarker([r.latitude,r.longitude],{renderer:canvas,radius:4,color:'#fff',weight:1,fillColor:'#262626',fillOpacity:1}).bindPopup(`<strong>${escape(r.bird_id)}</strong><br>${escape(r.timestamp.slice(0,10))}<br>Latest observed estimate in this month.`).addTo(points);
  }
  const date=new Date(timeline[state.frame]).toLocaleDateString('en-GB',{month:'long',year:'numeric',timeZone:'UTC'});
  byId('spoi-month-label').textContent=date;
@@ -127,7 +124,7 @@ function draw() {
  const trips=data.journey?asRows(data.journey.journeys).filter(j=>state.bird==='all'||j.bird_id===state.bird):[];
  const q=quality.find(q=>q.bird_id===state.bird);
  byId('spoi-bird-story').innerHTML=state.bird==='all'?'<h3>Recorded journeys</h3><p class="note">Each motif marks the last recorded estimate in the selected month. Older estimates fade over twelve months. Months without a valid observation have no current marker. Choose a bird to see its own coverage.</p>':
- `<h3>${escape(state.bird)}</h3><p class="note">${birdRows.length.toLocaleString()} displayable estimates, ${escape(birdRows[0]?.timestamp.slice(0,10)||'unknown')} to ${escape(birdRows.at(-1)?.timestamp.slice(0,10)||'unknown')}. ${q?.missing_latitudes||0} source positions have no latitude.</p><p class="note">${trips.filter(j=>j.complete===1).length} complete candidate journeys identified across recorded years. ${trips.filter(j=>j.complete===1&&j.season==='Inbound').map(j=>`${j.year}: ${escape(j.lane)}${Number.isFinite(j.elapsed_days)&&j.timing_method==='Local sensor change points'?' · about '+Math.round(j.elapsed_days)+' days':''}`).join('<br>')||'No complete spring journey identified.'}</p><p class="note">Country labels and durations are exploratory. The icon follows adjacent location estimates; it does not measure the bird’s body orientation.</p>`;
+ `<h3>${escape(state.bird)}</h3><p class="note">${birdRows.length.toLocaleString()} displayable estimates, ${escape(birdRows[0]?.timestamp.slice(0,10)||'unknown')} to ${escape(birdRows.at(-1)?.timestamp.slice(0,10)||'unknown')}. ${q?.missing_latitudes||0} source positions have no latitude.</p><p class="note">${trips.filter(j=>j.complete===1).length} complete candidate journeys identified across recorded years. ${trips.filter(j=>j.complete===1&&j.season==='Inbound').map(j=>`${j.year}: ${escape(j.lane)}${Number.isFinite(j.elapsed_days)&&j.timing_method==='Local sensor change points'?' · about '+Math.round(j.elapsed_days)+' days':''}`).join('<br>')||'No complete spring journey identified.'}</p><p class="note">Country labels and durations are exploratory. Points show recorded location estimates, with gaps retained.</p>`;
  el.dataset.visibleObservations=String(count);el.dataset.selectedBird=state.bird;el.dataset.visibleHeads=String(selectedHeads.length);
 }
 byId('spoi-view').addEventListener('change',()=>{stop();if(byId('spoi-view').value==='summary'){state.bird='all';byId('spoi-bird').value='all';}draw();});

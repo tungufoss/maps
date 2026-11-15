@@ -19,6 +19,7 @@ xy <- function(lon,lat) st_coordinates(st_transform(st_as_sf(data.frame(lon=lon,
 ends <- unname(xy(c(-20.2,-15),c(63.8,11)))
 width <- (ends[2,1]-ends[1,1])/.42; height <- width*1.5
 bounds <- c(xmin=ends[1,1]-.29*width,xmax=ends[1,1]+.71*width,ymin=ends[2,2]-.13*height,ymax=ends[2,2]+.87*height)
+bounds <- spoi_page_bounds(bounds)
 cartography <- prepare_poster_cartography(con,projection,bounds)
 countries <- prepare_countries(con,projection)
 analysis <- analyse_journeys(observations,DBI::dbReadTable(con,"environment"),countries,projection)

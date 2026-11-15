@@ -27,8 +27,4 @@ Suggested credit: **AI-generated whimbrel flight illustration, inspired by Nozem
 
 ## Retained assets
 
-Only the used bird illustration, SVG marker and their prompts are retained in Git; reference images are linked by source URL. Superseded AI poster and website mockups and their prompts were removed; earlier versions remain in Git history. The final map, routes, typography and layout are rendered in R.
-
-## Reusable icons
-
-The [M-shaped flight marker](icons/whimbrel-flight-marker.svg) is an original, code-authored SVG, separate from the raster illustration. [Design brief and reuse notes](prompts.md#icons). Keep icons in `icons/`, used raster overlays in `images/` and optional ignored reference copies in `inspiration/`, and append future asset entries under the matching heading in `prompts.md`.
+Only the used bird illustration and its prompt are retained in Git; reference images are linked by source URL. Superseded AI poster and website mockups and their prompts were removed; earlier versions remain in Git history. The final map, routes, typography and layout are rendered in R.

@@ -1,4 +1,4 @@
-"""Replace a served preview only after the complete HTML export is ready."""
+"""Replace a served preview asset only after the complete export is ready."""
 import os
 import sys
 import time

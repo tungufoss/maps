@@ -20,7 +20,7 @@ options<-list(
   list(ocean=colour("teal"),south=wheel(210,.70,.85),north=wheel(235,.65,.82),legend="Orange south; gold north. Nearby warm hues."),
   list(ocean=colour("teal"),south=wheel(240,.65,.78),north=wheel(120,.45,.65),legend="Gold south; violet north. RGB triadic scheme."),
   list(ocean=colour("teal"),south=wheel(210,.70,.82),north=wheel(150,.55,.65),legend="Orange south; magenta north. RGB split-complementary."))
-for(i in seq_along(options))render_spoi_poster(analysis,cartography,projection,bounds,"en",options[[i]],paste0("-palette-",i),linkedin=FALSE)
+for(i in seq_along(options))render_spoi_poster(analysis,cartography,projection,bounds,"en",options[[i]],paste0("-palette-",i))
 ragg::agg_png("previews/spoi/palette-wheel-comparison.png",width=1800,height=1000,res=150,background="#F5F5F5")
 grid::grid.newpage()
 titles<-c("1  Orange + gold","2  Triadic: gold + violet","3  Split-complementary: orange + magenta")

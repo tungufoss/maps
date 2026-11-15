@@ -1,9 +1,11 @@
 ---
-title: 'Whimbrel: summers in Iceland'
-description: 'A reproducible R poster, an interactive explorer, and the cartographic choices between observations and a legible story.'
+title: 'Whimbrel migration'
+description: 'Between Iceland and West Africa: direct autumn journeys and spring stopovers.'
 author: 'Dr Helga Ingimundardóttir'
 date: '2026-11-15'
 draft: true
+categories: [Flow map, Research dataset, Poster]
+lightbox: true
 format:
   html:
     embed-resources: false
@@ -13,9 +15,13 @@ format:
     code-fold: false
 ---
 
-An Atlantic journey, drawn in R. Iceland is the breeding ground; West Africa's Atlantic coast is the non-breeding destination. The return journey often includes a stop. This page brings together the poster, the explorer and the decisions behind the design.
+Warren Davison's [Drawn by Flight](https://storymaps.esri.com/stories/storyscape-resources/30-day-map-challenge/map2.png) was the starting point: could I make a similarly story-led poster in R, using open research data about Icelandic birds? Its full-page geography, pale relief, bird illustration and numbered story notes gave me a composition to work towards.
 
-This is a local branch preview, awaiting a weekly slot. The underlying observations are **light-level geolocation estimates**, not GPS tracks.
+That question led to the Icelandic whimbrel: a bird that breeds in Iceland and spends the non-breeding season on West Africa's Atlantic coast.
+
+The dataset comes from [Carneiro, Gunnarsson and Alves's study](https://doi.org/10.1111/jav.01938) and is openly archived on [Dryad](https://doi.org/10.5061/dryad.3kf35s5). The study followed 19 Icelandic whimbrels across 56 migrations. The openly accessible paper is an essential companion to the files: it explains the tracking method, how the estimates were processed, and the limitations that matter when interpreting the dataset.
+
+This page shows the resulting poster and how those observations shaped its design.
 
 ## The poster
 
@@ -23,53 +29,41 @@ This is a local branch preview, awaiting a weekly slot. The underlying observati
 <figure><img src="poster.png" alt="Whimbrel migration poster: teal Atlantic, white shaded relief, orange southbound and magenta northbound schematic routes linking Iceland, European stopovers and West Africa, with four seasonal story notes." style="display:block;width:100%;height:auto"><figcaption>Rendered in R. The curves link regions; they are not precise flight paths.</figcaption></figure>
 ```
 
-[English poster](poster.png) · [Íslenskt veggspjald](poster-is.png) · [LinkedIn-sized image](poster-linkedin.png)
+[English poster](poster.png) · [Íslenskt veggspjald](poster-is.png) · A4 portrait
 
-The contrast comes from [Carneiro, Gunnarsson and Alves's study](https://doi.org/10.1111/jav.01938): their tracked birds made direct autumn journeys, while most spring journeys included a stop. The poster uses rounded country-to-country travel times from a separate exploratory analysis. These are not the paper's migration-duration estimates that also account for pre-departure fuelling.
+## Building the poster, step by step
 
-## Explore the poster
+With [*Drawn by Flight*](https://storymaps.esri.com/stories/storyscape-resources/30-day-map-challenge/map2.png) by Warren Davison in mind, I started by putting all the recorded trajectories on a map. The design emerged by simplifying that untidy picture, giving the routes meaningful endpoints, and then choosing a composition that left room for the story.
 
-Select an individual to inspect its recorded estimates. The overview describes the study sample; individual information describes only the selected bird. Missing intervals remain gaps.
+The gallery follows those design decisions. Its first six panels use a north-up Mercator view; the seventh changes to the final oblique view, and the eighth adds text and illustration. The production renderer applies the selected projection consistently to every geographic layer before placing the final annotations.
 
-```{=html}
-<iframe title="Interactive whimbrel poster and bird explorer" src="dashboard.html" data-external="1" style="width:100%;height:900px;border:0;background:#2DD2C0" loading="lazy"></iframe>
-```
+::: {layout-ncol=3}
 
-[Open the interactive poster full-screen](dashboard.html).
+![1. Start with the map](../../previews/spoi/build-01-map.png){.lightbox group="poster-layers"}
 
-The explorer uses the same projected Natural Earth paper map as the poster. Selecting a bird replaces the overview's regional story with its own coverage and candidate journeys. During playback, each month shows that bird's latest recorded position; earlier estimates fade over at most twelve months. An optional thin trail retains the same gap breaks. The original M-shaped SVG marker rotates along consecutive estimates; a neutral dot indicates that direction is unavailable. This is a direction between uncertain fixes, not a measured flight heading. The marker's design brief and the AI overlay's full prompt are recorded separately under **Icons** and **Images** in the [reusable-asset prompt log](https://github.com/tungufoss/maps/blob/feature/iceland-bird-migration/research/illustrations/prompts.md).
+![2. All the trajectories](../../previews/spoi/build-02-trajectories.png){.lightbox group="poster-layers"}
 
-## Building the map, layer by layer
+![3. Colour the seasonal journeys](../../previews/spoi/build-03-direction.png){.lightbox group="poster-layers"}
 
-The visual hierarchy starts with the seasonal journey: orange south, magenta north. Geography locates that story; short annotations explain it. Relief, graticules and the bird illustration provide context and character. They stay quieter than the data. The order in which R paints those layers starts at the bottom instead.
+![4. Smooth the pattern](../../previews/spoi/build-03-smoothing.png){.lightbox group="poster-layers"}
 
-```{=html}
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px">
-<figure><a href="poster-background.png"><img src="poster-background.png" alt="Teal ocean and white relief, with no bird observations" style="width:100%;height:auto"></a><figcaption>1. Geographic foundation</figcaption></figure>
-<figure><a href="poster-observed.png"><img src="poster-observed.png" alt="Recorded displayable location estimates scattered over the same map extent" style="width:100%;height:auto"></a><figcaption>2. Observed estimates</figcaption></figure>
-<figure><a href="poster-regions.png"><img src="poster-regions.png" alt="Black and white regional concentration shading over the base map" style="width:100%;height:auto"></a><figcaption>3. Regional concentration</figcaption></figure>
-<figure><a href="poster-lanes.png"><img src="poster-lanes.png" alt="Orange and magenta schematic lanes over concentration regions" style="width:100%;height:auto"></a><figcaption>4. Legible connections</figcaption></figure>
-</div>
-```
+![5. Fix the anchors](../../previews/spoi/build-04-anchors.png){.lightbox group="poster-layers"}
 
-Click a thumbnail for the full-size R export. Every panel has the same projection and extent. The observations panel shows the display-filtered recorded estimates; it is not a confidence envelope. The final poster adds the type, short story and illustration above these geographic layers.
+![6. Add the concentration regions](../../previews/spoi/build-05-density.png){.lightbox group="poster-layers"}
 
-### 1. A geographic foundation
+![7. Tilt the composition](../../previews/spoi/poster-lanes.png){.lightbox group="poster-layers"}
+
+![8. Tell the story](../../previews/spoi/poster.png){.lightbox group="poster-layers"}
+
+:::
+
+Click a thumbnail to open the gallery. Use Next/Previous or the left/right arrow keys to compare stages; Escape closes it.
+
+### 1. Start with the map
 
 The base combines public-domain [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/) 1:50m land and Gray Earth shaded relief, over a teal ocean. R repairs and clips the land before projection, projects the relief with bilinear resampling and lightens it to a paper-like grey. Both source checksums and the prepared geography are retained with the analysis.
 
-An oblique Mercator projection, tilted 15 degrees, places Iceland and West Africa along the poster's diagonal. This is a cartographic composition, not a geographical rearrangement: every geographic layer uses the same transform.
-
-```r
-projection <- paste(
-  "+proj=omerc +lat_0=35 +lonc=-20 +alpha=15",
-  "+gamma=0 +k=1 +datum=WGS84 +units=m +no_defs"
-)
-```
-
-The scale bar describes an approximate 1,000 km distance at its own location. Projection scale varies across the map. Schematic route curves cannot be used to measure flight distances.
-
-### 2. Preserve observations before summarising
+### 2. Put all the trajectories on it
 
 The [Dryad archive](https://doi.org/10.5061/dryad.3kf35s5) supplies two tables: twilight timestamps with derived locations, and environmental summaries. Python imports the original fields into SQLite before parsing usable values. Although named `.csv`, the source files are quoted whitespace tables.
 
@@ -77,15 +71,29 @@ The database retains 19,981 position rows and 67,393 environmental rows for 19 b
 
 The display policy flags missing or invalid coordinates, reversed intervals, an approximate equinox exclusion window and estimates beyond the study-region bounds. It retains 14,074 positions. A flagged row or a gap over 36 hours breaks a line. No missing flight locations are invented. The original times and raw values remain available even when excluded from the display.
 
-### 3. Regions, with equal weight per bird
+Joining the displayable estimates produces an untidy picture: repeated journeys overlap, and geolocation noise creates distracting zigzags. This panel keeps the quality-mask, annual-cycle and 36-hour breaks used for the recorded trajectories. It shows why presenting every line at equal visual weight obscures the seasonal story.
+
+### 3. Colour the seasonal journeys
+
+The paper's seasonal contrast suggested the next visual decision: orange for southbound autumn journeys, magenta for northbound spring journeys. Colour makes the two directions easier to follow in the overlapping estimates, before simplifying their shapes.
+
+For this panel, recorded positions inherit a direction only when they fall within a complete candidate journey identified by this project's event analysis. Positions outside those intervals stay faint grey, and colour changes do not bridge gaps. The paper motivates the distinction; it does not supply these per-position labels.
+
+### 4. Smooth the pattern—and inspect where it ends
+
+An earlier candidate summary grouped positions into 2.5-degree latitude bins. Within each bin, it took the median longitude for each bird/cycle, averaged cycles within birds, and then gave birds equal weight. Bins needed at least five contributing birds. A cubic smoothing spline (`spar = 0.65`) softened the supported bin means.
+
+The next panel uses the same seasonal colours for the archived candidate curves. That earlier smoothing used the July–September and April–May calendar windows, rather than the candidate-event labels in the preceding panel. Their endpoints follow the available latitude-bin support, leaving the northern ends offshore, east of Iceland, and the southern ends beyond the intended non-breeding region. A smoother line alone does not establish a meaningful departure or arrival location. Calendar-window aggregation can also mix stationary and migrating estimates.
+
+This became a design turning point: identify the regions and candidate journeys, then construct the final links between their anchors. The archived smooths remain in SQLite and CSV for audit; they are not the final poster's routes.
+
+### 5. Fix the source, sink and waypoints
 
 Repeatedly tracking one bird should not give it disproportionate influence over a regional anchor. The calculation summarises repeated cycles within each bird, then weights birds equally in projected coordinates.
 
 Light-derived coordinates are noisy. The original Iceland regional mean falls offshore. For the schematic map, R moves that display anchor to the nearest point within the intended land region, using a 1 km inset where possible. The movement is about **157 km**. Both the unconstrained mean and the displacement remain in SQLite; the raw observations are not snapped to land. That substantial adjustment is a reason to label the map as a regional summary.
 
-The shaded regions use weighted Gaussian kernels with fixed, illustrative bandwidths: 90 km for Iceland and stopovers, 160 km for the non-breeding region. The 50%, 75% and 95% concentration regions are conditioned on land. Darkness also reflects the number of contributing birds. These regions describe concentration under this display method; they are not location-error confidence bounds, a global species range or a reproduction of the paper's kernel analysis.
-
-### 4. From anchors to legible connections
+#### Connect the anchors
 
 The orange and magenta curves are cubic Bézier links. Given endpoints A and B, R creates two control points by moving one-third and two-thirds along the segment and adding a perpendicular offset. The curve is:
 
@@ -103,15 +111,34 @@ The endpoints stay fixed at the regional anchors. An Ireland route joins an Afri
 
 Line width uses one count scale, 0.13 mm per journey in the static export. The southbound band represents the paper's 30 direct autumn migrations. Spring lanes use this project's exploratory classifications: 13 via Ireland, five via the United Kingdom, five direct, one via France and one via Portugal. One unresolved country is retained in the denominator of 26 but has no invented mapped lane. The two sources of counts are deliberately documented separately.
 
-### 5. Short text, with the calculation behind it
-
 Candidate stops require sustained spatial stability and supporting sensor coverage. Country labels use a nearest-country rule with offshore uncertainty checks. Local changes in temperature, wet-contact and conductivity summaries refine candidate arrival and departure times. These heuristics do not reproduce the authors' full manually checked processing.
+
+### 6. Add the concentration regions
+
+The shaded regions use weighted Gaussian kernels with fixed, illustrative bandwidths: 90 km for Iceland and stopovers, 160 km for the non-breeding region. The 50%, 75% and 95% concentration regions are conditioned on land. Darkness also reflects the number of contributing birds. These regions describe concentration under this display method; they are not location-error confidence bounds, a global species range or a reproduction of the paper's kernel analysis.
+
+The previous panel shows the anchored connections alone. This step adds the concentration layer beneath those same routes, keeping location concentration and journey counts as separate visual encodings.
+
+### 7. Tilt the composition
+
+An oblique Mercator projection, tilted 15 degrees, places Iceland and West Africa along the poster's diagonal. This is a cartographic composition, not a geographical rearrangement: every geographic layer uses the same transform.
+
+```r
+projection <- paste(
+  "+proj=omerc +lat_0=35 +lonc=-20 +alpha=15",
+  "+gamma=0 +k=1 +datum=WGS84 +units=m +no_defs"
+)
+```
+
+The scale bar describes an approximate 1,000 km distance at its own location. Projection scale varies across the map. Schematic route curves cannot be used to measure flight distances.
+
+With the journey structure established, the diagonal composition creates a useful ocean text area. Choosing the final view here in the design walkthrough makes that purpose visible. It does not mean rotating a finished screenshot: land, relief, regions and route geometry all share the final projected coordinates.
+
+### 8. Add the story, illustration and typography
 
 The public text rounds those estimates: about 4–5 days south; about 12 days stopped in Ireland; about 16 days for the whole spring journey via Ireland, versus about five direct. Only accepted timing estimates contribute to the relevant averages. A stop is detected behaviour; its purpose is not measured. The suggestion of building reserves or awaiting favourable conditions remains an explanation proposed by the study's authors.
 
 Complete paired stays suggest about three months on Iceland's breeding grounds and eight months in West Africa. The summer estimate uses only eight paired stays from four birds; the winter estimate uses 24 stays from 17 birds. These separate subsets are not a complete twelve-month budget for a representative individual.
-
-### 6. Illustration and typography
 
 The layout, labels, relief and map geometry are made in R with `ggplot2`, `sf`, `terra`, `grid` and `ragg`. Jost is bundled under its OFL licence. English and Icelandic exports share the same layout; text widths are measured to keep the common name and subtitle balanced.
 
