@@ -199,15 +199,13 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   for(i in seq_len(nrow(places))){pos<-npc(xy(places$lon[i],places$lat[i]));txt(if(language=="is")places$is[i] else places$en[i],pos[1],pos[2],6,"bold")}
   txt(w$caveat,.04,.112,6.1,"italic")
   leader(c(.035,.95),c(.088,.088))
-  txt(paste(w$source," Carneiro, Gunnarsson & Alves (2019)  |  doi:10.1111/jav.01938"),.035,.072,6.5)
-  txt(paste(w$data," Dryad, CC0  |  doi:10.5061/dryad.3kf35s5"),.035,.057,6.5)
-  txt(w$geography,.035,.043,6);txt(w$credit,.035,.029,5.3)
-  # QR to the public story page, left of the footer scale; built by scripts/build_spoi_qr.py.
-  scale_text_left<-scale_right-max(text_width(if(language=="is")"Sk\u00e1sni\u00f0 Mercators" else "Oblique Mercator",7),
-    text_width(if(language=="is")"Um 1.000 km \u00b7 kvar\u00f0i h\u00e9r" else "Approx. 1,000 km \u00b7 scale here",6.5))/page_width
-  qr_height<-.07;qr_width<-qr_height*grid::convertHeight(grid::unit(1,"npc"),"inches",valueOnly=TRUE)/page_width
-  grid::grid.raster(png::readPNG("img/qr/spoi.png"),x=min(scale_left,scale_text_left)-.025,y=.012,
-    width=qr_width,height=qr_height,just=c("right","bottom"),interpolate=FALSE)
+  # QR to the public story page at the left of the footer; built by scripts/build_spoi_qr.py.
+  qr_height<-.068;qr_width<-qr_height*grid::convertHeight(grid::unit(1,"npc"),"inches",valueOnly=TRUE)/page_width
+  grid::grid.raster(png::readPNG("img/qr/spoi.png"),x=.035,y=.014,width=qr_width,height=qr_height,just=c("left","bottom"),interpolate=FALSE)
+  footer_x<-.035+qr_width+.015
+  txt(paste(w$source," Carneiro, Gunnarsson & Alves (2019)  |  doi:10.1111/jav.01938"),footer_x,.072,6.5)
+  txt(paste(w$data," Dryad, CC0  |  doi:10.5061/dryad.3kf35s5"),footer_x,.057,6.5)
+  txt(w$geography,footer_x,.043,6);txt(w$credit,footer_x,.029,5.3)
   finish()
   invisible(structure(file,title_width_inches=title_width,subtitle_width_inches=subtitle_width))
 }
