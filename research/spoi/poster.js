@@ -12,12 +12,13 @@ const stage = document.createElement('section'); stage.className='poster-stage';
 shell.appendChild(stage); stage.appendChild(el); el.classList.add('poster-map');
 el.setAttribute('aria-label','Whimbrel tracking map. Use the bird and date controls to highlight observations.');
 const heading = document.createElement('div'); heading.className='poster-heading';
-heading.innerHTML='<div class="eyebrow">≈ 3 months of summer vacation</div><h1>SPÓI</h1><h2>Summers in Iceland</h2><p><i>Numenius phaeopus islandicus</i><br>Observed estimates · 2012–2016</p>';
+heading.innerHTML='<div class="eyebrow">≈ 3 months of summer vacation</div><h1>WHIMBREL</h1><h2>Summers in Iceland</h2><p><i>Numenius phaeopus islandicus</i><br>Icelandic breeding population · 2012–2016</p>';
 stage.appendChild(heading);
 const bird = document.createElement('img'); bird.className='poster-bird'; bird.src=data.birdImage; bird.alt=''; bird.setAttribute('aria-hidden','true'); stage.appendChild(bird);
 const aside = document.createElement('aside'); aside.className='poster-sidebar'; aside.setAttribute('aria-label','Bird selection, story and source information');
 aside.innerHTML=`<div class="eyebrow">An interactive poster · R + Leaflet</div><h2>Every bird has a journey.</h2>
- <p class="note">Real geolocator estimates from the journal-linked dataset. Select a bird to highlight its observations against the others.</p>
+ <p class="note">Real geolocator estimates from the journal-linked dataset. Select a bird to switch to its observed estimates.</p>
+ <label for="spoi-view">Map view<select id="spoi-view"><option value="summary">Regions & journey lanes</option><option value="observations">Individual observations</option></select></label>
  <label for="spoi-bird">Highlight a bird<select id="spoi-bird"><option value="all">All 19 birds</option>${birds.map(b=>`<option value="${escape(b.bird_id)}">${escape(b.bird_id)} · ${escape(b.sex)}</option>`).join('')}</select></label>
  <div class="control-pair"><label for="spoi-cycle">Annual cycle<select id="spoi-cycle"><option value="all">All cycles</option>${cycles.map(c=>`<option>${escape(c)}</option>`).join('')}</select></label>
  <label for="spoi-season">Calendar window<select id="spoi-season"><option value="all">All months</option><option value="south">July–September</option><option value="north">April–May</option></select></label></div>
@@ -25,7 +26,9 @@ aside.innerHTML=`<div class="eyebrow">An interactive poster · R + Leaflet</div>
  <div class="control-actions"><button id="spoi-play" type="button" aria-pressed="false">Play months</button><button id="spoi-reset" type="button">Reset view</button></div>
  <label class="note"><input id="spoi-points" type="checkbox"> Show observation points</label>
  <p id="spoi-count" class="count" role="status" aria-live="polite"></p>
- <div class="tldr"><strong>A short summer at home.</strong>Spói returns to Iceland to breed, filling the short summer with its distinctive whistling call. Tracked adults typically returned in May and left in August: roughly three months in Iceland and nine months away. The non-breeding season takes them south, including to West Africa. Individual schedules vary. <a href="https://www.bto.org/learn/about-birds/birdfacts/whimbrel">BTO</a> · <a href="https://web-cdn.rspb.org.uk/whats-happening/news/whats-happening-on-the-frontline-to-help-migratory-birds">RSPB/Fuglavernd</a> · <a href="https://doi.org/10.1111/jav.01938">Study dates</a></div>
+ <div class="tldr"><strong>A short summer at home.</strong>Whimbrels return to Iceland to breed, filling the short summer with their distinctive whistling call. Tracked adults typically returned in May and left in August: roughly three months in Iceland and nine months away. The non-breeding season takes them south, including to West Africa. Individual schedules vary. <a href="https://www.bto.org/learn/about-birds/birdfacts/whimbrel">BTO</a> · <a href="https://web-cdn.rspb.org.uk/whats-happening/news/whats-happening-on-the-frontline-to-help-migratory-birds">RSPB/Fuglavernd</a> · <a href="https://doi.org/10.1111/jav.01938">Study dates</a></div>
+ <div id="spoi-journey-summary"></div>
+ <p class="note"><a href="poster.png">English poster</a> · <a href="poster-is.png" lang="is">Íslenskt veggspjald</a><br><a href="poster-linkedin.png">English LinkedIn size</a> · <a href="poster-is-linkedin.png">Íslensk LinkedIn-stærð</a></p>
  <div class="eyebrow">The published story</div>
  <div class="step"><b>1</b><p><strong>A summer in Iceland.</strong> Breeding grounds at the northern end of the journey.</p></div>
  <div class="step"><b>2</b><p><strong>A direct journey south.</strong> All 30 autumn migrations in the study went directly to West Africa.</p></div>
@@ -44,14 +47,32 @@ L.control.zoom({position:'topright'}).addTo(map);
 // The ready-made raster basemap stays in Leaflet's tile pane beneath tracks.
 map.createPane('spoi-tracks').style.zIndex='450';
 const canvas=L.canvas({pane:'spoi-tracks',padding:0.5}), routes=L.layerGroup().addTo(map), points=L.layerGroup().addTo(map);
-for (const [lat,lon,name] of [[65,-19,'ICELAND'],[54,-8,'IRELAND'],[41,-5,'IBERIA'],[12,-10,'WEST AFRICA']]) {
+for (const [lat,lon,name] of [[65,-19,'ICELAND'],[12,-10,'WEST AFRICA']]) {
   L.marker([lat,lon],{interactive:false,icon:L.divIcon({className:'map-place',html:name,iconSize:[110,20]})}).addTo(map);
 }
 const byId=id=>aside.querySelector('#'+id);
 const state={bird:'all',cycle:'all',season:'all',monthLimit:12}; let timer=null;
 const stop=()=>{clearInterval(timer);timer=null;byId('spoi-play').textContent='Play months';byId('spoi-play').setAttribute('aria-pressed','false');};
+const summaryLayers=L.layerGroup();
+const asRows=x=>Array.isArray(x)?x:HTMLWidgets.dataframeToD3(x);
+if(data.journey){
+  const summary=asRows(data.journey.summary).filter(r=>r.season==='Inbound');
+  byId('spoi-journey-summary').innerHTML=`<h3>12-day mini-break</h3><p class="note">Candidate Ireland stopovers average about 12 days. The whole journey via Ireland averages about 16 days, including that stop (13 timed journeys).</p><p class="note"><strong>Read the regions:</strong> Iceland is the breeding area; the European regions are candidate stopovers; West Africa is the non-breeding area. All regions use black-and-white shading. Opacity is proportional to the number of contributing birds, so France and Portugal are much fainter. Darker nested cores show greater concentration. These are 50/75/95% on-land kernel regions, not the species-wide range or location-error confidence bounds.</p><details><summary>How these estimates were made</summary><p class="note">${escape(data.journey.method.stopover)}</p><p class="note">${escape(data.journey.method.country)}</p><p class="note">${escape(data.journey.method.timing)}</p><p class="note">${escape(data.journey.method.route_display.colour.legend)} All lanes use one width scale proportional to journey counts. The autumn width uses the paper’s 30 confirmed direct journeys; the spring counts are exploratory classifications; one unresolved country is counted in the denominator but has no mapped lane. Lanes are schematic country-to-country links, not measured or average flight paths. Two of 30 autumn route classifications remain unresolved; the published paper classifies all 30 as direct.</p><p class="note">${escape(data.journey.method.limitations)}</p><p class="note">Seasonal means give birds and their cycles equal weight. The unconstrained Iceland mean is about 157 km offshore; the displayed marker is constrained to Iceland, with that displacement retained in SQLite. Raw observations are unchanged. The environmental file contributes sensor evidence and timing, not additional coordinates.</p></details>`;
+}else{byId('spoi-view').value='observations';byId('spoi-view').querySelector('[value="summary"]').disabled=true;}
+function drawSummary(){
+  summaryLayers.clearLayers();
+  if(!data.journey)return;
+  L.geoJSON(JSON.parse(data.journey.density),{pane:'spoi-tracks',style:f=>({stroke:false,fillColor:'#262626',fillOpacity:f.properties.display_alpha}),onEachFeature:(f,l)=>l.bindPopup(`<strong>${escape(f.properties.region)}</strong><br>${escape(f.properties.role)} · ${f.properties.birds} contributing birds<br>${Math.round(f.properties.level*100)}% on-land kernel region<br>Concentration of uncertain location estimates, not a species range or confidence bound.`)}).addTo(summaryLayers);
+  L.geoJSON(JSON.parse(data.journey.lanes),{pane:'spoi-tracks',filter:f=>state.season==='all'||f.properties.season===(state.season==='south'?'Outbound':'Inbound'),style:f=>({color:f.properties.color,weight:f.properties.width*3,opacity:1}),onEachFeature:(f,l)=>l.bindPopup(`<strong>${escape(f.properties.season)} · ${escape(f.properties.lane)}</strong><br>${f.properties.journeys} journeys<br>${escape(f.properties.count_source)}<br>Schematic link between regional means; not a flight track.`)}).addTo(summaryLayers);
+  for(const a of asRows(data.journey.anchors)){ if(a.role==='Stopover')L.marker([a.latitude,a.longitude],{interactive:false,icon:L.divIcon({className:'map-place',html:escape(a.region.toUpperCase()),iconSize:[130,20],iconAnchor:[-9,16]})}).addTo(summaryLayers); L.circleMarker([a.latitude,a.longitude],{pane:'spoi-tracks',radius:4,color:'#262626',weight:1.5,fillColor:'#fff',fillOpacity:1}).bindPopup(`<strong>${escape(a.region)}</strong><br>Land-constrained regional mean · ${a.birds} birds<br>Display displacement from raw mean: ${a.display_displacement_km.toFixed(1)} km<br>Both seasonal directions use the same endpoint.`).addTo(summaryLayers);}
+  summaryLayers.addTo(map);
+}
 function draw() {
   routes.clearLayers();points.clearLayers();
+  const summaryMode=byId('spoi-view').value==='summary';
+  for(const id of ['spoi-cycle','spoi-month','spoi-play','spoi-points'])byId(id).disabled=summaryMode;
+  if(summaryMode){stop();drawSummary();byId('spoi-count').textContent='All years · 19 birds · 30 autumn and 26 spring candidate journeys. Select a bird to inspect its observations. Lanes are schematic; one width scale shows journey counts. '+data.journey.method.route_display.colour.legend;el.dataset.view='summary';el.dataset.visibleObservations='0';return;}
+  map.removeLayer(summaryLayers);el.dataset.view='observations';
   const segments=SpoiData.segments(rows,state); let count=0,highlighted=0; const visibleBirds=new Set();
   const ordered=segments.sort((a,b)=>Number(a[0].bird_id===state.bird)-Number(b[0].bird_id===state.bird));
   for(const segment of ordered){
@@ -70,13 +91,14 @@ function draw() {
   byId('spoi-month-label').textContent='July → '+monthNames[state.monthLimit-1];
   el.dataset.visibleObservations=String(count);el.dataset.selectedBird=state.bird;
 }
-byId('spoi-bird').addEventListener('change',e=>{state.bird=e.target.value;draw();});
+byId('spoi-view').addEventListener('change',()=>{stop();if(byId('spoi-view').value==='summary'){state.bird='all';byId('spoi-bird').value='all';}draw();});
+byId('spoi-bird').addEventListener('change',e=>{state.bird=e.target.value;byId('spoi-view').value='observations';draw();});
 byId('spoi-cycle').addEventListener('change',e=>{state.cycle=e.target.value;draw();});
 byId('spoi-season').addEventListener('change',e=>{state.season=e.target.value;draw();});
 byId('spoi-month').addEventListener('input',e=>{state.monthLimit=Number(e.target.value);draw();});
 byId('spoi-points').addEventListener('change',draw);
 byId('spoi-play').addEventListener('click',()=>{if(timer){stop();return;}state.monthLimit=1;byId('spoi-month').value=1;draw();byId('spoi-play').textContent='Pause';byId('spoi-play').setAttribute('aria-pressed','true');timer=setInterval(()=>{state.monthLimit++;byId('spoi-month').value=state.monthLimit;draw();if(state.monthLimit>=12)stop();},1000);});
-byId('spoi-reset').addEventListener('click',()=>{stop();Object.assign(state,{bird:'all',cycle:'all',season:'all',monthLimit:12});byId('spoi-bird').value='all';byId('spoi-cycle').value='all';byId('spoi-season').value='all';byId('spoi-month').value=12;map.fitBounds([[0,-38],[70,10]],{padding:[12,12]});draw();});
+byId('spoi-reset').addEventListener('click',()=>{stop();Object.assign(state,{bird:'all',cycle:'all',season:'all',monthLimit:12});byId('spoi-bird').value='all';byId('spoi-cycle').value='all';byId('spoi-season').value='all';byId('spoi-month').value=12;byId('spoi-view').value=data.journey?'summary':'observations';map.fitBounds([[0,-38],[70,10]],{padding:[12,12]});draw();});
 window.addEventListener('pagehide',stop);
 map.invalidateSize();map.fitBounds([[0,-38],[70,10]],{padding:[12,12]});draw();
 if(typeof ResizeObserver!=='undefined')new ResizeObserver(()=>map.invalidateSize()).observe(stage);

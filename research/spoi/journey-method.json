@@ -1,0 +1,41 @@
+{
+  "name": "Exploratory sensor-supported region crossings",
+  "version": "1.0",
+  "not_paper_event_reproduction": true,
+  "location_smoothing": "Median of fixes within +/-0.8 days; no interpolation",
+  "stable_endpoint": "At least four fixes spanning 1.5 days",
+  "windows": {
+    "outbound": "20 July to 1 September",
+    "inbound": "10 April to 25 May"
+  },
+  "endpoints": {
+    "Iceland": "smoothed latitude >=60; longitude -35 to -8",
+    "Africa": "smoothed latitude <=32; longitude -30 to 5"
+  },
+  "stopover": "Europe 35-60N/-15-5E, >=3 days, >=4 fixes; longitude IQR <=4deg, latitude IQR <=5deg; >=50% sensor coverage and land signal",
+  "sensor_alignment": "Same bird, +/-6h around light-interval midpoint; land evidence = wet contacts>0 OR conductivity>15 OR temperature range>=8C. Heuristic, not calibrated flight classification.",
+  "country": "Nearest Natural Earth country to stop median, using distances in the poster's oblique Mercator projection; unresolved if >200km offshore or offshore nearest/second-nearest margin<30km. Country assignments remain approximate and projection/threshold dependent.",
+  "timing": "Broad location crossings bracket local two-regime sensor change points (standardized temperature min/max, log1p wet contacts/conductivity, minimum within-segment SSE). Departure search -4 to +0.5 days; arrival -0.5 to +4 days south or -1.5 to +2 days north. Boundary optimum/gaps >12h rejected. Only journeys with both sensor estimates contribute to mean elapsed days. Location-crossing duration retained separately; includes stopovers, excludes pre-departure fuelling. Heuristic, not validated four-hour event accuracy.",
+  "direct": "No detected >=3-day stop, max location gap <=36h, sensor coverage >=50%; short/unobserved stops remain possible",
+  "denominator": "Complete origin-destination candidate journeys per season, including unresolved; incomplete journeys retained separately. Repeated journeys count separately.",
+  "regional_mean": "Projected arithmetic mean, equal weight to birds and then cycles; same breeding/winter anchors for both directions; raw means and land displacement retained",
+  "density": "Weighted Gaussian kernel; fixed 90km breeding/stopover and 160km winter bandwidths; conditional on land. Nested 50/75/95% grid mass; not positional confidence bounds or species-wide range. Black fill without contour outlines; layer alpha .42/.20/.08 multiplied by contributing birds/19, so small-sample regions are fainter.",
+  "limitations": "Raw geolocations are noisy and these analyst thresholds are not validated against the authors' events. Countries, journey classes and elapsed days are exploratory approximations. Data do not resolve exact flight paths; source timezone/datum unspecified.",
+  "paper": "https://doi.org/10.1111/jav.01938",
+  "data": "https://doi.org/10.5061/dryad.3kf35s5",
+  "route_display": {
+    "geometry": "Schematic cubic links between shared regional means; not estimated flight paths",
+    "width": "One count scale for both directions: 0.13 mm per journey; white edge halos are not part of the count encoding",
+    "outbound": "30 direct autumn migrations reported in the paper; automated classifications remain separately retained",
+    "inbound": "Exploratory complete spring journey counts; unresolved country included in denominator but no invented route",
+    "colour": {
+      "ocean": "#2DD2C0",
+      "south": "#D1783F",
+      "north": "#A64B82",
+      "legend": "Muted orange south; muted magenta north.",
+      "legend_is": "Appelsínugult suður; fjólubleikt norður.",
+      "relationship": "RGB split-complementary: route hues at teal +210 and +150 degrees; adjusted saturation/value. Not restricted to the HI route palette."
+    },
+    "pattern": "Both solid; arrows show direction"
+  }
+}

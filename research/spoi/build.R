@@ -3,10 +3,11 @@
 html_only <- "--html-only" %in% commandArgs(trailingOnly = TRUE)
 if (.Platform$OS.type == "windows") Sys.setlocale("LC_CTYPE", "English_United States.UTF-8")
 .libPaths(c(file.path(getwd(), ".R-library"), .libPaths()))
-required <- c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc", "ggplot2", "ragg", "boot", "terra", "systemfonts")
+required <- c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc", "ggplot2", "ragg", "boot", "terra", "systemfonts", "isoband")
 missing <- required[!vapply(required, requireNamespace, logical(1), quietly = TRUE)]
 if (length(missing)) stop("Install required packages first: ", paste(missing, collapse = ", "))
 root <- normalizePath(getwd(), winslash = "/")
+if (!html_only) source("research/spoi/poster.R", encoding = "UTF-8")
 db_path <- file.path(root, "data/spoi/spoi.sqlite")
 if (!file.exists(db_path)) stop("Run python scripts/build_spoi_db.py first.")
 con <- DBI::dbConnect(RSQLite::SQLite(), db_path)
@@ -30,6 +31,12 @@ if (!DBI::dbExistsTable(con, "basemaps") || !"processing" %in% DBI::dbListFields
     source = "https://naciscdn.org/naturalearth/110m/physical/ne_110m_land.zip", licence = "Public domain", retrieved = "2026-11-14", md5 = unname(tools::md5sum(land_zip)), processing = "GEOS-planar-validity-v1"), overwrite = TRUE)
 }
 basemap <- DBI::dbReadTable(con, "basemaps")
+journey_payload <- if(DBI::dbExistsTable(con,"journey_summary"))list(
+  summary=DBI::dbReadTable(con,"journey_summary"),anchors=DBI::dbReadTable(con,"journey_anchors"),
+  journeys=DBI::dbReadTable(con,"journey_journeys"),
+  density=DBI::dbReadTable(con,"journey_density")$geojson[[1]],
+  lanes=DBI::dbReadTable(con,"journey_lanes")$geojson[[1]],
+  method=jsonlite::fromJSON(DBI::dbReadTable(con,"journey_methods")$method_json[[1]])) else NULL
 cached_land <- tempfile(fileext = ".geojson")
 writeLines(enc2utf8(basemap$geojson[[1]]), cached_land, useBytes = TRUE)
 land <- sf::st_read(cached_land, quiet = TRUE)
@@ -45,7 +52,7 @@ sf::st_write(land, land_geo, quiet = TRUE)
 out <- file.path(root, "previews/spoi")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 manifest <- jsonlite::fromJSON(file.path(root, "data/spoi/source.json"))
-payload <- list(positions = positions, birds = birds, quality = quality, flags = flags,
+payload <- list(positions = positions, birds = birds, quality = quality, flags = flags,journey=journey_payload,
   environmentMissing = environment_missing, manifest = manifest,
   birdImage = base64enc::dataURI(file = file.path(root, "research/illustrations/spoi-flight-ai.png"), mime = "image/png"))
 
@@ -68,10 +75,9 @@ if (nzchar(quarto)) {
     rmarkdown::find_pandoc(dir = candidate, cache = FALSE)
   }
 }
-htmlwidgets::saveWidget(map, file.path(out, "index.html"), selfcontained = TRUE, title = "Sp\u00f3i \u00b7 52 / HIDEF MAPS", background = "#2DD2C0")
+htmlwidgets::saveWidget(map, file.path(out, "index.html"), selfcontained = TRUE, title = "Whimbrel \u00b7 52 / HIDEF MAPS", background = "#2DD2C0")
 
 # Designed static poster and derived corridors use the same SQLite observations.
-if (!html_only) source("research/spoi/poster.R", encoding = "UTF-8")
 versions <- data.frame(package = required, version = vapply(required, function(p) as.character(utils::packageVersion(p)), character(1)))
 write.csv(versions, "research/spoi/package-versions.csv", row.names = FALSE)
 writeLines(sub("[[:blank:]]+$", "", capture.output(sessionInfo())), "research/spoi/session-info.txt")
