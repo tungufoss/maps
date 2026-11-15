@@ -15,6 +15,7 @@ __pycache__/
 
 # Personal review exports must never be committed or deployed.
 /review-data/
+/.worktrees/
 /previews/collection-review/
 map-reviews-*.json
 map-inspiration-brief-*.md
