@@ -21,13 +21,13 @@ There are **222 distinct collection URLs** and **183 distinct creator labels**. 
 
 ## Personal reviews
 
-Double-click **Open map reviews.cmd** in the project root. It starts or reuses a server bound only to `127.0.0.1:8874` and opens the private browser tool. The tool has no external dependencies and makes no background calls to the creators' sites. The source links open only when chosen.
+Open the [online reviewer](https://tungufoss.github.io/maps/inspiration/), or double-click **Open map reviews.cmd** in the project root for the local version at `127.0.0.1:8874`. Selecting an entry loads the creator's original website beside the review form. Their site may make its usual network requests; sites that block embedding have an external-link fallback. [Running, backup and migration instructions](../../tools/collection-review/README.md).
 
 For each collection, record **Positive / Neutral / Negative** and a freeform explanation. Optional feature tags, a specific map URL, and an idea for your own map can help turn opinions into an inspiration brief. All 222 collections begin without personal opinions.
 
 Reviews save in browser local storage, **not in this database or the public website**. Use the same browser and address each time; browser data is device-specific and can be cleared. Use **Export review backup** regularly. Import validates the backup and keeps the newer review for each collection. Unknown collection IDs are rejected rather than silently discarded.
 
-**Export design brief** makes a Markdown summary of positive examples, recurring feature tags, ideas, sources, and neutral/negative counterexamples. Share an exported backup or brief in the chat when ready to use those preferences for future maps. Exports are not uploaded automatically. Files matching the export naming patterns and the local `review-data/` directory are ignored by Git. The app itself is excluded from Quarto publication.
+**Export design brief** makes a Markdown summary of positive examples, recurring feature tags, ideas, sources, and neutral/negative counterexamples. Share an exported backup or brief in the chat when ready to use those preferences for future maps. Exports are not uploaded automatically. Files matching the export naming patterns and the local `review-data/` directory are ignored by Git. Quarto publishes only the five public application files through an explicit post-render allowlist; personal reviews and runtime files are excluded. Localhost and the online reviewer have separate storage: export then import to transfer your existing reviews.
 
 ## Reproduce the catalogue
 

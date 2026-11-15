@@ -11,8 +11,15 @@ function Test-ReviewServer {
 }
 
 if (-not (Test-ReviewServer)) {
-    $pythonForReviews = (Get-Command python -ErrorAction Stop).Source
-    $reviewArguments = @('-m', 'http.server', '8874', '--bind', '127.0.0.1', '--directory', ('"' + $reviewDirectory + '"'))
+    $pythonLauncher = Get-Command py -ErrorAction SilentlyContinue
+    if ($pythonLauncher) {
+        $pythonForReviews = $pythonLauncher.Source
+        $reviewArguments = @('-3', '-m', 'http.server')
+    } else {
+        $pythonForReviews = (Get-Command python -ErrorAction Stop).Source
+        $reviewArguments = @('-m', 'http.server')
+    }
+    $reviewArguments += @('8874', '--bind', '127.0.0.1', '--directory', ('"' + $reviewDirectory + '"'))
     $reviewLogDirectory = Join-Path (Split-Path (Split-Path $reviewDirectory -Parent) -Parent) 'review-data\runtime'
     New-Item -ItemType Directory -Path $reviewLogDirectory -Force | Out-Null
     $reviewProcess = Start-Process -FilePath $pythonForReviews -ArgumentList $reviewArguments -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $reviewLogDirectory 'server.stdout.log') -RedirectStandardError (Join-Path $reviewLogDirectory 'server.stderr.log')
