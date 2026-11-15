@@ -18,8 +18,7 @@ poster_words <- function(language) {
     breeding_key="Varp",stop_key="Vi\u00f0koma",winter_key="Vetrardv\u00f6l",density="Dekkri kjarnar: meiri \u00fe\u00e9ttleiki \u00e1\u00e6tla\u00f0ra sta\u00f0setninga.",
     caveat="T\u00edmar eru n\u00e1munda\u00f0ar \u00e1\u00e6tlanir \u00far g\u00f6gnunum; fer\u00f0at\u00edmi er me\u00f0 vi\u00f0komum.\nL\u00ednurnar tengja sv\u00e6\u00f0i og s\u00fdna ekki n\u00e1kv\u00e6ma flugsl\u00f3\u00f0a. N\u00e1nari fyrirvarar \u00ed grein.",
     source="GREIN",data="G\u00d6GN",geography="Land og h\u00e6\u00f0askuggar: Natural Earth, almannaeign.",
-    credit="Fuglamynd: gervigreind eftir Nozeman & Sepp. Upprunaleg mynd \u00ed almannaeign; heimildir og fyrirm\u00e6li \u00ed grein.",
-    method="Gert \u00ed R \u00far opnum g\u00f6gnum. A\u00f0fer\u00f0, \u00f3vissa og lei\u00f0beiningar um endurger\u00f0 \u00ed grein.")
+    credit="Fuglamynd: gervigreind eftir Nozeman & Sepp. Upprunaleg mynd \u00ed almannaeign; heimildir og fyrirm\u00e6li \u00ed grein.")
   else list(title="WHIMBREL",title_size=34,subtitle="SUMMERS IN ICELAND",
     author="Maps defined by Dr Helga Ingimundard\u00f3ttir",biology="Chicks hatch in Iceland.\nAdults winter farther south.",
     iceland="ICELAND",breeding="Breeding grounds",spring="SPRING",autumn="AUTUMN",africa="WEST AFRICA",winter="Non-breeding season",
@@ -30,8 +29,7 @@ poster_words <- function(language) {
     breeding_key="Breeding",stop_key="Stopover",winter_key="Non-breeding",density="Darker cores: greater concentration of location estimates.",
     caveat="Rounded estimates from tracking data; journey time includes stops.\nLines link regions, not exact flight paths. Further limitations in the write-up.",
     source="PAPER",data="DATA",geography="Geography & shaded relief: Natural Earth, public domain.",
-    credit="Bird illustration: AI after Nozeman & Sepp, public-domain reference. Original, prompt and provenance in the write-up.",
-    method="Made in R from open data. Methods, uncertainty and reproduction in the write-up.")
+    credit="Bird illustration: AI after Nozeman & Sepp, public-domain reference. Original, prompt and provenance in the write-up.")
 }
 
 poster_story_facts <- function(analysis) {
@@ -203,7 +201,13 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   leader(c(.035,.95),c(.088,.088))
   txt(paste(w$source," Carneiro, Gunnarsson & Alves (2019)  |  doi:10.1111/jav.01938"),.035,.072,6.5)
   txt(paste(w$data," Dryad, CC0  |  doi:10.5061/dryad.3kf35s5"),.035,.057,6.5)
-  txt(w$geography,.035,.043,6);txt(w$credit,.035,.029,5.3);txt(w$method,.035,.016,5.3)
+  txt(w$geography,.035,.043,6);txt(w$credit,.035,.029,5.3)
+  # QR to the public story page, left of the footer scale; built by scripts/build_spoi_qr.py.
+  scale_text_left<-scale_right-max(text_width(if(language=="is")"Sk\u00e1sni\u00f0 Mercators" else "Oblique Mercator",7),
+    text_width(if(language=="is")"Um 1.000 km \u00b7 kvar\u00f0i h\u00e9r" else "Approx. 1,000 km \u00b7 scale here",6.5))/page_width
+  qr_height<-.07;qr_width<-qr_height*grid::convertHeight(grid::unit(1,"npc"),"inches",valueOnly=TRUE)/page_width
+  grid::grid.raster(png::readPNG("img/qr/spoi.png"),x=min(scale_left,scale_text_left)-.025,y=.012,
+    width=qr_width,height=qr_height,just=c("right","bottom"),interpolate=FALSE)
   finish()
   invisible(structure(file,title_width_inches=title_width,subtitle_width_inches=subtitle_width))
 }

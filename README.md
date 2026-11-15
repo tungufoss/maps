@@ -28,8 +28,6 @@ The [SQLite reference database](data/challenge/30daymapchallenge.sqlite) contain
 
 Double-click **Open map reviews.cmd** in this folder to review all 222 distinct collections from the official directory (223 yearly listings, 2019–2025). Record a Positive, Neutral, or Negative opinion and explain why. Reviews save only in your browser; export a backup regularly. **Export design brief** collects your preferences for future mapping ideas. See [the catalogue and privacy notes](data/community/README.md).
 
-Or open the [online reviewer](https://tungufoss.github.io/maps/inspiration/). See [how to run it and move existing reviews between browsers/devices](tools/collection-review/README.md). The tool is public; your notes stay in your browser.
-
 ## Design provenance
 
-`styles/hi-site.scss` is reused from [quarto-hi](https://github.com/HI-IDN/quarto-hi), with its MIT notice retained in `styles/quarto-hi-LICENSE.txt`. `styles.css` adds the map gallery and responsive hero layout. The site loads Jost and uses the shared theme’s blue navigation/footer, turquoise accents, headings, tables, code, and callouts. No University logos are copied.
+`styles/hi-site.scss` is reused from [quarto-hi](https://github.com/HI-IDN/quarto-hi), with its MIT notice retained in `styles/quarto-hi-LICENSE.txt`. `styles.css` adds the map gallery and responsive hero layout. The site loads Jost and uses the shared theme’s blue navigation/footer, turquoise accents, headings, tables, code, and callouts. The only University logo copied is the HÍ seal in `img/hi/hi_logo.svg`, used (recoloured) at the centre of poster QR codes in `img/qr/`; the site itself uses no University logos.

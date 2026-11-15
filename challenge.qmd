@@ -7,10 +7,6 @@ subtitle: 'One map a week in 2027. The topic stays open.'
 
 This project takes inspiration from the [30DayMapChallenge galleries](https://30daymapchallenge.com/galleries/). Instead of following a fixed sequence of prompts, I choose a subject that interests me each week.
 
-::: {.small}
-[Browse the inspiration collections](inspiration/) and keep personal reactions and notes in your browser.
-:::
-
 Variety matters: different scales, sources, techniques, visual styles, and levels of effort. Some weeks may be substantial analyses; others may be a quick experiment.
 
 ## Suggest a topic or dataset

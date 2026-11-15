@@ -1,7 +1,6 @@
 project:
   type: website
   output-dir: _site
-  post-render: scripts/publish-inspiration.ts
   render:
     - '*.qmd'
     - 'maps/**/*.qmd'
