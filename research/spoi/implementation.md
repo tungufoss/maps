@@ -45,3 +45,6 @@ Seasonal geography revision: place 4 between Morocco and Mauritania, call Icelan
 
 
 Final heading/route-label refinement: omit the summer-vacation tagline, put the Latin name directly under the common name, then the seasonal subtitle. Use actual Jost text height to position the Latin line and preserve equal title/subtitle widths. Place 2 close to the southbound trajectory with a clear gap, with its two-line description on the left. Both PNG languages and interactive heading order updated.
+
+
+Caption pairing revision: Autumn journey / Spring journey and Haustferðin / Vorferðin use parallel heading/destination structure. Autumn text is right-aligned closer to the trajectory, with 2 on its right and clear of the line. English uses “favourable conditions to continue to Iceland”; Icelandic says “hagstæðra skilyrða fyrir flugið til Íslands”, preserving conditional wording. Rendered both languages and LinkedIn variants; heading-width and country-position checks pass.

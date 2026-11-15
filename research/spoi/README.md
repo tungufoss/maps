@@ -130,3 +130,6 @@ Story placement and seasonal geography: point 4 is placed in the open map area b
 
 
 Heading refinement: remove the editorial “≈ 3 months of summer vacation / ≈ 3 mánaða sumarfrí” tagline. The common name is followed directly by the italic Latin name, then “Summers in Iceland / Sumar á Íslandi.” The numbered Iceland story still retains the data-derived approximate nesting-season duration. Story 2 is moved alongside the southbound route, with its short text aligned to its left. The same heading order is used by the interactive HTML.
+
+
+The paired journey headings now use Autumn journey / Haustferðin and Spring journey / Vorferðin, with their destinations directly below (West Africa / Iceland). The autumn text is closer to the route; its number remains on the right of the text. The cautious spring explanation reads “favourable conditions to continue to Iceland”, matching the journey framing while retaining “may” rather than asserting a measured cause.
