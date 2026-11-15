@@ -1,6 +1,6 @@
 # Shared layout: only the strings differ between English and Icelandic exports.
 poster_words <- function(language) {
-  if(language=="is")list(title="SP\u00d3I",title_size=82,subtitle="SUMAR \u00c1 \u00cdSLANDI",vacation="\u2248 3 m\u00e1na\u00f0a sumarfr\u00ed",
+  if(language=="is")list(title="SP\u00d3I",title_size=82,subtitle="SUMAR \u00c1 \u00cdSLANDI",
     author="Kort skilgreind af Dr. Helgu Ingimundard\u00f3ttur",biology="Ungarnir klekjast \u00fat \u00e1 \u00cdslandi.\nFullor\u00f0nu fuglarnir dvelja sunnar \u00e1 veturna.",
     iceland="\u00cdSLAND",breeding="Varpsv\u00e6\u00f0i",spring="VOR",autumn="HAUST",africa="VESTUR-AFR\u00cdKA",winter="Vetrardv\u00f6l",
     study="19 fuglar \u00b7 56 fer\u00f0ir",adults="Litlir m\u00e6lar \u00e1 f\u00f3tum fuglanna\nhj\u00e1lpu\u00f0u a\u00f0 rekja fer\u00f0ir \u00feeirra.",
@@ -12,7 +12,7 @@ poster_words <- function(language) {
     source="GREIN",data="G\u00d6GN",geography="Land og h\u00e6\u00f0askuggar: Natural Earth, almannaeign. Sk\u00e1sni\u00f0 Mercators.",
     credit="Fuglamynd: gervigreind eftir Nozeman & Sepp. Upprunaleg mynd \u00ed almannaeign; heimildir og fyrirm\u00e6li \u00ed grein.",
     method="Gert \u00ed R \u00far opnum g\u00f6gnum. A\u00f0fer\u00f0, \u00f3vissa og lei\u00f0beiningar um endurger\u00f0 \u00ed grein.")
-  else list(title="WHIMBREL",title_size=34,subtitle="SUMMERS IN ICELAND",vacation="\u2248 3 months of summer vacation",
+  else list(title="WHIMBREL",title_size=34,subtitle="SUMMERS IN ICELAND",
     author="Maps defined by Dr Helga Ingimundard\u00f3ttir",biology="Chicks hatch in Iceland.\nAdults winter farther south.",
     iceland="ICELAND",breeding="Breeding grounds",spring="SPRING",autumn="AUTUMN",africa="WEST AFRICA",winter="Non-breeding season",
     study="19 birds \u00b7 56 migrations",adults="Tiny leg-mounted loggers helped\nresearchers follow their journeys.",south="About 4\u20135 days south",south_detail="Sensor estimates \u00b7 28 timed journeys",
@@ -123,8 +123,14 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   subtitle_width<-text_width(w$subtitle,19)
   title_size<-w$title_size*subtitle_width/text_width(w$title,w$title_size)
   title_width<-text_width(w$title,title_size)
-  txt(w$title,.045,if(language=="en").475 else .515,title_size,"bold");txt(w$subtitle,.045,.435,19,"bold")
-  txt(w$vacation,.045,.404,10.5,"bold");txt("Numenius phaeopus islandicus",.045,.381,9,"italic");txt(w$biology,.045,.346,9.5)
+  name_y<-if(language=="en").475 else .515
+  title_height<-grid::convertHeight(grid::grobHeight(grid::textGrob(w$title,gp=grid::gpar(fontfamily="Jost Poster",fontface="bold",fontsize=title_size))),"npc",valueOnly=TRUE)
+  latin_y<-name_y-title_height/2-.018
+  subtitle_y<-latin_y-.037
+  txt(w$title,.045,name_y,title_size,"bold")
+  txt("Numenius phaeopus islandicus",.045,latin_y,9,"italic")
+  txt(w$subtitle,.045,subtitle_y,19,"bold")
+  txt(w$biology,.045,min(.365,subtitle_y-.055),9.5)
   txt("1",.42,.943,38,"bold");txt(w$iceland,.49,.950,12,"bold")
   txt(if(language=="is")sprintf("Um %d m\u00e1nu\u00f0ir \u00e1 varpsl\u00f3\u00f0um.\nH\u00e9r verpa fuglarnir\nog ala upp unga.",facts$summer_months) else sprintf("About %d months on the\nbreeding grounds, to nest\nand raise their chicks.",facts$summer_months),.49,.915,9)
   leader(c(.41,.39,ice[1]+.012),c(.94,.94,ice[2]+.002))
@@ -133,8 +139,8 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   # Study card and autumn note follow the existing poster's composition.
   grid::grid.polygon(x=c(.035,.345,.345,.315,.035),y=c(.285,.285,.198,.184,.184),gp=grid::gpar(fill=grDevices::adjustcolor("white",alpha.f=.80),col=NA))
   txt(w$study,.05,.264,12,"bold");txt(w$adults,.05,.233,9)
-  txt("2",.05,.800,38,"bold");txt(w$autumn,.12,.816,11,"bold")
-  txt(if(language=="is")sprintf("Beint til Vestur-Afr\u00edku\n\u00e1 um %d\u2013%d d\u00f6gum.",floor(facts$south_days),ceiling(facts$south_days)) else sprintf("Straight to West Africa\nin about %d\u2013%d days.",floor(facts$south_days),ceiling(facts$south_days)),.12,.787,9)
+  txt("2",.270,.800,38,"bold");txt(w$autumn,.245,.816,11,"bold",just="right")
+  txt(if(language=="is")sprintf("Beint til Vestur-Afr\u00edku\n\u00e1 um %d\u2013%d d\u00f6gum.",floor(facts$south_days),ceiling(facts$south_days)) else sprintf("Straight to West Africa\nin about %d\u2013%d days.",floor(facts$south_days),ceiling(facts$south_days)),.245,.787,9,just="right")
   txt("3",.40,.166,38,"bold");txt(w$africa,.47,.177,12,"bold")
   txt(if(language=="is")sprintf("Um %d m\u00e1na\u00f0a vetrardv\u00f6l\nvi\u00f0 strendur Vestur-Afr\u00edku.",facts$winter_months) else sprintf("About %d months on\nWest Africa's Atlantic coast.",facts$winter_months),.47,.145,9)
   leader(c(.68,.69,africa[1]-.012),c(.135,.135,africa[2]+.004))

@@ -42,3 +42,6 @@ Composition refinement: move story point 2 above the bird in the northern Atlant
 
 
 Seasonal geography revision: place 4 between Morocco and Mauritania, call Iceland breeding grounds rather than an exclusive home, and use Spring return / Vorferðin. Caption 3 names West Africa’s Atlantic coast. Ivory Coast is unsupported by the paper; Upper Guinea Coast describes the core Guinea/Guinea-Bissau region but not the northern winter range. Regional-name sources and scope are documented in README.
+
+
+Final heading/route-label refinement: omit the summer-vacation tagline, put the Latin name directly under the common name, then the seasonal subtitle. Use actual Jost text height to position the Latin line and preserve equal title/subtitle widths. Place 2 close to the southbound trajectory with a clear gap, with its two-line description on the left. Both PNG languages and interactive heading order updated.

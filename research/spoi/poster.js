@@ -12,7 +12,7 @@ const stage = document.createElement('section'); stage.className='poster-stage';
 shell.appendChild(stage); stage.appendChild(el); el.classList.add('poster-map');
 el.setAttribute('aria-label','Whimbrel tracking map. Use the bird and date controls to highlight observations.');
 const heading = document.createElement('div'); heading.className='poster-heading';
-heading.innerHTML='<div class="eyebrow">≈ 3 months of summer vacation</div><h1>WHIMBREL</h1><h2>Summers in Iceland</h2><p><i>Numenius phaeopus islandicus</i><br>Icelandic breeding population · 2012–2016</p>';
+heading.innerHTML='<h1>WHIMBREL</h1><p class="scientific-name"><i>Numenius phaeopus islandicus</i></p><h2>Summers in Iceland</h2><p>Icelandic breeding population · 2012–2016</p>';
 stage.appendChild(heading);
 const bird = document.createElement('img'); bird.className='poster-bird'; bird.src=data.birdImage; bird.alt=''; bird.setAttribute('aria-hidden','true'); stage.appendChild(bird);
 const aside = document.createElement('aside'); aside.className='poster-sidebar'; aside.setAttribute('aria-label','Bird selection, story and source information');
