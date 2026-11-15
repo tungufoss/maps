@@ -14,7 +14,7 @@ Prepared 14 November 2026 on `feature/iceland-bird-migration`.
 
 ## Generated flight interpretation
 
-- Output: [spoi-flight-ai.png](spoi-flight-ai.png), generated 14 November 2026. This preview has not replaced the bird in the earlier map mockups.
+- Output: [spoi-flight-ai.png](spoi-flight-ai.png), generated 14 November 2026. This is the decorative bird used in the current R posters and Leaflet preview.
 - Tool: OpenAI's built-in `image_gen.imagegen`, accessed in Codex as `image_gen__imagegen`.
 - Model identifier/version: **not exposed by the tool interface or returned metadata**. Do not infer it from the Codex chat model or CLI defaults.
 - Full submitted prompt: [spoi-flight-prompt.txt](spoi-flight-prompt.txt).
@@ -25,6 +25,6 @@ Prepared 14 November 2026 on `feature/iceland-bird-migration`.
 
 Suggested credit: **AI-generated whimbrel flight illustration, inspired by Nozeman & Sepp, Nederlandsche vogelen, plate 156; public-domain reference from Koninklijke Bibliotheek via Wikimedia Commons. Created with OpenAI image generation; exact model identifier unavailable. Prompt and provenance supplied.**
 
-## Archival flight alternative
+## Retained assets
 
-[Ted Swem/USFWS, whimbrel in flight near the Colville River, Alaska](https://www.fws.gov/media/whimbreljpg). The provider labels the photograph Public Domain. It is not a vintage drawing and does not document an Icelandic bird; do not substitute its population-specific features without checking.
+Only the used bird illustration, its full prompt and its historical reference image are retained here. Superseded AI poster and website mockups and their prompts were removed; earlier versions remain in Git history. The final map, routes, typography and layout are rendered in R.

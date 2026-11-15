@@ -139,10 +139,30 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   # Study card and autumn note follow the existing poster's composition.
   grid::grid.polygon(x=c(.035,.345,.345,.315,.035),y=c(.285,.285,.198,.184,.184),gp=grid::gpar(fill=grDevices::adjustcolor("white",alpha.f=.80),col=NA))
   txt(w$study,.05,.264,12,"bold");txt(w$adults,.05,.233,9)
-  txt("2",.275,.800,38,"bold")
-  txt(if(language=="is")"HAUSTFER\u00d0IN" else "AUTUMN JOURNEY",.264,.816,12,"bold",just="right")
-  txt(if(language=="is")"Til Vestur-Afr\u00edku" else "To West Africa",.264,.794,8.5,just="right")
-  txt(if(language=="is")sprintf("Beint \u00e1 um %d\u2013%d d\u00f6gum.",floor(facts$south_days),ceiling(facts$south_days)) else sprintf("Non-stop in about %d\u2013%d days.",floor(facts$south_days),ceiling(facts$south_days)),.264,.770,9,just="right")
+  autumn_heading<-if(language=="is")"HAUSTFER\u00d0IN" else "AUTUMN JOURNEY"
+  autumn_destination<-if(language=="is")"Til Vestur-Afr\u00edku" else "To West Africa"
+  autumn_duration<-if(language=="is")sprintf("Beint \u00e1 um %d\u2013%d d\u00f6gum.",floor(facts$south_days),ceiling(facts$south_days)) else sprintf("Non-stop in about %d\u2013%d days.",floor(facts$south_days),ceiling(facts$south_days))
+  page_width<-grid::convertWidth(grid::unit(1,"npc"),"inches",valueOnly=TRUE)
+  autumn_left<-.310-max(text_width(autumn_heading,12),text_width(autumn_destination,8.5),text_width(autumn_duration,9))/page_width
+  two_left<-autumn_left-text_width("2",38)/page_width-.015
+  txt("2",two_left,.800,38,"bold")
+  txt(autumn_heading,autumn_left,.816,12,"bold")
+  txt(autumn_destination,autumn_left,.794,8.5)
+  txt(autumn_duration,autumn_left,.770,9)
+  # Local geographic scale, independent of the schematic journey geometry.
+  # Solve for a horizontal projected bar spanning 1,000 km on a mean-radius sphere.
+  scale_start<-c(bounds["xmin"]+.05*diff(bounds[c("xmin","xmax")]),bounds["ymin"]+.715*diff(bounds[c("ymin","ymax")]))
+  scale_distance<-function(dx){
+    ll<-sf::st_coordinates(sf::st_transform(sf::st_sfc(sf::st_point(unname(scale_start)),sf::st_point(unname(scale_start+c(dx,0))),crs=projection),4326))*pi/180
+    h<-sin((ll[2,2]-ll[1,2])/2)^2+cos(ll[1,2])*cos(ll[2,2])*sin((ll[2,1]-ll[1,1])/2)^2
+    2*6371008.8*asin(sqrt(min(1,h)))
+  }
+  scale_metres<-uniroot(function(dx)scale_distance(dx)-1e6,c(5e5,2e6))$root
+  scale_end<-.05+scale_metres/diff(bounds[c("xmin","xmax")])
+  leader(c(.05,scale_end),c(.715,.715));leader(c(.05,.05),c(.711,.719));leader(c(scale_end,scale_end),c(.711,.719))
+  txt(if(language=="is")"Sk\u00e1sni\u00f0 Mercators" else "Oblique Mercator",.05,.739,7)
+  txt(if(language=="is")"Um 1.000 km \u00b7 kvar\u00f0i h\u00e9r" else "Approx. 1,000 km \u00b7 scale here",.05,.697,6.5)
+  stopifnot(abs(scale_distance(scale_metres)-1e6)<1)
   txt("3",.40,.166,38,"bold");txt(w$africa,.47,.177,12,"bold")
   txt(if(language=="is")sprintf("Um %d m\u00e1na\u00f0a vetrardv\u00f6l\nvi\u00f0 strendur Vestur-Afr\u00edku.",facts$winter_months) else sprintf("About %d months on\nWest Africa's Atlantic coast.",facts$winter_months),.47,.145,9)
   leader(c(.68,.69,africa[1]-.012),c(.135,.135,africa[2]+.004))
