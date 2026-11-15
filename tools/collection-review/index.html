@@ -13,8 +13,8 @@
 <main>
   <section class="intro" aria-label="About this collection">
     <p id="coverage"></p>
-    <p>This is a directory of collections, not a ranking of individual maps. Open a creator’s original gallery to see their work; no third-party images or posts are loaded here.</p>
-    <details><summary>Saving, privacy, and backups</summary><p>Your reactions and notes are saved only in this browser, on this device. Clearing browser data or using another browser can hide or remove them. Export a backup regularly. Nothing is sent to the public website or to the creators.</p><p>Import merges your backup, keeping the newer version of each review. “Export design brief” turns your positively reviewed collections and chosen features into a Markdown brief you can share in this chat.</p><p>Keep using the same file location or local preview address so the browser can find its saved reviews.</p></details>
+    <p>This is a directory of collections, not a ranking of individual maps. Select an entry to browse the creator’s original gallery beside your review.</p>
+    <details><summary>Saving, privacy, and backups</summary><p>Your reactions and notes are saved only in this browser, on this device. Clearing browser data or using another browser can hide or remove them. Export a backup regularly. Your reviews are not sent to the public website or to the creators. The original-gallery pane loads the creator’s website directly; its usual cookies and network requests may apply.</p><p>Import merges your backup, keeping the newer version of each review. “Export design brief” turns your positively reviewed collections and chosen features into a Markdown brief you can share in this chat.</p><p>Keep using the same file location or local preview address so the browser can find its saved reviews.</p></details>
   </section>
   <section class="toolbar" aria-label="Review backups">
     <button id="export">Export review backup</button><label class="file-button" for="import">Import backup<input id="import" type="file" accept="application/json,.json"></label><button id="brief">Export design brief</button>
@@ -23,6 +23,7 @@
   <p id="notice" class="notice" role="alert" hidden></p>
   <section class="progress-section" aria-label="Your progress"><p id="progress"></p><div id="feature-summary"></div></section>
   <div class="workspace">
+    <div class="review-sidebar">
     <section class="browse" aria-label="Collection browser">
       <div class="filters">
         <label>Search creators, descriptions, or notes<input id="search" type="search" placeholder="Try typography, Iceland, R…"></label>
@@ -34,7 +35,7 @@
     </section>
     <section class="inspector" aria-labelledby="selected-title">
       <p class="eyebrow" id="selected-years"></p><h2 id="selected-title">Choose a collection</h2><p id="selected-description"></p>
-      <p><a id="source-link" class="source-link" target="_blank" rel="noopener noreferrer">Open original collection ↗</a></p><p id="selected-host" class="muted"></p>
+      <p><a id="source-link" class="source-link" target="_blank" rel="noopener noreferrer">Open original collection ↗</a> <a href="#original-panel" class="pane-jump">View beside review ↓</a></p><p id="selected-host" class="muted"></p>
       <div id="per-year-listings"></div>
       <form id="review-form">
         <fieldset><legend>Your reaction</legend><div class="reactions">
@@ -51,6 +52,12 @@
         <p class="muted">Changes save automatically. Tags count toward the design brief when you mark a collection “Positive.” Neutral and negative reactions remain useful context in the backup.</p>
       </form>
       <div class="next-row"><button id="previous">← Previous</button><button id="next">Next →</button><button id="next-unreviewed">Next not reviewed</button></div>
+    </section>
+    </div>
+    <section id="original-panel" class="original-panel" aria-labelledby="original-title">
+      <div class="original-heading"><div><p class="eyebrow">ORIGINAL COLLECTION</p><h2 id="original-title">Choose a collection</h2></div><a id="original-external" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a></div>
+      <p class="embed-help">If this pane is blank or says the connection was refused, the creator’s site may block embedding. Use “Open in new tab” above.</p>
+      <iframe id="original-frame" title="Original collection" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" src="about:blank"></iframe>
     </section>
   </div>
   <footer><a id="directory-link" target="_blank" rel="noopener noreferrer">Official directory</a> · <a id="snapshot-link" target="_blank" rel="noopener noreferrer">Pinned source snapshot</a><p>The catalogue is public source material. Your personal reviews are separate and private to this browser.</p></footer>
