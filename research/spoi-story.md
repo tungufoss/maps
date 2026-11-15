@@ -12,6 +12,8 @@ Maps defined by Dr Helga Ingimundardóttir
 
 Spói returns to Iceland to breed, filling the short summer with its distinctive whistling call. Tracked adults typically returned in May and left in August: roughly three months in Iceland and nine months away. The non-breeding season takes them south, including to West Africa. Individual schedules vary.
 
+Chicks of the Icelandic breeding population hatch in Iceland, rather than in their African non-breeding grounds. The tracked birds were adults caught on nests in Iceland; their individual natal sites are not recorded in the dataset. [Paper: breeding and tagging methods](https://doi.org/10.1111/jav.01938).
+
 The subtitle is playful editorial framing; the description identifies the Icelandic stay as the breeding season. The durations are approximate interpretations of typical dates in the paper, not per-bird estimates calculated from the raw position file.
 
 ## What the dataset contains

@@ -3,7 +3,7 @@
 html_only <- "--html-only" %in% commandArgs(trailingOnly = TRUE)
 if (.Platform$OS.type == "windows") Sys.setlocale("LC_CTYPE", "English_United States.UTF-8")
 .libPaths(c(file.path(getwd(), ".R-library"), .libPaths()))
-required <- c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc", "ggplot2", "ragg", "boot")
+required <- c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc", "ggplot2", "ragg", "boot", "terra", "systemfonts")
 missing <- required[!vapply(required, requireNamespace, logical(1), quietly = TRUE)]
 if (length(missing)) stop("Install required packages first: ", paste(missing, collapse = ", "))
 root <- normalizePath(getwd(), winslash = "/")
@@ -56,6 +56,8 @@ map <- leaflet::fitBounds(map, -38, 0, 10, 70)
 render_code <- paste("function(el,x,data){", paste(readLines("research/spoi/poster-data.js", warn = FALSE, encoding = "UTF-8"), collapse = "\n"), paste(readLines("research/spoi/poster.js", warn = FALSE, encoding = "UTF-8"), collapse = "\n"), "}", sep = "\n")
 map <- htmlwidgets::onRender(map, render_code, data = payload)
 css <- paste(readLines("research/spoi/poster.css", warn = FALSE, encoding = "UTF-8"), collapse = "\n")
+font_uri <- base64enc::dataURI(file = "styles/fonts/Jost-wght.ttf", mime = "font/ttf")
+css <- paste0("@font-face{font-family:Jost;src:url('",font_uri,"') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}\n",css)
 map <- htmlwidgets::prependContent(map, htmltools::tags$style(htmltools::HTML(css)))
 # Quarto bundles Pandoc, so exporting a single offline HTML does not require RStudio.
 quarto <- Sys.which("quarto")

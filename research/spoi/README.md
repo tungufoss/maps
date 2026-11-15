@@ -9,7 +9,7 @@ The committed data artifact is [`../../data/spoi/spoi.sqlite`](../../data/spoi/s
 From the repository root, with Python 3.12+ and R 4.5+:
 
 ```r
-install.packages(c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc", "ggplot2", "ragg", "boot"), repos = "https://cloud.r-project.org")
+install.packages(c("leaflet", "htmlwidgets", "htmltools", "jsonlite", "sf", "DBI", "RSQLite", "png", "base64enc", "ggplot2", "ragg", "boot", "terra", "systemfonts"), repos = "https://cloud.r-project.org")
 ```
 
 Install Quarto (which provides Pandoc) or make Pandoc available to R, then run:
@@ -19,11 +19,18 @@ Rscript research/spoi/build.R
 python -m http.server 8875 --bind 127.0.0.1 --directory previews/spoi
 ```
 
-Open <http://127.0.0.1:8875/>. The outputs are `previews/spoi/index.html` (interactive poster) and `previews/spoi/poster.png` (1200 × 1500, designed in R/ggplot2 with solid/dashed seasonal summaries and bootstrap shading). Open `Open spoi poster.cmd` on Windows to launch the prepared preview. The static PNG summarizes the seasonal location corridors of all birds; it does not capture the current browser selection. Recorded package versions and R/GDAL/GEOS/PROJ details are alongside this README. Poster typography uses Arial and Impact, which must be installed for the same appearance.
+Open <http://127.0.0.1:8875/>. The outputs are `previews/spoi/index.html` (interactive poster), `previews/spoi/poster.png` (1200 × 1800, matching the reference composition) and `previews/spoi/poster-linkedin.png` (1200 × 1500, teal side margins preserve the poster proportions). The static poster is designed in R/ggplot2/grid with solid/dashed seasonal summaries and bootstrap shading. Open `Open spoi poster.cmd` on Windows to launch the prepared preview. The static PNG summarizes the seasonal location corridors of all birds; it does not capture the current browser selection. Recorded package versions and R/GDAL/GEOS/PROJ details are alongside this README. All typography is Jost, using the bundled OFL fonts in `styles/fonts/`; no system-font substitution or external font request is needed.
 
 For a fast interaction/style rebuild without regenerating the static PNG: `Rscript research/spoi/build.R --html-only`. OpenTopoMap is a modern topographic basemap, not a historical map scan. OpenTopoMap/OpenStreetMap attribution remains visible. The static PNG retains its reproducible Natural Earth background.
 
 For the designed static poster alone: `Rscript research/spoi/poster.R`. This also writes the derived estimates and full method to SQLite (`corridor_estimates`, `corridor_curves`, `corridor_bird_bins`, `corridor_cycle_bins`, `analysis_methods`) and exports human-readable CSV/JSON alongside the R source.
+
+The reference-matched design uses a 15-degree oblique Mercator view, 1:50m Natural Earth coastlines and real Gray Earth shaded relief. `cartography.R` stores the prepared geography in `poster_geography` and a compressed projected relief GeoTIFF plus source/checksum/processing metadata in `poster_relief`. A clone of the committed SQLite database needs no new geographic download to reproduce the poster. If rebuilding those caches from scratch, save these original public-domain archives in `data/raw/spoi/` first:
+
+- https://naciscdn.org/naturalearth/50m/physical/ne_50m_land.zip
+- https://naciscdn.org/naturalearth/50m/raster/GRAY_50M_SR_W.zip
+
+Reference: `research/spoi-teal-poster.png` is used for composition, not as a geographic background. The R render preserves the newer HIDEF branding, summer title and Jost typography. The estimated lines/bands are displayed between 11°N and 63.8°N to frame the broad winter/breeding corridor; complete latitude estimates remain in SQLite/CSV. Direction arrows show the seasonal direction. Terrain comes from the real Natural Earth raster, lightened to match the paper-like reference palette.
 
 ## Candidate seasonal corridors and their bands
 
@@ -31,7 +38,7 @@ Solid lines summarize the July–September location window; dashed lines summari
 
 Resample bird IDs as clusters 1,000 times (seed 2027), recomputing the means and applying the same smoother to each bootstrap curve. Shading is the pointwise 2.5th–97.5th percentile range of those curves. It describes the **estimated smoothed mean corridor**, not individual route spread, instrument accuracy, a simultaneous confidence region, or the probability that a bird flew through the band. Binning loses temporal order, and stationary/migrating locations can mix; missingness and geolocator errors remain limitations. This is an exploratory visual summary, not a reconstruction of the paper's flight paths or stopover analysis. The un-smoothed bin estimates remain available for audit.
 
-Numbered notes and the 30 autumn / 26 spring migration totals come from the paper. No new layover counts or durations are claimed from this corridor calculation. The bird engraving is decorative; the land shadow is a graphic treatment rather than invented elevation data. Static poster projection is equidistant conic, separate from Leaflet's Web Mercator.
+Numbered notes and the 30 autumn / 26 spring migration totals come from the paper. No new layover counts or durations are claimed from this corridor calculation. The bird engraving and small offset coastline shadow are decorative; the terrain itself is real shaded relief. Static poster projection is oblique Mercator, separate from Leaflet's Web Mercator.
 
 ## Rebuild the data import
 
@@ -51,8 +58,8 @@ This rebuilds the source and observation tables. To regenerate the basemap cache
 - A masked row breaks its line. Gaps longer than 36 hours, different birds and different July–June cycles never connect. No missing values are imputed, and no flight positions are interpolated. Bird selection highlights one individual over the others; cycle and month filters retain genuine observations. Playback reveals calendar months rather than simulating continuous flight.
 - Some first/last annual cycles are partial. A cycle label does not guarantee a complete migration. The application does not calculate departure dates, flight speeds or time away from these noisy raw estimates. “About nine months away” interprets typical August/May dates in the paper, not a per-bird result.
 - The paper used visual twilight checks, filtering and double smoothing; this exploratory viewer does **not** reproduce that entire analysis. Raw latitude noise remains visible, especially at high latitudes. Do not equate the displayed dashed joins with GPS flight paths.
-- Source timezone and coordinate datum are not specified in the table. The source time strings remain intact; an interval midpoint is used for ordering and display. WGS84 is assumed for geographic display; Leaflet uses Web Mercator (EPSG:3857), while the designed static poster uses the equidistant conic projection specified in `poster.R`. Do not measure migration distance from either graphic.
-- The coastline is repaired with planar GEOS and clipped before projection; spherical ring repair changed a continental ring in this environment and is deliberately avoided. No elevation raster is used; unlike the initial generated concept, this real basemap does not depict shaded relief.
+- Source timezone and coordinate datum are not specified in the table. The source time strings remain intact; an interval midpoint is used for ordering and display. WGS84 is assumed for geographic display; Leaflet uses Web Mercator (EPSG:3857), while the designed static poster uses the oblique Mercator projection specified in `poster.R`. Do not measure migration distance from either graphic.
+- The coastline is repaired with planar GEOS and clipped before projection; spherical ring repair changed a continental ring in this environment and is deliberately avoided. The designed static poster uses real Natural Earth Gray Earth shaded relief; the interactive poster uses the default tiled topographic provider.
 - Leaflet's raster tile pane stays beneath observed routes and points at z-index 450, with labels at the normal marker level. There is no custom SVG land layer in the interactive poster.
 
 ## Sources and credits
