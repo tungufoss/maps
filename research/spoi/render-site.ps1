@@ -7,7 +7,7 @@ try {
     New-Item -ItemType Directory -Path $siteDestination -Force | Out-Null
     $galleryDestination = Join-Path $repoForSpoi '_site\previews\spoi'
     New-Item -ItemType Directory -Path $galleryDestination -Force | Out-Null
-    foreach ($image in @('poster.png','poster-is.png','poster-background.png','build-01-map.png','build-02-trajectories.png','build-03-direction.png','build-03-smoothing.png','build-04-anchors.png','build-05-density.png','poster-lanes.png')) {
+    foreach ($image in @('poster.png','poster-is.png','poster-background.png','build-01-map.png','build-02-trajectories.png','build-03-regions.png','build-04-anchors.png','build-05-events.png','build-06-journeys.png','build-07-smoothing.png','poster-lanes.png')) {
         Copy-Item -LiteralPath (Join-Path 'previews/spoi' $image) -Destination $siteDestination
         Copy-Item -LiteralPath (Join-Path 'previews/spoi' $image) -Destination $galleryDestination
     }
