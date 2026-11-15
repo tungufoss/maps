@@ -39,3 +39,6 @@ Public-facing copy revision: remove the return-story box and numerical sample-si
 
 
 Composition refinement: move story point 2 above the bird in the northern Atlantic. Lower the decorative bird and left title/biology/research-card block to make room, retaining matched heading widths and clear route separation. Legends use the user’s directional wording: Appelsínugult suðurflug / fjólubleikt norðurflug and Orange southbound / magenta northbound. Both language exports and LinkedIn companions were rendered and visually inspected.
+
+
+Seasonal geography revision: place 4 between Morocco and Mauritania, call Iceland breeding grounds rather than an exclusive home, and use Spring return / Vorferðin. Caption 3 names West Africa’s Atlantic coast. Ivory Coast is unsupported by the paper; Upper Guinea Coast describes the core Guinea/Guinea-Bissau region but not the northern winter range. Regional-name sources and scope are documented in README.

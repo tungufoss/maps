@@ -126,21 +126,21 @@ render_spoi_poster <- function(analysis,cartography,projection,bounds,language="
   txt(w$title,.045,if(language=="en").475 else .515,title_size,"bold");txt(w$subtitle,.045,.435,19,"bold")
   txt(w$vacation,.045,.404,10.5,"bold");txt("Numenius phaeopus islandicus",.045,.381,9,"italic");txt(w$biology,.045,.346,9.5)
   txt("1",.42,.943,38,"bold");txt(w$iceland,.49,.950,12,"bold")
-  txt(if(language=="is")sprintf("Um %d m\u00e1nu\u00f0ir heima.\nH\u00e9r verpa fuglarnir\nog ala upp unga.",facts$summer_months) else sprintf("About %d months at home.\nTime to nest and\nraise their chicks.",facts$summer_months),.49,.915,9)
+  txt(if(language=="is")sprintf("Um %d m\u00e1nu\u00f0ir \u00e1 varpsl\u00f3\u00f0um.\nH\u00e9r verpa fuglarnir\nog ala upp unga.",facts$summer_months) else sprintf("About %d months on the\nbreeding grounds, to nest\nand raise their chicks.",facts$summer_months),.49,.915,9)
   leader(c(.41,.39,ice[1]+.012),c(.94,.94,ice[2]+.002))
-  txt("4",.70,.895,38,"bold");txt(if(language=="is")"HEIMFER\u00d0IN" else "THE WAY HOME",.77,.904,12,"bold")
-  txt(if(language=="is")"\u00c1 vorin" else "In spring",.77,.882,8.5)
+  txt("4",.70,.432,38,"bold");txt(if(language=="is")"VORFER\u00d0IN" else "SPRING RETURN",.77,.441,12,"bold")
+  txt(if(language=="is")"Til \u00cdslands" else "To Iceland",.77,.419,8.5)
   # Study card and autumn note follow the existing poster's composition.
   grid::grid.polygon(x=c(.035,.345,.345,.315,.035),y=c(.285,.285,.198,.184,.184),gp=grid::gpar(fill=grDevices::adjustcolor("white",alpha.f=.80),col=NA))
   txt(w$study,.05,.264,12,"bold");txt(w$adults,.05,.233,9)
   txt("2",.05,.800,38,"bold");txt(w$autumn,.12,.816,11,"bold")
   txt(if(language=="is")sprintf("Beint til Vestur-Afr\u00edku\n\u00e1 um %d\u2013%d d\u00f6gum.",floor(facts$south_days),ceiling(facts$south_days)) else sprintf("Straight to West Africa\nin about %d\u2013%d days.",floor(facts$south_days),ceiling(facts$south_days)),.12,.787,9)
   txt("3",.40,.166,38,"bold");txt(w$africa,.47,.177,12,"bold")
-  txt(if(language=="is")sprintf("Um %d m\u00e1na\u00f0a vetrardv\u00f6l\nvi\u00f0 str\u00f6ndina.",facts$winter_months) else sprintf("About %d months by the coast\nfor the non-breeding season.",facts$winter_months),.47,.145,9)
-  leader(c(.64,.67,africa[1]-.012),c(.135,.135,africa[2]+.004))
+  txt(if(language=="is")sprintf("Um %d m\u00e1na\u00f0a vetrardv\u00f6l\nvi\u00f0 strendur Vestur-Afr\u00edku.",facts$winter_months) else sprintf("About %d months on\nWest Africa's Atlantic coast.",facts$winter_months),.47,.145,9)
+  leader(c(.68,.69,africa[1]-.012),c(.135,.135,africa[2]+.004))
   # Public-facing story, directly on the map: no return-journey panel.
-  summary<-if(language=="is")sprintf("Um helmingur fer um \u00cdrland.\nA\u00f0 jafna\u00f0i %d daga vi\u00f0koma.\n\u00dear g\u00e6tu fuglarnir safna\u00f0 kr\u00f6ftum\nog be\u00f0i\u00f0 betri skilyr\u00f0a \u00e1 \u00cdslandi.\nHeim um \u00cdrland: um %d dagar.\nBeint heim: um %d dagar.",facts$ireland_stop_days,facts$ireland_journey_days,facts$direct_home_days) else sprintf("About half stop in Ireland:\n%d days there, on average.\nThey may build reserves and wait\nfor better conditions in Iceland.\nVia Ireland: about %d days home.\nDirect: about %d days home.",facts$ireland_stop_days,facts$ireland_journey_days,facts$direct_home_days)
-  txt(summary,.70,.818,9)
+  summary<-if(language=="is")sprintf("Um helmingur fer um \u00cdrland.\nA\u00f0 jafna\u00f0i %d daga vi\u00f0koma.\n\u00dear g\u00e6tu fuglarnir safna\u00f0 kr\u00f6ftum\nog be\u00f0i\u00f0 betri skilyr\u00f0a \u00e1 \u00cdslandi.\nTil \u00cdslands um \u00cdrland: um %d dagar.\nBeint til \u00cdslands: um %d dagar.",facts$ireland_stop_days,facts$ireland_journey_days,facts$direct_home_days) else sprintf("About half stop in Ireland:\n%d days there, on average.\nThey may build reserves and wait\nfor better conditions in Iceland.\nTo Iceland via Ireland: about %d days.\nDirect to Iceland: about %d days.",facts$ireland_stop_days,facts$ireland_journey_days,facts$direct_home_days)
+  txt(summary,.70,.355,9)
   # Width explanation belongs in the clear ocean text area.
   txt(if(language=="is")paste("Bre\u00ed\u00f0ari l\u00ednur s\u00fdna fleiri fer\u00f0ir.",colours$legend_is,"Dekkri sv\u00e6\u00f0i s\u00fdna fleiri fugla.",sep="\n") else paste("Wider lines show more journeys.",colours$legend,"Darker regions show more birds.",sep="\n"),.04,.153,7.5)
   # Geographic names remain deliberately brief, with no per-stop statistics.
